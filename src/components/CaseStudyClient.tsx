@@ -9,7 +9,6 @@ import type { Project } from "@/data/portfolio";
 import { getMediaUrl } from "@/data/portfolio";
 import { VideoPlayer } from "@/components/VideoPlayer";
 import { MasonryGallery } from "@/components/MasonryGallery";
-import { generatedGallery } from "@/data/generatedGallery";
 
 interface CaseStudyClientProps {
     project: Project;
@@ -248,7 +247,13 @@ export function CaseStudyClient({ project, nextProject, prevProject, relatedProj
 
                     {/* 10. Gallery */}
                     <section id="gallery" className="mb-32">
-                        <MasonryGallery items={generatedGallery[project.slug] || []} />
+                        {(!project.gallery || project.gallery.length === 0) ? (
+                            <div className="py-24 text-center border border-foreground/10 rounded-xl bg-foreground/5">
+                                <h3 className="text-xl md:text-2xl font-display font-medium text-foreground/50">Gallery coming soon</h3>
+                            </div>
+                        ) : (
+                            <MasonryGallery items={project.gallery} />
+                        )}
                     </section>
 
                 </div>

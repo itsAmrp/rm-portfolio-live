@@ -6,7 +6,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { Play } from "lucide-react";
 import { projects, getMediaUrl } from "@/data/portfolio";
-import { generatedGallery } from "@/data/generatedGallery";
 
 export function ShowcaseReel() {
     const featuredProjects = projects.filter(p => p.heroMedia).slice(0, 10);
@@ -20,7 +19,7 @@ export function ShowcaseReel() {
         const interval = setInterval(() => {
             setGalleryIndex((prevGalleryIdx) => {
                 const activeProject = featuredProjects[activeIndex];
-                const galleryItems = generatedGallery[activeProject.slug] || [];
+                const galleryItems = activeProject.gallery || [];
                 const totalItems = galleryItems.length > 0 ? galleryItems.length : 1;
 
                 if (prevGalleryIdx + 1 >= totalItems) {
@@ -38,7 +37,7 @@ export function ShowcaseReel() {
     if (featuredProjects.length === 0) return null;
 
     const activeProject = featuredProjects[activeIndex];
-    const galleryItems = generatedGallery[activeProject.slug] || [];
+    const galleryItems = activeProject.gallery || [];
     const validGalleryItems = galleryItems.length > 0 ? galleryItems : [activeProject.heroMedia];
 
     // Ensure galleryIndex is bounded
