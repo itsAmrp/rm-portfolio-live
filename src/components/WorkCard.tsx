@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
 import type { Project } from "@/data/portfolio";
+import { getMediaUrl } from "@/data/portfolio";
 import { VideoPlayer } from "./VideoPlayer";
 
 interface WorkCardProps {
@@ -32,15 +33,15 @@ export function WorkCard({ project, className, priority = false }: WorkCardProps
                     {project.heroMedia.type === "video" ? (
                         <div className="w-full h-full scale-[1.01] transition-transform duration-1000 group-hover:scale-105">
                             <VideoPlayer
-                                srcMp4={project.heroMedia.videoMp4}
-                                srcWebm={project.heroMedia.videoWebm}
-                                poster={project.heroMedia.url}
+                                srcMp4={getMediaUrl(project.heroMedia.videoMp4)}
+                                srcWebm={getMediaUrl(project.heroMedia.videoWebm)}
+                                poster={getMediaUrl(project.heroMedia.url)}
                                 alt={project.brand}
                             />
                         </div>
                     ) : (
                         <Image
-                            src={project.heroMedia.url}
+                            src={getMediaUrl(project.heroMedia.url) || ""}
                             alt={project.title}
                             fill
                             priority={priority}

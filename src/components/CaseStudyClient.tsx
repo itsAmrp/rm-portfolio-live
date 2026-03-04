@@ -6,6 +6,7 @@ import Link from "next/link";
 import { motion, useScroll, useTransform, Variants } from "framer-motion";
 import { ArrowLeft, ArrowRight, ArrowUpRight } from "lucide-react";
 import type { Project } from "@/data/portfolio";
+import { getMediaUrl } from "@/data/portfolio";
 import { VideoPlayer } from "@/components/VideoPlayer";
 import { MasonryGallery } from "@/components/MasonryGallery";
 import { generatedGallery } from "@/data/generatedGallery";
@@ -77,15 +78,15 @@ export function CaseStudyClient({ project, nextProject, prevProject, relatedProj
                 <motion.div style={{ y }} className="absolute inset-0 w-full h-[120%] -top-[10%]">
                     {project.heroMedia.type === "video" ? (
                         <VideoPlayer
-                            srcMp4={project.heroMedia.videoMp4}
-                            srcWebm={project.heroMedia.videoWebm}
-                            poster={project.heroMedia.url}
+                            srcMp4={getMediaUrl(project.heroMedia.videoMp4)}
+                            srcWebm={getMediaUrl(project.heroMedia.videoWebm)}
+                            poster={getMediaUrl(project.heroMedia.url)}
                             alt={project.title}
                             className="w-full h-full object-cover"
                         />
                     ) : (
                         <Image
-                            src={project.heroMedia.url}
+                            src={getMediaUrl(project.heroMedia.url) || ""}
                             alt={project.title}
                             fill
                             priority
@@ -265,7 +266,7 @@ export function CaseStudyClient({ project, nextProject, prevProject, relatedProj
                         <Link key={p.slug} href={`/work/${p.slug}`} className="group block">
                             <div className="relative aspect-[4/3] w-full overflow-hidden bg-foreground/5 rounded-xl mb-6">
                                 <Image
-                                    src={p.heroMedia.url}
+                                    src={getMediaUrl(p.heroMedia.url) || ""}
                                     alt={p.title}
                                     fill
                                     className="object-cover transition-transform duration-700 group-hover:scale-105"

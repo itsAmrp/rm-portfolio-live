@@ -1,12 +1,31 @@
+import mediaMapData from "./mediaMap.json";
+
 export type MediaType = "image" | "video";
 
 export interface MediaAsset {
     type: MediaType;
-    url: string; // fallback image or actual image
+    url: string;
     videoMp4?: string;
     videoWebm?: string;
     poster?: string;
     alt: string;
+}
+
+const mediaMap: Record<string, string> = mediaMapData as Record<string, string>;
+
+/**
+ * Resolves a local media path to a secure Cloudinary URL if NEXT_PUBLIC_MEDIA_MODE === 'cloudinary'
+ */
+export function getMediaUrl(localPath?: string): string | undefined {
+    if (!localPath) return undefined;
+
+    const mode = process.env.NEXT_PUBLIC_MEDIA_MODE === "cloudinary" ? "cloudinary" : "local";
+
+    if (mode === "cloudinary") {
+        return mediaMap[localPath] || localPath; // fallback to local if missing in map
+    }
+
+    return localPath;
 }
 
 export interface Project {

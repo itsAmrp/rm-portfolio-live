@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { Play } from "lucide-react";
-import { projects } from "@/data/portfolio";
+import { projects, getMediaUrl } from "@/data/portfolio";
 import { generatedGallery } from "@/data/generatedGallery";
 
 export function ShowcaseReel() {
@@ -46,7 +46,10 @@ export function ShowcaseReel() {
     const showcaseMedia = validGalleryItems[safeGalleryIndex];
     if (!showcaseMedia) return null;
 
-    const mediaUrl = showcaseMedia.type === 'video' ? showcaseMedia.videoMp4 : showcaseMedia.url;
+    const parsedUrl = getMediaUrl(showcaseMedia.url);
+    const parsedMp4 = getMediaUrl(showcaseMedia.videoMp4);
+
+    const mediaUrl = showcaseMedia.type === 'video' ? parsedMp4 : parsedUrl;
     const isVideo = showcaseMedia.type === 'video';
 
     return (
@@ -116,7 +119,7 @@ export function ShowcaseReel() {
                                         <div className="relative flex justify-center w-full">
                                             <video
                                                 src={mediaUrl}
-                                                poster={showcaseMedia.url}
+                                                poster={parsedUrl}
                                                 autoPlay
                                                 loop
                                                 muted

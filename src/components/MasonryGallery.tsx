@@ -5,6 +5,7 @@ import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, ChevronLeft, ChevronRight, Play } from "lucide-react";
 import type { MediaAsset } from "@/data/portfolio";
+import { getMediaUrl } from "@/data/portfolio";
 import { LazyVideo } from "@/components/LazyVideo";
 
 interface MasonryGalleryProps {
@@ -32,9 +33,9 @@ export function MasonryGallery({ items }: MasonryGalleryProps) {
                         {media.type === "video" ? (
                             <div className="relative w-full aspect-video">
                                 <LazyVideo
-                                    srcMp4={media.videoMp4}
-                                    srcWebm={media.videoWebm}
-                                    poster={media.poster || (media.url.includes('.jpg') ? media.url : undefined)}
+                                    srcMp4={getMediaUrl(media.videoMp4)}
+                                    srcWebm={getMediaUrl(media.videoWebm)}
+                                    poster={getMediaUrl(media.poster || (media.url.includes('.jpg') ? media.url : undefined))}
                                     alt={media.alt}
                                 />
                                 <div className="absolute top-4 left-4 flex gap-2 z-10 opacity-0 group-hover:opacity-100 transition-opacity">
@@ -52,7 +53,7 @@ export function MasonryGallery({ items }: MasonryGalleryProps) {
                             // OR we use next/image with width={1200} height={0} sizes="...". `height: auto` in Tailwind will preserve the ratio.
                             <div className="relative w-full">
                                 <Image
-                                    src={media.url}
+                                    src={getMediaUrl(media.url) || ""}
                                     alt={media.alt}
                                     width={1000}
                                     height={1000}
@@ -153,8 +154,8 @@ function Lightbox({ items, currentIndex, onClose, onIndexChange }: LightboxProps
                         {activeItem.type === "video" ? (
                             <div className="relative w-full h-full flex items-center justify-center bg-black/20 rounded-2xl overflow-hidden shadow-2xl">
                                 <video
-                                    src={activeItem.videoMp4 || activeItem.videoWebm}
-                                    poster={activeItem.url.includes('.jpg') ? activeItem.url : undefined}
+                                    src={getMediaUrl(activeItem.videoMp4 || activeItem.videoWebm)}
+                                    poster={getMediaUrl(activeItem.url.includes('.jpg') ? activeItem.url : undefined)}
                                     controls
                                     autoPlay
                                     muted
@@ -165,7 +166,7 @@ function Lightbox({ items, currentIndex, onClose, onIndexChange }: LightboxProps
                         ) : (
                             <div className="relative w-full h-full rounded-2xl overflow-hidden shadow-2xl border border-foreground/5">
                                 <Image
-                                    src={activeItem.url}
+                                    src={getMediaUrl(activeItem.url) || ""}
                                     alt={activeItem.alt}
                                     fill
                                     quality={100}
