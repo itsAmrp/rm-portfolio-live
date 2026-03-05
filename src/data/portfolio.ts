@@ -308,7 +308,7 @@ export const projects: Project[] = [
             { type: "image", url: "/media/baby-cheramy/02.jpg", alt: "baby-cheramy gallery image" },
             { type: "image", url: "/media/baby-cheramy/03.jpg", alt: "baby-cheramy gallery image" },
             { type: "image", url: "/media/baby-cheramy/04.jpg", alt: "baby-cheramy gallery image" },
-            { type: "video", url: "/media/baby-cheramy/05.mp4", alt: "baby-cheramy gallery video", videoMp4: "/media/baby-cheramy/05.mp4" }
+            { type: "video", url: "/media/baby-cheramy/05.jpg", alt: "baby-cheramy gallery video", videoMp4: "/media/baby-cheramy/05.mp4" }
         ],
     },
     {
@@ -456,8 +456,8 @@ export const projects: Project[] = [
             { type: "image", url: "/media/anchor-butter/15.jpg", alt: "anchor-butter gallery image" },
             { type: "image", url: "/media/anchor-butter/16.jpg", alt: "anchor-butter gallery image" },
             { type: "image", url: "/media/anchor-butter/17.jpg", alt: "anchor-butter gallery image" },
-            { type: "video", url: "/media/anchor-butter/18.mp4", alt: "anchor-butter gallery video", videoMp4: "/media/anchor-butter/18.mp4" },
-            { type: "video", url: "/media/anchor-butter/19.mp4", alt: "anchor-butter gallery video", videoMp4: "/media/anchor-butter/19.mp4" }
+            { type: "video", url: "/media/anchor-butter/18.jpg", alt: "anchor-butter gallery video", videoMp4: "/media/anchor-butter/18.mp4" },
+            { type: "video", url: "/media/anchor-butter/19.jpg", alt: "anchor-butter gallery video", videoMp4: "/media/anchor-butter/19.mp4" }
         ],
     },
     {
@@ -506,18 +506,18 @@ export const projects: Project[] = [
             { type: "image", url: "/media/anchor-moments/21.jpg", alt: "anchor-moments gallery image" },
             { type: "image", url: "/media/anchor-moments/22.jpg", alt: "anchor-moments gallery image" },
             { type: "image", url: "/media/anchor-moments/23.jpg", alt: "anchor-moments gallery image" },
-            { type: "video", url: "/media/anchor-moments/24.mp4", alt: "anchor-moments gallery video", videoMp4: "/media/anchor-moments/24.mp4" },
-            { type: "video", url: "/media/anchor-moments/25.mp4", alt: "anchor-moments gallery video", videoMp4: "/media/anchor-moments/25.mp4" },
-            { type: "video", url: "/media/anchor-moments/26.mp4", alt: "anchor-moments gallery video", videoMp4: "/media/anchor-moments/26.mp4" },
-            { type: "video", url: "/media/anchor-moments/27.mp4", alt: "anchor-moments gallery video", videoMp4: "/media/anchor-moments/27.mp4" },
-            { type: "video", url: "/media/anchor-moments/28.mp4", alt: "anchor-moments gallery video", videoMp4: "/media/anchor-moments/28.mp4" },
-            { type: "video", url: "/media/anchor-moments/29.mp4", alt: "anchor-moments gallery video", videoMp4: "/media/anchor-moments/29.mp4" },
-            { type: "video", url: "/media/anchor-moments/30.mp4", alt: "anchor-moments gallery video", videoMp4: "/media/anchor-moments/30.mp4" },
-            { type: "video", url: "/media/anchor-moments/31.mp4", alt: "anchor-moments gallery video", videoMp4: "/media/anchor-moments/31.mp4" },
-            { type: "video", url: "/media/anchor-moments/32.mp4", alt: "anchor-moments gallery video", videoMp4: "/media/anchor-moments/32.mp4" },
-            { type: "video", url: "/media/anchor-moments/33.mp4", alt: "anchor-moments gallery video", videoMp4: "/media/anchor-moments/33.mp4" },
-            { type: "video", url: "/media/anchor-moments/34.mp4", alt: "anchor-moments gallery video", videoMp4: "/media/anchor-moments/34.mp4" },
-            { type: "video", url: "/media/anchor-moments/35.mp4", alt: "anchor-moments gallery video", videoMp4: "/media/anchor-moments/35.mp4" }
+            { type: "video", url: "/media/anchor-moments/24.jpg", alt: "anchor-moments gallery video", videoMp4: "/media/anchor-moments/24.mp4" },
+            { type: "video", url: "/media/anchor-moments/25.jpg", alt: "anchor-moments gallery video", videoMp4: "/media/anchor-moments/25.mp4" },
+            { type: "video", url: "/media/anchor-moments/26.jpg", alt: "anchor-moments gallery video", videoMp4: "/media/anchor-moments/26.mp4" },
+            { type: "video", url: "/media/anchor-moments/27.jpg", alt: "anchor-moments gallery video", videoMp4: "/media/anchor-moments/27.mp4" },
+            { type: "video", url: "/media/anchor-moments/28.jpg", alt: "anchor-moments gallery video", videoMp4: "/media/anchor-moments/28.mp4" },
+            { type: "video", url: "/media/anchor-moments/29.jpg", alt: "anchor-moments gallery video", videoMp4: "/media/anchor-moments/29.mp4" },
+            { type: "video", url: "/media/anchor-moments/30.jpg", alt: "anchor-moments gallery video", videoMp4: "/media/anchor-moments/30.mp4" },
+            { type: "video", url: "/media/anchor-moments/31.jpg", alt: "anchor-moments gallery video", videoMp4: "/media/anchor-moments/31.mp4" },
+            { type: "video", url: "/media/anchor-moments/32.jpg", alt: "anchor-moments gallery video", videoMp4: "/media/anchor-moments/32.mp4" },
+            { type: "video", url: "/media/anchor-moments/33.jpg", alt: "anchor-moments gallery video", videoMp4: "/media/anchor-moments/33.mp4" },
+            { type: "video", url: "/media/anchor-moments/34.jpg", alt: "anchor-moments gallery video", videoMp4: "/media/anchor-moments/34.mp4" },
+            { type: "video", url: "/media/anchor-moments/35.jpg", alt: "anchor-moments gallery video", videoMp4: "/media/anchor-moments/35.mp4" }
         ],
     },
     {
@@ -546,10 +546,10 @@ export const projects: Project[] = [
             { type: "image", url: "/media/brewery/01.jpg", alt: "brewery gallery image" },
             { type: "image", url: "/media/brewery/02.jpg", alt: "brewery gallery image" },
             { type: "image", url: "/media/brewery/03.jpg", alt: "brewery gallery image" },
-            { type: "video", url: "/media/brewery/4.mp4", alt: "brewery gallery video", videoMp4: "/media/brewery/4.mp4" },
-            { type: "video", url: "/media/brewery/5.mp4", alt: "brewery gallery video", videoMp4: "/media/brewery/5.mp4" },
-            { type: "video", url: "/media/brewery/6.mp4", alt: "brewery gallery video", videoMp4: "/media/brewery/6.mp4" },
-            { type: "video", url: "/media/brewery/7.mp4", alt: "brewery gallery video", videoMp4: "/media/brewery/7.mp4" }
+            { type: "video", url: "/media/brewery/4.jpg", alt: "brewery gallery video", videoMp4: "/media/brewery/4.mp4" },
+            { type: "video", url: "/media/brewery/5.jpg", alt: "brewery gallery video", videoMp4: "/media/brewery/5.mp4" },
+            { type: "video", url: "/media/brewery/6.jpg", alt: "brewery gallery video", videoMp4: "/media/brewery/6.mp4" },
+            { type: "video", url: "/media/brewery/7.jpg", alt: "brewery gallery video", videoMp4: "/media/brewery/7.mp4" }
         ],
     },
     {
@@ -571,13 +571,13 @@ export const projects: Project[] = [
         deliverables: ["Animated Social Posts", "Key Visuals"],
         heroMedia: {
             type: "video",
-            url: "/placeholders/hero-anchor-stirred-yoghurt.jpg",
+            url: "/media/anchor-stirred-yoghurt/cover.jpg",
             videoMp4: "/media/anchor-stirred-yoghurt/1.mp4",
             alt: "Anchor Stirred Yoghurt Hero",
         },
         gallery: [
-            { type: "video", url: "/media/anchor-stirred-yoghurt/1.mp4", alt: "anchor-stirred-yoghurt gallery video", videoMp4: "/media/anchor-stirred-yoghurt/1.mp4" },
-            { type: "video", url: "/media/anchor-stirred-yoghurt/2.mp4", alt: "anchor-stirred-yoghurt gallery video", videoMp4: "/media/anchor-stirred-yoghurt/2.mp4" }
+            { type: "video", url: "/media/anchor-stirred-yoghurt/1.jpg", alt: "anchor-stirred-yoghurt gallery video", videoMp4: "/media/anchor-stirred-yoghurt/1.mp4" },
+            { type: "video", url: "/media/anchor-stirred-yoghurt/2.jpg", alt: "anchor-stirred-yoghurt gallery video", videoMp4: "/media/anchor-stirred-yoghurt/2.mp4" }
         ],
     },
     {
