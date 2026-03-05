@@ -172,19 +172,20 @@ export const projects: Project[] = [
         },
         deliverables: ["Social First Video", "Instagram Grid Overhaul", "Digital Display Ads"],
         heroMedia: {
-            type: "image",
-            url: "/media/dilmah-sri-lanka/cover.jpg",
-            alt: "Dilmah Sri Lanka Hero",
+            type: "video",
+            url: "https://res.cloudinary.com/ddxa0ahzp/video/upload/v1772741168/rm-portfolio-live/dilmah-sri-lanka/hero.jpg",
+            videoMp4: "https://res.cloudinary.com/ddxa0ahzp/video/upload/v1772741168/rm-portfolio-live/dilmah-sri-lanka/hero.mp4",
+            alt: "dilmah-sri-lanka Hero",
         },
         gallery: [
-            { type: "image", url: "/media/dilmah-sri-lanka/01.jpg", alt: "dilmah-sri-lanka gallery image" },
-            { type: "image", url: "/media/dilmah-sri-lanka/02.jpg", alt: "dilmah-sri-lanka gallery image" },
-            { type: "image", url: "/media/dilmah-sri-lanka/03.jpg", alt: "dilmah-sri-lanka gallery image" },
-            { type: "image", url: "/media/dilmah-sri-lanka/04.jpg", alt: "dilmah-sri-lanka gallery image" },
-            { type: "image", url: "/media/dilmah-sri-lanka/05.jpg", alt: "dilmah-sri-lanka gallery image" },
-            { type: "image", url: "/media/dilmah-sri-lanka/06.jpg", alt: "dilmah-sri-lanka gallery image" },
-            { type: "image", url: "/media/dilmah-sri-lanka/07.jpg", alt: "dilmah-sri-lanka gallery image" },
-            { type: "image", url: "/media/dilmah-sri-lanka/08.jpg", alt: "dilmah-sri-lanka gallery image" }
+            { type: "image", url: "https://res.cloudinary.com/ddxa0ahzp/image/upload/v1772640564/rm-portfolio-live/dilmah-sri-lanka/01.jpg", alt: "dilmah-sri-lanka gallery image" },
+            { type: "image", url: "https://res.cloudinary.com/ddxa0ahzp/image/upload/v1772640563/rm-portfolio-live/dilmah-sri-lanka/02.jpg", alt: "dilmah-sri-lanka gallery image" },
+            { type: "image", url: "https://res.cloudinary.com/ddxa0ahzp/image/upload/v1772640562/rm-portfolio-live/dilmah-sri-lanka/03.jpg", alt: "dilmah-sri-lanka gallery image" },
+            { type: "image", url: "https://res.cloudinary.com/ddxa0ahzp/image/upload/v1772640560/rm-portfolio-live/dilmah-sri-lanka/04.jpg", alt: "dilmah-sri-lanka gallery image" },
+            { type: "image", url: "https://res.cloudinary.com/ddxa0ahzp/image/upload/v1772640559/rm-portfolio-live/dilmah-sri-lanka/05.jpg", alt: "dilmah-sri-lanka gallery image" },
+            { type: "image", url: "https://res.cloudinary.com/ddxa0ahzp/image/upload/v1772640555/rm-portfolio-live/dilmah-sri-lanka/06.jpg", alt: "dilmah-sri-lanka gallery image" },
+            { type: "image", url: "https://res.cloudinary.com/ddxa0ahzp/image/upload/v1772640551/rm-portfolio-live/dilmah-sri-lanka/07.jpg", alt: "dilmah-sri-lanka gallery image" },
+            { type: "image", url: "https://res.cloudinary.com/ddxa0ahzp/image/upload/v1772640550/rm-portfolio-live/dilmah-sri-lanka/08.jpg", alt: "dilmah-sri-lanka gallery image" }
         ],
     },
     {
