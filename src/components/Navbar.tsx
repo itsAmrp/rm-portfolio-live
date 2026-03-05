@@ -47,15 +47,17 @@ export function Navbar() {
             <div className="container mx-auto px-6 md:px-12 flex justify-between items-center">
                 <Link
                     href="/"
-                    className="hover:opacity-70 transition-opacity flex items-center"
+                    className="relative z-50 block opacity-100"
                 >
                     <Image
                         src={getMediaUrl("/media/site-assets/logo.png") || ""}
                         alt={`${siteMeta.name} Logo`}
-                        width={180}
-                        height={48}
-                        className={`object-contain h-8 md:h-9 w-auto transition-all ${isDark ? 'invert drop-shadow-[0_2px_12px_rgba(255,255,255,0.15)]' : 'drop-shadow-sm'}`}
+                        width={240}
+                        height={60}
+                        className={`object-contain h-[28px] md:h-[40px] w-auto transition-none ${isDark ? 'drop-shadow-[0_2px_12px_rgba(255,255,255,0.2)]' : 'invert drop-shadow-[0_1px_2px_rgba(0,0,0,0.1)]'}`}
                         priority
+                        unoptimized
+                        style={{ display: 'block', opacity: 1 }}
                     />
                 </Link>
                 <div className="flex items-center gap-6 md:gap-8">
