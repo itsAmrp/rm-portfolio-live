@@ -53,8 +53,8 @@ export function Navbar() {
                         src={getMediaUrl("/media/site-assets/logo.png") || ""}
                         alt={`${siteMeta.name} Logo`}
                         width={180}
-                        height={40}
-                        className={`object-contain h-8 w-auto ${isDark ? 'invert' : ''}`}
+                        height={48}
+                        className={`object-contain h-8 md:h-9 w-auto transition-all ${isDark ? 'invert drop-shadow-[0_2px_12px_rgba(255,255,255,0.15)]' : 'drop-shadow-sm'}`}
                         priority
                     />
                 </Link>

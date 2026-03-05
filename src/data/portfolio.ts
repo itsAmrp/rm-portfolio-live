@@ -91,6 +91,7 @@ export const brandList = [
     "2024 Portfolio",
     "Sprite",
     "Portfolio 2022",
+    "Potted",
 ];
 
 export const featuredOrder = [
@@ -340,6 +341,60 @@ export const projects: Project[] = [
         gallery: [
             { type: "image", url: "/media/anchor-newdale/01.jpg", alt: "anchor-newdale gallery image" },
             { type: "image", url: "/media/anchor-newdale/02.jpg", alt: "anchor-newdale gallery image" }
+        ],
+    },
+    {
+        slug: "potted",
+        brand: "Potted",
+        title: "Potted Branding",
+        region: "Global",
+        year: "2023",
+        disciplines: ["Art Direction", "Branding", "Design"],
+        shortDescription: "A comprehensive branding and visual identity project for Potted.",
+        roleSummary: "Art Director",
+        tools: ["Adobe Illustrator", "Photoshop", "InDesign"],
+        caseStudySections: {
+            challenge: "Creating a standout visual identity in a crowded market.",
+            insight: "Nature-inspired designs resonate deeply with the target audience.",
+            idea: "A clean, modern, and earthy typographic approach paired with vibrant imagery.",
+            execution: "Developed the full brand guidelines, logo updates, and packaging mockups.",
+        },
+        deliverables: ["Brand Identity", "Logo Design", "Packaging"],
+        heroMedia: {
+            type: "image",
+            url: "https://res.cloudinary.com/ddxa0ahzp/image/upload/v1772737802/rm-portfolio-live/potted/hero.jpg",
+            alt: "potted Hero",
+        },
+        gallery: [
+            { type: "image", url: "https://res.cloudinary.com/ddxa0ahzp/image/upload/v1772737756/rm-portfolio-live/potted/potted%20branding_page_02.jpg", alt: "potted gallery image" },
+            { type: "image", url: "https://res.cloudinary.com/ddxa0ahzp/image/upload/v1772737758/rm-portfolio-live/potted/potted%20branding_page_03.jpg", alt: "potted gallery image" },
+            { type: "image", url: "https://res.cloudinary.com/ddxa0ahzp/image/upload/v1772737759/rm-portfolio-live/potted/potted%20branding_page_04.jpg", alt: "potted gallery image" },
+            { type: "image", url: "https://res.cloudinary.com/ddxa0ahzp/image/upload/v1772737761/rm-portfolio-live/potted/potted%20branding_page_05.jpg", alt: "potted gallery image" },
+            { type: "image", url: "https://res.cloudinary.com/ddxa0ahzp/image/upload/v1772737762/rm-portfolio-live/potted/potted%20branding_page_06.jpg", alt: "potted gallery image" },
+            { type: "image", url: "https://res.cloudinary.com/ddxa0ahzp/image/upload/v1772737764/rm-portfolio-live/potted/potted%20branding_page_07.jpg", alt: "potted gallery image" },
+            { type: "image", url: "https://res.cloudinary.com/ddxa0ahzp/image/upload/v1772737768/rm-portfolio-live/potted/potted%20branding_page_08.jpg", alt: "potted gallery image" },
+            { type: "image", url: "https://res.cloudinary.com/ddxa0ahzp/image/upload/v1772737770/rm-portfolio-live/potted/potted%20branding_page_09.jpg", alt: "potted gallery image" },
+            { type: "image", url: "https://res.cloudinary.com/ddxa0ahzp/image/upload/v1772737771/rm-portfolio-live/potted/potted%20branding_page_10.jpg", alt: "potted gallery image" },
+            { type: "image", url: "https://res.cloudinary.com/ddxa0ahzp/image/upload/v1772737772/rm-portfolio-live/potted/potted%20branding_page_11.jpg", alt: "potted gallery image" },
+            { type: "image", url: "https://res.cloudinary.com/ddxa0ahzp/image/upload/v1772737773/rm-portfolio-live/potted/potted%20branding_page_12.jpg", alt: "potted gallery image" },
+            { type: "image", url: "https://res.cloudinary.com/ddxa0ahzp/image/upload/v1772737774/rm-portfolio-live/potted/potted%20branding_page_13.jpg", alt: "potted gallery image" },
+            { type: "image", url: "https://res.cloudinary.com/ddxa0ahzp/image/upload/v1772737776/rm-portfolio-live/potted/potted%20branding_page_14.jpg", alt: "potted gallery image" },
+            { type: "image", url: "https://res.cloudinary.com/ddxa0ahzp/image/upload/v1772737777/rm-portfolio-live/potted/potted%20branding_page_15.jpg", alt: "potted gallery image" },
+            { type: "image", url: "https://res.cloudinary.com/ddxa0ahzp/image/upload/v1772737778/rm-portfolio-live/potted/potted%20branding_page_16.jpg", alt: "potted gallery image" },
+            { type: "image", url: "https://res.cloudinary.com/ddxa0ahzp/image/upload/v1772737780/rm-portfolio-live/potted/potted%20branding_page_17.jpg", alt: "potted gallery image" },
+            { type: "image", url: "https://res.cloudinary.com/ddxa0ahzp/image/upload/v1772737781/rm-portfolio-live/potted/potted%20branding_page_18.jpg", alt: "potted gallery image" },
+            { type: "image", url: "https://res.cloudinary.com/ddxa0ahzp/image/upload/v1772737782/rm-portfolio-live/potted/potted%20branding_page_19.jpg", alt: "potted gallery image" },
+            { type: "image", url: "https://res.cloudinary.com/ddxa0ahzp/image/upload/v1772737785/rm-portfolio-live/potted/potted%20branding_page_20.jpg", alt: "potted gallery image" },
+            { type: "image", url: "https://res.cloudinary.com/ddxa0ahzp/image/upload/v1772737786/rm-portfolio-live/potted/potted%20branding_page_21.jpg", alt: "potted gallery image" },
+            { type: "image", url: "https://res.cloudinary.com/ddxa0ahzp/image/upload/v1772737788/rm-portfolio-live/potted/potted%20branding_page_22.jpg", alt: "potted gallery image" },
+            { type: "image", url: "https://res.cloudinary.com/ddxa0ahzp/image/upload/v1772737789/rm-portfolio-live/potted/potted%20branding_page_23.jpg", alt: "potted gallery image" },
+            { type: "image", url: "https://res.cloudinary.com/ddxa0ahzp/image/upload/v1772737790/rm-portfolio-live/potted/potted%20branding_page_24.jpg", alt: "potted gallery image" },
+            { type: "image", url: "https://res.cloudinary.com/ddxa0ahzp/image/upload/v1772737792/rm-portfolio-live/potted/potted%20branding_page_25.jpg", alt: "potted gallery image" },
+            { type: "image", url: "https://res.cloudinary.com/ddxa0ahzp/image/upload/v1772737793/rm-portfolio-live/potted/potted%20branding_page_26.jpg", alt: "potted gallery image" },
+            { type: "image", url: "https://res.cloudinary.com/ddxa0ahzp/image/upload/v1772737794/rm-portfolio-live/potted/potted%20branding_page_27.jpg", alt: "potted gallery image" },
+            { type: "image", url: "https://res.cloudinary.com/ddxa0ahzp/image/upload/v1772737796/rm-portfolio-live/potted/potted%20branding_page_28.jpg", alt: "potted gallery image" },
+            { type: "image", url: "https://res.cloudinary.com/ddxa0ahzp/image/upload/v1772737800/rm-portfolio-live/potted/potted%20branding_page_29.jpg", alt: "potted gallery image" },
+            { type: "image", url: "https://res.cloudinary.com/ddxa0ahzp/image/upload/v1772737801/rm-portfolio-live/potted/potted%20branding_page_30.jpg", alt: "potted gallery image" }
         ],
     },
     {
@@ -668,7 +723,7 @@ export const projects: Project[] = [
     {
         slug: "portfolio-2022",
         brand: "Portfolio 2022",
-        title: "Roshan Mariadas 2022",
+        title: "Creative Archive 2022",
         region: "Global",
         year: "2022",
         disciplines: ["Art Direction", "Digital", "CGI", "Design"],
