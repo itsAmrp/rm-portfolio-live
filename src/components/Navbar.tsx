@@ -52,9 +52,9 @@ export function Navbar() {
                     <Image
                         src={getMediaUrl("/media/site-assets/logo.png") || ""}
                         alt={`${siteMeta.name} Logo`}
-                        width={240}
-                        height={60}
-                        className="object-contain h-[30px] md:h-[40px] w-auto brightness-0 drop-shadow-[0_2px_8px_rgba(255,255,255,0.6)] dark:invert dark:drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]"
+                        width={280}
+                        height={80}
+                        className="object-contain h-[36px] md:h-[48px] w-auto brightness-0 drop-shadow-[0_2px_8px_rgba(255,255,255,0.6)] dark:invert dark:drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]"
                         priority
                         unoptimized
                         style={{ display: 'block', opacity: 1, mixBlendMode: 'normal' }}
