@@ -7,7 +7,7 @@ const MAP_PATH = join(process.cwd(), 'src/data/mediaMap.json');
 const mediaMap = JSON.parse(readFileSync(MAP_PATH, 'utf-8'));
 let portfolioStr = readFileSync(PORTFOLIO_PATH, 'utf-8');
 
-const projectsToUpdate = ['anchor-moments', 'anchor-butter', 'brewery'];
+const projectsToUpdate = ['anchor-moments', 'anchor-butter', 'brewery', 'portfolio-2022'];
 
 projectsToUpdate.forEach(slug => {
     const prefix = `/media/${slug}/`;

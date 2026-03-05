@@ -4,7 +4,8 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
-import { nav, siteMeta } from "@/data/portfolio";
+import Image from "next/image";
+import { nav, siteMeta, getMediaUrl } from "@/data/portfolio";
 import { Moon, Sun } from "lucide-react";
 
 export function Navbar() {
@@ -46,9 +47,16 @@ export function Navbar() {
             <div className="container mx-auto px-6 md:px-12 flex justify-between items-center">
                 <Link
                     href="/"
-                    className="text-xl font-display font-bold tracking-tight hover:opacity-70 transition-opacity"
+                    className="hover:opacity-70 transition-opacity flex items-center"
                 >
-                    {siteMeta.name}
+                    <Image
+                        src={getMediaUrl("/media/site-assets/logo.png") || ""}
+                        alt={`${siteMeta.name} Logo`}
+                        width={180}
+                        height={40}
+                        className={`object-contain h-8 w-auto ${isDark ? 'invert' : ''}`}
+                        priority
+                    />
                 </Link>
                 <div className="flex items-center gap-6 md:gap-8">
                     {nav.map((link) => (

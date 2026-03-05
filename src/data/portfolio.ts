@@ -90,9 +90,11 @@ export const brandList = [
     "Mapei UAE",
     "2024 Portfolio",
     "Sprite",
+    "Portfolio 2022",
 ];
 
 export const featuredOrder = [
+    "portfolio-2022",
     "sprite",
     "portfolio-2024",
     "anchor-moments",
@@ -661,6 +663,54 @@ export const projects: Project[] = [
             { type: "image", url: "/media/sprite/mother's day-01.png", alt: "Sprite gallery image 12" },
             { type: "image", url: "/media/sprite/mother's day-02.png", alt: "Sprite gallery image 13" },
             { type: "image", url: "/media/sprite/mother's day-03.png", alt: "Sprite gallery image 14" }
+        ],
+    },
+    {
+        slug: "portfolio-2022",
+        brand: "Portfolio 2022",
+        title: "Roshan Mariadas 2022",
+        region: "Global",
+        year: "2022",
+        disciplines: ["Art Direction", "Digital", "CGI", "Design"],
+        shortDescription: "A comprehensive showcase of art direction and design projects from 2022.",
+        roleSummary: "Art Director",
+        tools: ["Adobe Creative Cloud", "Cinema 4D"],
+        caseStudySections: {
+            challenge: "Showcasing a diverse range of high-impact visual design projects.",
+            insight: "A portfolio needs to be visually striking and easy to navigate.",
+            idea: "A bold, image-first presentation highlighting the best work from the year.",
+            execution: "Curated and designed an immersive visual narrative for each project.",
+        },
+        deliverables: ["Key Visuals", "Digital Campaigns", "Branding"],
+        heroMedia: {
+            type: "image",
+            url: "https://res.cloudinary.com/ddxa0ahzp/image/upload/v1772736708/rm-portfolio-live/portfolio-2022/hero.jpg",
+            alt: "portfolio-2022 Hero",
+        },
+        gallery: [
+            { type: "image", url: "https://res.cloudinary.com/ddxa0ahzp/image/upload/v1772736709/rm-portfolio-live/portfolio-2022/roshans%20portfolio_page_03.jpg", alt: "portfolio-2022 gallery image" },
+            { type: "image", url: "https://res.cloudinary.com/ddxa0ahzp/image/upload/v1772736710/rm-portfolio-live/portfolio-2022/roshans%20portfolio_page_04.jpg", alt: "portfolio-2022 gallery image" },
+            { type: "image", url: "https://res.cloudinary.com/ddxa0ahzp/image/upload/v1772736711/rm-portfolio-live/portfolio-2022/roshans%20portfolio_page_05.jpg", alt: "portfolio-2022 gallery image" },
+            { type: "image", url: "https://res.cloudinary.com/ddxa0ahzp/image/upload/v1772736712/rm-portfolio-live/portfolio-2022/roshans%20portfolio_page_06.jpg", alt: "portfolio-2022 gallery image" },
+            { type: "image", url: "https://res.cloudinary.com/ddxa0ahzp/image/upload/v1772736713/rm-portfolio-live/portfolio-2022/roshans%20portfolio_page_07.jpg", alt: "portfolio-2022 gallery image" },
+            { type: "image", url: "https://res.cloudinary.com/ddxa0ahzp/image/upload/v1772736714/rm-portfolio-live/portfolio-2022/roshans%20portfolio_page_08.jpg", alt: "portfolio-2022 gallery image" },
+            { type: "image", url: "https://res.cloudinary.com/ddxa0ahzp/image/upload/v1772736716/rm-portfolio-live/portfolio-2022/roshans%20portfolio_page_09.jpg", alt: "portfolio-2022 gallery image" },
+            { type: "image", url: "https://res.cloudinary.com/ddxa0ahzp/image/upload/v1772736717/rm-portfolio-live/portfolio-2022/roshans%20portfolio_page_10.jpg", alt: "portfolio-2022 gallery image" },
+            { type: "image", url: "https://res.cloudinary.com/ddxa0ahzp/image/upload/v1772736720/rm-portfolio-live/portfolio-2022/roshans%20portfolio_page_11.jpg", alt: "portfolio-2022 gallery image" },
+            { type: "image", url: "https://res.cloudinary.com/ddxa0ahzp/image/upload/v1772736722/rm-portfolio-live/portfolio-2022/roshans%20portfolio_page_12.jpg", alt: "portfolio-2022 gallery image" },
+            { type: "image", url: "https://res.cloudinary.com/ddxa0ahzp/image/upload/v1772736723/rm-portfolio-live/portfolio-2022/roshans%20portfolio_page_13.jpg", alt: "portfolio-2022 gallery image" },
+            { type: "image", url: "https://res.cloudinary.com/ddxa0ahzp/image/upload/v1772736725/rm-portfolio-live/portfolio-2022/roshans%20portfolio_page_14.jpg", alt: "portfolio-2022 gallery image" },
+            { type: "image", url: "https://res.cloudinary.com/ddxa0ahzp/image/upload/v1772736727/rm-portfolio-live/portfolio-2022/roshans%20portfolio_page_15.jpg", alt: "portfolio-2022 gallery image" },
+            { type: "image", url: "https://res.cloudinary.com/ddxa0ahzp/image/upload/v1772736728/rm-portfolio-live/portfolio-2022/roshans%20portfolio_page_16.jpg", alt: "portfolio-2022 gallery image" },
+            { type: "image", url: "https://res.cloudinary.com/ddxa0ahzp/image/upload/v1772736729/rm-portfolio-live/portfolio-2022/roshans%20portfolio_page_17.jpg", alt: "portfolio-2022 gallery image" },
+            { type: "image", url: "https://res.cloudinary.com/ddxa0ahzp/image/upload/v1772736731/rm-portfolio-live/portfolio-2022/roshans%20portfolio_page_18.jpg", alt: "portfolio-2022 gallery image" },
+            { type: "image", url: "https://res.cloudinary.com/ddxa0ahzp/image/upload/v1772736732/rm-portfolio-live/portfolio-2022/roshans%20portfolio_page_19.jpg", alt: "portfolio-2022 gallery image" },
+            { type: "image", url: "https://res.cloudinary.com/ddxa0ahzp/image/upload/v1772736733/rm-portfolio-live/portfolio-2022/roshans%20portfolio_page_20.jpg", alt: "portfolio-2022 gallery image" },
+            { type: "image", url: "https://res.cloudinary.com/ddxa0ahzp/image/upload/v1772736734/rm-portfolio-live/portfolio-2022/roshans%20portfolio_page_21.jpg", alt: "portfolio-2022 gallery image" },
+            { type: "image", url: "https://res.cloudinary.com/ddxa0ahzp/image/upload/v1772736736/rm-portfolio-live/portfolio-2022/roshans%20portfolio_page_22.jpg", alt: "portfolio-2022 gallery image" },
+            { type: "image", url: "https://res.cloudinary.com/ddxa0ahzp/image/upload/v1772736737/rm-portfolio-live/portfolio-2022/roshans%20portfolio_page_23.jpg", alt: "portfolio-2022 gallery image" },
+            { type: "image", url: "https://res.cloudinary.com/ddxa0ahzp/image/upload/v1772736738/rm-portfolio-live/portfolio-2022/roshans%20portfolio_page_24.jpg", alt: "portfolio-2022 gallery image" },
+            { type: "image", url: "https://res.cloudinary.com/ddxa0ahzp/image/upload/v1772736739/rm-portfolio-live/portfolio-2022/roshans%20portfolio_page_25.jpg", alt: "portfolio-2022 gallery image" }
         ],
     }
 ];
