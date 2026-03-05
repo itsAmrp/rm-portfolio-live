@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence, useScroll, useTransform, useMotionValue, useSpring, useReducedMotion } from "framer-motion";
 import Link from "next/link";
 import { ArrowRight, ChevronRight } from "lucide-react";
-import { projects, siteMeta, brandList, featuredOrder } from "@/data/portfolio";
+import { projects, siteMeta, brandList, featuredOrder, getMediaUrl } from "@/data/portfolio";
 import { WorkCard } from "@/components/WorkCard";
 import { ShowcaseReel } from "@/components/ShowcaseReel";
 import Image from "next/image";
@@ -353,7 +353,7 @@ export default function Home() {
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8">
               <div className="lg:col-span-5 relative h-[60vh] lg:h-auto rounded-xl overflow-hidden bg-foreground/10">
                 <Image
-                  src="/media/about/about-hero.jpg"
+                  src={getMediaUrl("/media/about/about-hero.jpg") || ""}
                   alt="Roshan Mariadas Portrait"
                   fill
                   className="object-cover"

@@ -1,9 +1,49 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useState, useRef } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { siteMeta, socialLinks } from "@/data/portfolio";
+import HCaptcha from "@hcaptcha/react-hcaptcha";
 
 export default function Contact() {
+    const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [message, setMessage] = useState("");
+    const [token, setToken] = useState<string | null>(null);
+    const captchaRef = useRef<HCaptcha>(null);
+
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+
+        if (!token) {
+            alert("Please complete the captcha.");
+            return;
+        }
+
+        setStatus("submitting");
+
+        try {
+            const res = await fetch("/api/contact", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ name, email, message, hcaptchaToken: token }),
+            });
+
+            if (!res.ok) throw new Error("Failed to send message");
+
+            setStatus("success");
+            setName("");
+            setEmail("");
+            setMessage("");
+            setToken(null);
+            captchaRef.current?.resetCaptcha();
+        } catch (error) {
+            console.error("Submission error:", error);
+            setStatus("error");
+        }
+    };
+
     return (
         <div className="min-h-screen pt-32 pb-24">
             <div className="container mx-auto px-6 md:px-12">
@@ -70,47 +110,94 @@ export default function Contact() {
                     <div className="lg:col-span-6 lg:col-start-7">
                         <div className="bg-foreground/5 p-8 md:p-12 rounded-2xl">
                             <h2 className="text-3xl font-display font-bold tracking-tight mb-8">Send a message</h2>
-                            <form className="space-y-8" onSubmit={(e) => e.preventDefault()}>
-                                <div className="space-y-2">
-                                    <label htmlFor="name" className="text-sm font-sans tracking-widest uppercase opacity-70">Name</label>
-                                    <input
-                                        type="text"
-                                        id="name"
-                                        required
-                                        className="w-full bg-transparent border-b border-foreground/30 py-4 focus:outline-none focus:border-foreground transition-colors font-medium text-lg placeholder:text-foreground/30"
-                                        placeholder="John Doe"
-                                    />
-                                </div>
+                            <AnimatePresence mode="wait">
+                                {status === "success" ? (
+                                    <motion.div
+                                        key="success"
+                                        initial={{ opacity: 0, y: 10 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        exit={{ opacity: 0, scale: 0.95 }}
+                                        className="h-full flex flex-col items-center justify-center py-16 text-center space-y-6"
+                                    >
+                                        <div className="w-16 h-16 bg-foreground/10 text-foreground rounded-full flex items-center justify-center mb-4">
+                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                        </div>
+                                        <h3 className="text-3xl font-display font-bold tracking-tight">Message Sent</h3>
+                                        <p className="text-foreground/70">Thanks for reaching out. I&apos;ll get back to you soon.</p>
+                                        <button
+                                            onClick={() => setStatus("idle")}
+                                            className="mt-8 px-8 py-3 rounded-full border border-foreground/20 text-xs tracking-widest uppercase font-bold hover:bg-foreground/5 transition-colors"
+                                        >
+                                            Send another
+                                        </button>
+                                    </motion.div>
+                                ) : (
+                                    <motion.form key="form" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="space-y-8" onSubmit={handleSubmit}>
+                                        <div className="space-y-2">
+                                            <label htmlFor="name" className="text-sm font-sans tracking-widest uppercase opacity-70">Name</label>
+                                            <input
+                                                type="text"
+                                                id="name"
+                                                required
+                                                value={name}
+                                                onChange={(e) => setName(e.target.value)}
+                                                disabled={status === "submitting"}
+                                                className="w-full bg-transparent border-b border-foreground/30 py-4 focus:outline-none focus:border-foreground transition-colors font-medium text-lg placeholder:text-foreground/30 disabled:opacity-50"
+                                                placeholder="John Doe"
+                                            />
+                                        </div>
 
-                                <div className="space-y-2">
-                                    <label htmlFor="email" className="text-sm font-sans tracking-widest uppercase opacity-70">Email</label>
-                                    <input
-                                        type="email"
-                                        id="email"
-                                        required
-                                        className="w-full bg-transparent border-b border-foreground/30 py-4 focus:outline-none focus:border-foreground transition-colors font-medium text-lg placeholder:text-foreground/30"
-                                        placeholder="john@example.com"
-                                    />
-                                </div>
+                                        <div className="space-y-2">
+                                            <label htmlFor="email" className="text-sm font-sans tracking-widest uppercase opacity-70">Email</label>
+                                            <input
+                                                type="email"
+                                                id="email"
+                                                required
+                                                value={email}
+                                                onChange={(e) => setEmail(e.target.value)}
+                                                disabled={status === "submitting"}
+                                                className="w-full bg-transparent border-b border-foreground/30 py-4 focus:outline-none focus:border-foreground transition-colors font-medium text-lg placeholder:text-foreground/30 disabled:opacity-50"
+                                                placeholder="john@example.com"
+                                            />
+                                        </div>
 
-                                <div className="space-y-2">
-                                    <label htmlFor="message" className="text-sm font-sans tracking-widest uppercase opacity-70">Message</label>
-                                    <textarea
-                                        id="message"
-                                        required
-                                        rows={4}
-                                        className="w-full bg-transparent border-b border-foreground/30 py-4 focus:outline-none focus:border-foreground transition-colors font-medium text-lg placeholder:text-foreground/30 resize-none"
-                                        placeholder="Tell me about your project..."
-                                    />
-                                </div>
+                                        <div className="space-y-2">
+                                            <label htmlFor="message" className="text-sm font-sans tracking-widest uppercase opacity-70">Message</label>
+                                            <textarea
+                                                id="message"
+                                                required
+                                                rows={4}
+                                                value={message}
+                                                onChange={(e) => setMessage(e.target.value)}
+                                                disabled={status === "submitting"}
+                                                className="w-full bg-transparent border-b border-foreground/30 py-4 focus:outline-none focus:border-foreground transition-colors font-medium text-lg placeholder:text-foreground/30 resize-none disabled:opacity-50"
+                                                placeholder="Tell me about your project..."
+                                            />
+                                        </div>
 
-                                <button
-                                    type="submit"
-                                    className="w-full bg-foreground text-background py-5 rounded-full uppercase tracking-widest text-sm font-bold hover:opacity-90 transition-opacity mt-8"
-                                >
-                                    Submit Inquiry
-                                </button>
-                            </form>
+                                        <div className="pt-4">
+                                            <HCaptcha
+                                                sitekey={process.env.NEXT_PUBLIC_HCAPTCHA_SITE_KEY || "10000000-ffff-ffff-ffff-000000000001"}
+                                                onVerify={(token) => setToken(token)}
+                                                ref={captchaRef}
+                                                theme="dark"
+                                            />
+                                        </div>
+
+                                        {status === "error" && (
+                                            <p className="text-red-500 text-sm">Failed to send message. Please try again.</p>
+                                        )}
+
+                                        <button
+                                            type="submit"
+                                            disabled={status === "submitting" || !token}
+                                            className="w-full bg-foreground text-background py-5 rounded-full uppercase tracking-widest text-sm font-bold hover:opacity-90 transition-opacity mt-8 disabled:opacity-50 disabled:cursor-not-allowed"
+                                        >
+                                            {status === "submitting" ? "Sending..." : "Submit Inquiry"}
+                                        </button>
+                                    </motion.form>
+                                )}
+                            </AnimatePresence>
                         </div>
                     </div>
 

@@ -85,19 +85,19 @@ export const brandList = [
     "Anchor Newdale",
     "Dialog",
     "Anchor Butter",
-    "Anchor Moments",
     "Brewery",
     "Anchor Stirred Yoghurt",
     "Mapei UAE",
     "2024 Portfolio",
+    "Sprite",
 ];
 
 export const featuredOrder = [
+    "sprite",
     "portfolio-2024",
     "anchor-moments",
     "idemitsu-mena",
-    "anchor-butter",
-    "mazda-motor-oil-mena"
+    "anchor-butter"
 ];
 
 const mockGallery = (brand: string): MediaAsset[] => {
@@ -130,8 +130,9 @@ export const projects: Project[] = [
         },
         deliverables: ["Social Media KV", "AI Video Assets", "Digital Ad Units", "Brand Guidelines"],
         heroMedia: {
-            type: "image",
-            url: "/media/idemitsu-mena/cover.jpg",
+            type: "video",
+            url: "/media/idemitsu-mena/hero.jpg",
+            videoMp4: "/media/idemitsu-mena/hero.mp4",
             alt: "Idemitsu MENA Hero",
         },
         gallery: [
@@ -231,8 +232,9 @@ export const projects: Project[] = [
         },
         deliverables: ["Campaign Strategy", "Social Media Playbook", "Video Vignettes", "Digital Ad Banners"],
         heroMedia: {
-            type: "image",
-            url: "/media/cinnamon/cover.jpg",
+            type: "video",
+            url: "/media/cinnamon/hero.jpg",
+            videoMp4: "/media/cinnamon/hero.mp4",
             alt: "Cinnamon Hero",
         },
         gallery: [
@@ -434,8 +436,9 @@ export const projects: Project[] = [
         },
         deliverables: ["Key Visuals", "Social Content"],
         heroMedia: {
-            type: "image",
-            url: "/media/anchor-butter/01.jpg",
+            type: "video",
+            url: "/media/anchor-butter/hero.jpg",
+            videoMp4: "/media/anchor-butter/hero.mp4",
             alt: "Anchor Butter Hero",
         },
         gallery: [
@@ -538,8 +541,9 @@ export const projects: Project[] = [
         },
         deliverables: ["Brand Identity", "Website Design", "Packaging Concepts"],
         heroMedia: {
-            type: "image",
-            url: "/media/brewery/cover.jpg",
+            type: "video",
+            url: "/media/brewery/hero.jpg",
+            videoMp4: "/media/brewery/hero.mp4",
             alt: "Brewery Hero",
         },
         gallery: [
@@ -605,6 +609,47 @@ export const projects: Project[] = [
         gallery: [
             { type: "image", url: "/media/mapei-uae/01.jpg", alt: "mapei-uae gallery image" },
             { type: "image", url: "/media/mapei-uae/02.jpg", alt: "mapei-uae gallery image" }
+        ],
+    },
+    {
+        slug: "sprite",
+        brand: "Sprite",
+        title: "Stay Refreshingly Bold",
+        region: "Global",
+        year: "2024",
+        disciplines: ["Art Direction", "AI Video", "Digital", "CGI"],
+        shortDescription: "A high-energy, hyper-refreshing digital campaign celebrating the bold taste of Sprite.",
+        roleSummary: "Lead Art Director focusing on hyper-realistic condensation and dynamic fluid simulations.",
+        tools: ["Cinema 4D", "Redshift", "After Effects", "Midjourney"],
+        caseStudySections: {
+            challenge: "Creating impossibly refreshing visuals that look completely authentic.",
+            insight: "Refreshment is a visual and auditory sensation triggered by ice, condensation, and dynamic splashes.",
+            idea: "A 'Hyper-Chilled' visual direction pairing stark studio lighting with intense, close-up fluid dynamics.",
+            execution: "Developed a comprehensive visual system featuring AI-assisted fluid simulations and macro CGI renders.",
+        },
+        deliverables: ["CGI Key Visuals", "Social Media Toolkit", "Digital Video Ads"],
+        heroMedia: {
+            type: "video",
+            url: "/media/sprite/hero.jpg",
+            videoMp4: "/media/sprite/hero.mp4",
+            alt: "Sprite Hero Video",
+        },
+        
+        gallery: [
+            { type: "image", url: "/media/sprite/1.png", alt: "Sprite gallery image 1" },
+            { type: "image", url: "/media/sprite/2.png", alt: "Sprite gallery image 2" },
+            { type: "image", url: "/media/sprite/eid ul adha 04.png", alt: "Sprite gallery image 3" },
+            { type: "image", url: "/media/sprite/eid ul adha-02.png", alt: "Sprite gallery image 4" },
+            { type: "image", url: "/media/sprite/eid ul adha-03.png", alt: "Sprite gallery image 5" },
+            { type: "image", url: "/media/sprite/eid ul adha-1.png", alt: "Sprite gallery image 6" },
+            { type: "image", url: "/media/sprite/eid ul adha-final wish.png", alt: "Sprite gallery image 7" },
+            { type: "image", url: "/media/sprite/eid ul adha03.png", alt: "Sprite gallery image 8" },
+            { type: "image", url: "/media/sprite/rmdn -03.png", alt: "Sprite gallery image 9" },
+            { type: "image", url: "/media/sprite/rmdn-01.png", alt: "Sprite gallery image 10" },
+            { type: "image", url: "/media/sprite/rmdn-02.png", alt: "Sprite gallery image 11" },
+            { type: "image", url: "/media/sprite/mother's day-01.png", alt: "Sprite gallery image 12" },
+            { type: "image", url: "/media/sprite/mother's day-02.png", alt: "Sprite gallery image 13" },
+            { type: "image", url: "/media/sprite/mother's day-03.png", alt: "Sprite gallery image 14" }
         ],
     }
 ];
