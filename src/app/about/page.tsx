@@ -10,7 +10,7 @@ export default function About() {
     const skills = [
         "Creative Direction",
         "Concept Development",
-        "AI Visual & Video Production",
+        "Motion Design & Production",
         "Key Visual Architecture",
         "Visual Storytelling",
         "Digital Campaign Systems"
@@ -21,19 +21,19 @@ export default function About() {
             company: "Magic Mango",
             role: "Art Director",
             period: "Sep 2024 – Present",
-            description: "Leading creative teams to conceptualize and execute high-impact campaigns. Specializing in integrating AI visual workflows into traditional art direction pipelines for rapid, scalable, and premium quality outputs."
+            description: "Leading creative teams to conceptualize and execute high-impact campaigns. Driving motion workflows and digital-first art direction for rapid, scalable, and premium quality outputs."
         },
         {
             company: "Hype Invention",
             role: "Junior Art Director",
             period: "Nov 2023 – Aug 2024",
-            description: "Bridged the gap between strategy and visual identity. Spearheaded digital-first campaigns and motion graphics for regional clientele, establishing strict aesthetic baselines."
+            description: "Bridged the gap between strategy and visual identity. Spearheaded digital campaigns and motion graphics for regional clientele, establishing rigorous aesthetic baselines."
         },
         {
             company: "MullenLowe Sri Lanka",
             role: "Graphic Designer",
             period: "Aug 2021 – Jul 2023",
-            description: "Executed high-volume social and digital assets for top-tier national brands. Honed skills in typographic hierarchy, key visual adaptation, and brand-compliant visual storytelling."
+            description: "Executed high-volume social and digital assets for top-tier national brands. Honed skills in typographic hierarchy, key visual adaptation, and brand-compliant storytelling."
         }
     ];
 
@@ -49,17 +49,17 @@ export default function About() {
                     className="max-w-4xl mb-24"
                 >
                     <h1 className="text-5xl md:text-8xl font-display font-bold tracking-tight mb-12 leading-[0.9]">
-                        Driven by storytelling. <br />
+                        Built on craft. <br />
                         <span className="text-foreground/50 italic mr-8">Defined</span>
                         by execution.
                     </h1>
 
                     <div className="text-xl md:text-3xl leading-relaxed text-foreground/80 space-y-8 font-medium">
                         <p>
-                            I’m an Art Director shaping brand narratives through considered design, cinematic visuals, and evolving creative tools.
+                            I’m an Art Director shaping brand narratives through considered design, cinematic visuals, and meticulous motion.
                         </p>
                         <p>
-                            Across 7+ years in agency environments, I’ve learned to balance bold ideas with rigorous execution, building visual systems that endure beyond a single campaign.
+                            Over the past seven years, I have learned to balance bold ideas with rigorous execution, building visual systems that endure.
                         </p>
                     </div>
                 </motion.div>
@@ -126,13 +126,13 @@ export default function About() {
                                 <ArrowDown size={32} strokeWidth={1} className="text-foreground/30 mb-8" />
                             </motion.div>
                             <h2 className="text-4xl md:text-6xl font-display font-bold tracking-tight mb-8">
-                                Ready to talk?
+                                Ready to make something?
                             </h2>
                             <Link
                                 href="/contact"
                                 className="inline-block border border-foreground rounded-full px-8 py-4 text-sm uppercase tracking-widest font-bold hover:bg-foreground hover:text-background transition-colors duration-300"
                             >
-                                Start a conversation
+                                Start a Conversation
                             </Link>
                         </div>
                     </div>

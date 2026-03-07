@@ -64,7 +64,7 @@ export default function Contact() {
                     <h1 className="text-5xl md:text-8xl lg:text-[8vw] font-display font-bold tracking-tight uppercase leading-[0.9] mb-8">
                         Let&apos;s build <br />
                         <span className="text-foreground/50 italic mr-8">something</span>
-                        bold.
+                        lasting.
                     </h1>
                 </motion.div>
 

@@ -191,7 +191,7 @@ export default function Home() {
   const servicesList = [
     "Creative Direction",
     "Concept Development",
-    "AI Visual & Video Production",
+    "Motion Design & Production",
     "Key Visual Architecture",
     "Visual Storytelling",
     "Digital Campaign Systems"
@@ -315,7 +315,7 @@ export default function Home() {
 
                   <div className="relative z-10 flex flex-col items-start">
                     <div className="flex flex-col items-start mb-10 w-full text-lg md:text-xl text-foreground/80 font-medium tracking-wide">
-                      <span>Storytelling meets</span>
+                      <span>Concept meets</span>
 
                       {/* Step 5: "Execution" signature animation */}
                       <div className="overflow-hidden mt-2 pb-2 w-full">
@@ -462,14 +462,14 @@ export default function Home() {
               </div>
               <div className="lg:col-span-6 lg:col-start-7 flex flex-col justify-center">
                 <h2 className="text-4xl md:text-5xl font-display font-bold tracking-tight mb-8">
-                  Driven by visual storytelling & relentless execution.
+                  Built on craft. Defined by execution.
                 </h2>
                 <div className="space-y-6 text-foreground/80 text-lg leading-relaxed mb-12">
                   <p>
-                    With over 7 years of experience across agency leadership and hands-on production, I shape ideas into cohesive visual narratives.
+                    With over seven years of agency leadership and hands-on production experience, I shape bold ideas into clear visual narratives.
                   </p>
                   <p>
-                    My work blends strategic thinking with evolving tools, building systems that scale while protecting the integrity of the craft.
+                    My work balances aesthetic intuition with technical rigor, building creative systems that scale while protecting the integrity of the design.
                   </p>
                 </div>
                 <div className="mt-8">
