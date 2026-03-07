@@ -9,6 +9,68 @@ import { WorkCard } from "@/components/WorkCard";
 import { ShowcaseReel } from "@/components/ShowcaseReel";
 import Image from "next/image";
 
+// Subtle Magnetic Repulsion Component for specifically large text
+function RepellingText({ children }: { children: React.ReactNode }) {
+  const prefersReducedMotion = useReducedMotion();
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+
+  const springConfig = { damping: 20, stiffness: 150, mass: 0.5 };
+  const smoothX = useSpring(x, springConfig);
+  const smoothY = useSpring(y, springConfig);
+
+  const handlePointerMove = (e: React.PointerEvent<HTMLSpanElement>) => {
+    // Desktop only, ignore touches/styluses. Safety catch for preferences.
+    if (e.pointerType !== "mouse" || prefersReducedMotion) return;
+
+    const rect = e.currentTarget.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+
+    // Calculate distance from center
+    const distanceX = e.clientX - centerX;
+    const distanceY = e.clientY - centerY;
+
+    // We want repulsion (move away from cursor), bounded strictly to subtle limits (e.g. max 12px)
+    // The closer to center, the harder the push (capped). Opposite math logic.
+    const maxRepel = 12;
+    // Normalized distance threshold (within 200px acts strongly)
+    const threshold = 200;
+
+    const distance = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
+
+    if (distance < threshold) {
+      // Repel intensity mapping
+      const intensity = 1 - distance / threshold;
+      // Reverse direction to repel, capped by maxRepel
+      const moveX = -(distanceX / distance) * maxRepel * intensity;
+      const moveY = -(distanceY / distance) * maxRepel * intensity;
+
+      x.set(moveX);
+      y.set(moveY);
+    } else {
+      // Ease back
+      x.set(0);
+      y.set(0);
+    }
+  };
+
+  const handlePointerLeave = () => {
+    x.set(0);
+    y.set(0);
+  };
+
+  return (
+    <motion.span
+      onPointerMove={handlePointerMove}
+      onPointerLeave={handlePointerLeave}
+      style={{ x: smoothX, y: smoothY, display: "inline-block" }}
+    >
+      {children}
+    </motion.span>
+  );
+}
+
 export default function Home() {
   const [loading, setLoading] = useState(true);
 
@@ -173,7 +235,7 @@ export default function Home() {
                       variants={lineVariant}
                       className="text-[12vw] sm:text-[10vw] lg:text-[8vw] font-display font-bold tracking-tight leading-[0.85] m-0"
                     >
-                      Roshan
+                      <RepellingText>Roshan</RepellingText>
                     </motion.h1>
                   </div>
                   <div className="overflow-hidden pb-4 w-full">
@@ -181,7 +243,7 @@ export default function Home() {
                       variants={lineVariant}
                       className="text-[12vw] sm:text-[10vw] lg:text-[8vw] font-display font-bold tracking-tight leading-[0.85] m-0 mb-2"
                     >
-                      Mariadas
+                      <RepellingText>Mariadas</RepellingText>
                     </motion.h1>
                   </div>
 
