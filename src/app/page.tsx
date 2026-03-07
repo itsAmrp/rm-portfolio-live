@@ -36,20 +36,19 @@ export default function Home() {
   };
 
   const lineVariant: import("framer-motion").Variants = {
-    hidden: { y: prefersReducedMotion ? 0 : 48, opacity: 0 },
+    hidden: { y: prefersReducedMotion ? 0 : 20, opacity: 0 },
     visible: {
       y: 0,
       opacity: 1,
-      transition: { ease: [0.22, 1, 0.36, 1], duration: 0.9 }
+      transition: { ease: "easeOut", duration: 0.5 }
     }
   };
 
   const roleVariant: import("framer-motion").Variants = {
-    hidden: { y: prefersReducedMotion ? 0 : 16, opacity: 0 },
+    hidden: { opacity: 0 },
     visible: {
-      y: 0,
       opacity: 1,
-      transition: { duration: 0.6, delay: 0.15 }
+      transition: { duration: 0.5, delay: 0.12, ease: "easeOut" }
     }
   };
 
@@ -232,9 +231,9 @@ export default function Home() {
                     {/* Step 6: Buttons stagger in */}
                     <div className="flex flex-col sm:flex-row items-center gap-4 w-full">
                       <motion.div
-                        initial={{ opacity: 0, y: 10 }}
+                        initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 10 }}
                         animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.6, delay: 1.9, ease: "easeOut" }}
+                        transition={{ duration: 0.5, delay: 0.20, ease: "easeOut" }}
                         className="w-full sm:w-auto"
                       >
                         <Link
@@ -246,9 +245,9 @@ export default function Home() {
                       </motion.div>
 
                       <motion.div
-                        initial={{ opacity: 0, y: 10 }}
+                        initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 10 }}
                         animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.6, delay: 2.05, ease: "easeOut" }}
+                        transition={{ duration: 0.5, delay: 0.25, ease: "easeOut" }}
                         className="w-full sm:w-auto"
                       >
                         <Link
