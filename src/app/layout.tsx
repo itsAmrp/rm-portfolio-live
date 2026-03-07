@@ -18,6 +18,7 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://rm-portfolio-live.vercel.app"),
   title: "Roshan Mariadas | Portfolio",
   description: "A portfolio of art direction, visual storytelling, and modern image-making.",
   openGraph: {
@@ -26,7 +27,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/og-image.png",
+        url: "https://rm-portfolio-live.vercel.app/og-image.png",
         width: 1200,
         height: 630,
         alt: "Roshan Mariadas | Portfolio",
@@ -37,7 +38,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Roshan Mariadas | Portfolio",
     description: "A portfolio of art direction, visual storytelling, and modern image-making.",
-    images: ["/og-image.png"],
+    images: ["https://rm-portfolio-live.vercel.app/og-image.png"],
   },
 };
 
