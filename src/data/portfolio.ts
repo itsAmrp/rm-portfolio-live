@@ -238,8 +238,9 @@ export const projects: Project[] = [
         },
         deliverables: ["Key Visuals", "Social Content System", "POS Display Designs"],
         heroMedia: {
-            type: "image",
-            url: "/media/mazda-motor-oil-mena/cover.jpg",
+            type: "video",
+            url: "/media/mazda-motor-oil-mena/hero.mp4",
+            videoMp4: "/media/mazda-motor-oil-mena/hero.mp4",
             alt: "Mazda Motor Oil MENA Hero",
         },
         gallery: [
@@ -337,8 +338,9 @@ export const projects: Project[] = [
         },
         deliverables: ["Activation Branding", "Social Campaign", "Digital Illustrations"],
         heroMedia: {
-            type: "image",
-            url: "/media/baby-cheramy/cover.jpg",
+            type: "video",
+            url: "/media/baby-cheramy/hero.mp4",
+            videoMp4: "/media/baby-cheramy/hero.mp4",
             alt: "Baby Cheramy Hero",
         },
         gallery: [
@@ -367,8 +369,9 @@ export const projects: Project[] = [
         },
         deliverables: ["Key Visuals", "Social Content", "BTL Materials"],
         heroMedia: {
-            type: "image",
-            url: "/media/anchor-newdale/cover.jpg",
+            type: "video",
+            url: "/media/anchor-newdale/hero.mp4",
+            videoMp4: "/media/anchor-newdale/hero.mp4",
             alt: "Anchor Newdale Hero",
         },
         gallery: [
@@ -532,6 +535,7 @@ export const projects: Project[] = [
             alt: "anchor-butter Hero",
         },
         gallery: [
+            { type: "image", url: "/media/anchor-butter/port-ver.png", alt: "anchor-butter gallery portrait image" },
             { type: "image", url: "https://res.cloudinary.com/ddxa0ahzp/image/upload/v1772640721/rm-portfolio-live/anchor-butter/01.jpg", alt: "anchor-butter gallery image" },
             { type: "image", url: "https://res.cloudinary.com/ddxa0ahzp/image/upload/v1772733654/rm-portfolio-live/anchor-butter/1v.png", alt: "anchor-butter gallery image" },
             { type: "image", url: "https://res.cloudinary.com/ddxa0ahzp/image/upload/v1772640719/rm-portfolio-live/anchor-butter/02.jpg", alt: "anchor-butter gallery image" },
@@ -582,6 +586,15 @@ export const projects: Project[] = [
             alt: "anchor-moments Hero",
         },
         gallery: [
+            { type: "image", url: "/media/anchor-moments/artboard-1.png", alt: "anchor-moments gallery 1" },
+            { type: "image", url: "/media/anchor-moments/artboard-2.png", alt: "anchor-moments gallery 2" },
+            { type: "image", url: "/media/anchor-moments/artboard-3.png", alt: "anchor-moments gallery 3" },
+            { type: "image", url: "/media/anchor-moments/artboard-4.png", alt: "anchor-moments gallery 4" },
+            { type: "image", url: "/media/anchor-moments/artboard-5.png", alt: "anchor-moments gallery 5" },
+            { type: "image", url: "/media/anchor-moments/artboard-7.png", alt: "anchor-moments gallery 7" },
+            { type: "image", url: "/media/anchor-moments/artboard-8.png", alt: "anchor-moments gallery 8" },
+            { type: "image", url: "/media/anchor-moments/artboard-9.png", alt: "anchor-moments gallery 9" },
+            { type: "image", url: "/media/anchor-moments/artboard-10.png", alt: "anchor-moments gallery 10" },
             { type: "image", url: "https://res.cloudinary.com/ddxa0ahzp/image/upload/v1772640845/rm-portfolio-live/anchor-moments/01.jpg", alt: "anchor-moments gallery image" },
             { type: "image", url: "https://res.cloudinary.com/ddxa0ahzp/image/upload/v1772640843/rm-portfolio-live/anchor-moments/02.jpg", alt: "anchor-moments gallery image" },
             { type: "image", url: "https://res.cloudinary.com/ddxa0ahzp/image/upload/v1772640842/rm-portfolio-live/anchor-moments/03.jpg", alt: "anchor-moments gallery image" },
