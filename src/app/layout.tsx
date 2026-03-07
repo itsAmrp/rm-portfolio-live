@@ -18,8 +18,18 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: "Roshan Mariadas | Art Director",
-  description: "Digital-first Art Director specialising in AI visuals and AI video creation. 7+ years experience.",
+  title: "Roshan Mariadas | Portfolio",
+  description: "A portfolio of art direction, visual storytelling, and modern image-making.",
+  openGraph: {
+    title: "Roshan Mariadas | Portfolio",
+    description: "A portfolio of art direction, visual storytelling, and modern image-making.",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Roshan Mariadas | Portfolio",
+    description: "A portfolio of art direction, visual storytelling, and modern image-making.",
+  },
 };
 
 export default function RootLayout({
