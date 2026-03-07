@@ -199,7 +199,7 @@ export const projects: Project[] = [
         caseStudySections: {
             challenge: "Making a classic heritage tea brand appeal to a younger demographic without alienating core consumers.",
             insight: "Young consumers value authenticity and the aesthetics of the brewing ritual.",
-            idea: "'The Modern Brew'—a visual series focusing on macro textures, dynamic lighting, and tea mixology.",
+            idea: "'The Modern Brew', a visual series focusing on macro textures, dynamic lighting, and tea mixology.",
             execution: "Launched a social-first campaign utilizing macro videography and vibrant color palettes.",
         },
         deliverables: ["Social First Video", "Instagram Grid Overhaul", "Digital Display Ads"],
@@ -261,7 +261,7 @@ export const projects: Project[] = [
         tools: ["Adobe Creative Suite", "Photography Direction", "Figma"],
         caseStudySections: {
             challenge: "Capturing the tactile luxury and diverse experiences of Cinnamon hotels through a unified lens.",
-            insight: "Travelers seek sensory previews of their stays—the sound of waves, the texture of linens.",
+            insight: "Travelers seek sensory previews of their stays, such as the sound of waves or the texture of linens.",
             idea: "'Moments in Cinnamon', a campaign focused on hyper-sensory, short-form vignettes.",
             execution: "Directed mood-driven shoots and translated them into a cohesive digital ecosystem with bespoke typography.",
         },
