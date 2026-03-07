@@ -126,8 +126,11 @@ export function getProjectThumbnail(project: Project): string {
         if (project.heroMedia.poster) return getMediaUrl(project.heroMedia.poster) || project.heroMedia.poster;
 
         // Use the actual .mp4 to generate a high quality Cloudinary frame
-        const videoUrl = getMediaUrl(project.heroMedia.videoMp4);
+        let videoUrl = getMediaUrl(project.heroMedia.videoMp4);
         if (videoUrl && (videoUrl.endsWith(".mp4") || videoUrl.endsWith(".webm"))) {
+            if (videoUrl.includes('/upload/')) {
+                videoUrl = videoUrl.replace('/upload/', '/upload/so_95p/');
+            }
             return videoUrl.replace(/\.(mp4|webm)$/, ".jpg");
         }
     }

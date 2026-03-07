@@ -79,7 +79,7 @@ export function CaseStudyClient({ project, nextProject, prevProject, relatedProj
                         <VideoPlayer
                             srcMp4={getMediaUrl(project.heroMedia.videoMp4)}
                             srcWebm={getMediaUrl(project.heroMedia.videoWebm)}
-                            poster={getMediaUrl(project.heroMedia.url)}
+                            poster={getProjectThumbnail(project)}
                             alt={project.title}
                             className="w-full h-full object-cover"
                         />

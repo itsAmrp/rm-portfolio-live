@@ -1,8 +1,8 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useMotionValue, useSpring, useReducedMotion, MotionValue } from "framer-motion";
 import { X, ChevronLeft, ChevronRight, Play } from "lucide-react";
 import type { MediaAsset } from "@/data/portfolio";
 import { getMediaUrl } from "@/data/portfolio";
@@ -14,61 +14,38 @@ interface MasonryGalleryProps {
 
 export function MasonryGallery({ items }: MasonryGalleryProps) {
     const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+    const mouseX = useMotionValue(-1000);
+    const mouseY = useMotionValue(-1000);
+
+    const handleMouseMove = (e: React.MouseEvent) => {
+        if (window.innerWidth < 1024) return; // Desktop only
+        mouseX.set(e.clientX);
+        mouseY.set(e.clientY);
+    };
+
+    const handleMouseLeave = () => {
+        mouseX.set(-1000);
+        mouseY.set(-1000);
+    };
 
     if (!items || items.length === 0) return null;
 
     return (
         <>
-            <div className="columns-1 sm:columns-2 md:columns-3 xl:columns-4 gap-6 space-y-6">
+            <div
+                className="columns-2 sm:columns-2 md:columns-3 xl:columns-4 gap-3 sm:gap-6 space-y-3 sm:space-y-6"
+                onMouseMove={handleMouseMove}
+                onMouseLeave={handleMouseLeave}
+            >
                 {items.map((media, i) => (
-                    <motion.div
-                        key={media.url}
-                        initial={{ opacity: 0, y: 30 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true, margin: "-50px" }}
-                        transition={{ duration: 0.6, delay: (i % 5) * 0.1, ease: "easeOut" }}
-                        className="break-inside-avoid relative w-full group cursor-zoom-in overflow-hidden rounded-xl bg-foreground/5 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
+                    <MasonryTile
+                        key={media.url + i}
+                        media={media}
+                        index={i}
+                        mouseX={mouseX}
+                        mouseY={mouseY}
                         onClick={() => setLightboxIndex(i)}
-                    >
-                        {media.type === "video" ? (
-                            <div className="relative w-full aspect-video">
-                                <LazyVideo
-                                    srcMp4={getMediaUrl(media.videoMp4)}
-                                    srcWebm={getMediaUrl(media.videoWebm)}
-                                    poster={getMediaUrl(media.poster || (media.url.includes('.jpg') ? media.url : undefined))}
-                                    alt={media.alt}
-                                />
-                                <div className="absolute top-4 left-4 flex gap-2 z-10 opacity-0 group-hover:opacity-100 transition-opacity">
-                                    <span className="px-3 py-1 bg-background/80 backdrop-blur-md rounded-full text-[10px] uppercase tracking-widest font-medium shadow-sm flex items-center gap-1.5">
-                                        <Play size={10} /> Video
-                                    </span>
-                                </div>
-                            </div>
-                        ) : (
-                            // Render Image. Without fixed sizes to preserve natural aspect ratio, next/image with layout="responsive" or width/height 0 is hard.
-                            // The easiest way for masonry is using an img tag or Image with width/height set explicitly, but we don't know the dimensions.
-                            // So we just use 0/0 and 100vw, but object-fit contain/cover behaves weird without aspect ratio.
-                            // Best trick: next/image requires native ratios or fill.
-                            // We can use a standard `img` tag here for the masonry layout to perfectly follow the natural unconstrained height,
-                            // OR we use next/image with width={1200} height={0} sizes="...". `height: auto` in Tailwind will preserve the ratio.
-                            <div className="relative w-full">
-                                <Image
-                                    src={getMediaUrl(media.url) || ""}
-                                    alt={media.alt}
-                                    width={1000}
-                                    height={1000}
-                                    className="w-full h-auto object-cover"
-                                    sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1280px) 33vw, 25vw"
-                                />
-                                <div className="absolute top-4 left-4 flex gap-2 z-10 opacity-0 group-hover:opacity-100 transition-opacity">
-                                    <span className="px-3 py-1 bg-background/80 backdrop-blur-md rounded-full text-[10px] uppercase tracking-widest font-medium shadow-sm">
-                                        Image
-                                    </span>
-                                </div>
-                            </div>
-                        )}
-                        <div className="absolute inset-0 bg-foreground/0 group-hover:bg-foreground/5 transition-colors pointer-events-none" />
-                    </motion.div>
+                    />
                 ))}
             </div>
 
@@ -83,6 +60,108 @@ export function MasonryGallery({ items }: MasonryGalleryProps) {
                 )}
             </AnimatePresence>
         </>
+    );
+}
+
+interface MasonryTileProps {
+    media: MediaAsset;
+    index: number;
+    mouseX: MotionValue<number>;
+    mouseY: MotionValue<number>;
+    onClick: () => void;
+}
+
+function MasonryTile({ media, index, mouseX, mouseY, onClick }: MasonryTileProps) {
+    const ref = useRef<HTMLDivElement>(null);
+    const prefersReducedMotion = useReducedMotion();
+
+    const springConfig = { damping: 25, stiffness: 150, mass: 0.5 };
+    const x = useSpring(0, springConfig);
+    const y = useSpring(0, springConfig);
+    const rotateX = useSpring(0, springConfig);
+    const rotateY = useSpring(0, springConfig);
+
+    useEffect(() => {
+        if (prefersReducedMotion) return;
+
+        const unsubscribe = mouseX.on("change", (latestX) => {
+            if (!ref.current) return;
+            if (latestX === -1000) {
+                x.set(0); y.set(0); rotateX.set(0); rotateY.set(0);
+                return;
+            }
+
+            const rect = ref.current.getBoundingClientRect();
+            const centerX = rect.left + rect.width / 2;
+            const centerY = rect.top + rect.height / 2;
+
+            const distanceX = latestX - centerX;
+            const distanceY = mouseY.get() - centerY;
+            const distance = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
+
+            const threshold = 600;
+
+            if (distance < threshold) {
+                const intensity = Math.pow(1 - (distance / threshold), 1.5);
+                const nX = Math.max(-1, Math.min(1, distanceX / (rect.width / 2)));
+                const nY = Math.max(-1, Math.min(1, distanceY / (rect.height / 2)));
+
+                x.set(nX * -8 * intensity);
+                y.set(nY * -8 * intensity);
+                rotateX.set(nY * -4 * intensity);
+                rotateY.set(nX * 4 * intensity);
+            } else {
+                x.set(0); y.set(0); rotateX.set(0); rotateY.set(0);
+            }
+        });
+
+        return () => unsubscribe();
+    }, [mouseX, mouseY, prefersReducedMotion, x, y, rotateX, rotateY]);
+
+    return (
+        <motion.div
+            ref={ref}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ duration: 0.6, delay: (index % 5) * 0.1, ease: "easeOut" }}
+            className="break-inside-avoid relative w-full group cursor-zoom-in overflow-hidden rounded-xl bg-foreground/5 shadow-sm hover:shadow-2xl transition-shadow duration-300 transform-gpu"
+            style={{ x, y, rotateX, rotateY, transformPerspective: 1200 }}
+            onClick={onClick}
+        >
+            {media.type === "video" ? (
+                <div className="relative w-full aspect-video">
+                    <LazyVideo
+                        srcMp4={getMediaUrl(media.videoMp4)}
+                        srcWebm={getMediaUrl(media.videoWebm)}
+                        poster={getMediaUrl(media.poster || (media.url.includes('.jpg') ? media.url : undefined))}
+                        alt={media.alt}
+                    />
+                    <div className="absolute top-4 left-4 flex gap-2 z-10 opacity-0 group-hover:opacity-100 transition-opacity">
+                        <span className="px-3 py-1 bg-background/80 backdrop-blur-md rounded-full text-[10px] uppercase tracking-widest font-medium shadow-sm flex items-center gap-1.5">
+                            <Play size={10} /> Video
+                        </span>
+                    </div>
+                </div>
+            ) : (
+                <div className="relative w-full">
+                    <Image
+                        src={getMediaUrl(media.url) || ""}
+                        alt={media.alt}
+                        width={1000}
+                        height={1000}
+                        className="w-full h-auto object-cover"
+                        sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1280px) 33vw, 25vw"
+                    />
+                    <div className="absolute top-4 left-4 flex gap-2 z-10 opacity-0 group-hover:opacity-100 transition-opacity">
+                        <span className="px-3 py-1 bg-background/80 backdrop-blur-md rounded-full text-[10px] uppercase tracking-widest font-medium shadow-sm">
+                            Image
+                        </span>
+                    </div>
+                </div>
+            )}
+            <div className="absolute inset-0 bg-foreground/0 group-hover:bg-foreground/5 transition-colors pointer-events-none" />
+        </motion.div>
     );
 }
 
