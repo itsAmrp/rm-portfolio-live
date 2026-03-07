@@ -49,9 +49,9 @@ function MagneticLetter({ children, mouseX, mouseY, isHovered }: { children: Rea
       const distanceY = currentMouseY - centerY;
       const distance = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
 
-      // Premium styling rules: max move 8px, soft gradient threshold of 180px
-      const maxRepel = 8;
-      const threshold = 180;
+      // Premium styling rules: max move 14px, soft gradient threshold of 240px
+      const maxRepel = 14;
+      const threshold = 240;
 
       if (distance < threshold) {
         // Squared interpolation for luxurious falloff gradient
