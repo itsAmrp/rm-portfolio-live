@@ -28,7 +28,7 @@ export function WorkCard({ project, className, priority = false }: WorkCardProps
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
         >
-            <Link href={`/work/${project.slug}`} className="block w-full overflow-hidden bg-foreground/5 rounded-xl cursor-none">
+            <Link href={`/work/${project.slug}`} className="block w-full overflow-hidden bg-foreground/5 rounded-xl cursor-none" data-cursor={project.heroMedia.type === "video" ? "video" : "image"}>
                 <div className="relative aspect-[4/5] md:aspect-[16/9] lg:aspect-[4/3] overflow-hidden rounded-xl">
                     {project.heroMedia.type === "video" ? (
                         <div className="w-full h-full scale-[1.01] transition-transform duration-300 ease-out md:group-hover:scale-105">

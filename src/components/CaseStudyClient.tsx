@@ -268,7 +268,7 @@ export function CaseStudyClient({ project, nextProject, prevProject, relatedProj
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-32">
                     {relatedProjects.map((p) => (
-                        <Link key={p.slug} href={`/work/${p.slug}`} className="group block">
+                        <Link key={p.slug} href={`/work/${p.slug}`} className="group block" data-cursor={p.heroMedia.type === "video" ? "video" : "image"}>
                             <div className="relative aspect-[4/3] w-full overflow-hidden bg-foreground/5 rounded-xl mb-6">
                                 <Image
                                     src={getProjectThumbnail(p)}

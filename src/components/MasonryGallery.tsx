@@ -128,6 +128,7 @@ function MasonryTile({ media, index, mouseX, mouseY, onClick }: MasonryTileProps
             className="break-inside-avoid relative w-full group cursor-zoom-in overflow-hidden rounded-xl bg-foreground/5 shadow-sm hover:shadow-2xl transition-shadow duration-300 transform-gpu"
             style={{ x, y, rotateX, rotateY, transformPerspective: 1200 }}
             onClick={onClick}
+            data-cursor={media.type === "video" ? "video" : "image"}
         >
             {media.type === "video" ? (
                 <div className="relative w-full aspect-video">
