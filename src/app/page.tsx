@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence, useScroll, useTransform, useMotionValue, useSpring, useReducedMotion } from "framer-motion";
 import Link from "next/link";
 import { ArrowRight, ChevronRight } from "lucide-react";
@@ -9,65 +9,108 @@ import { WorkCard } from "@/components/WorkCard";
 import { ShowcaseReel } from "@/components/ShowcaseReel";
 import Image from "next/image";
 
-// Subtle Magnetic Repulsion Component for specifically large text
-function RepellingText({ children }: { children: React.ReactNode }) {
+// Individual letter physics node
+function MagneticLetter({ children, mouseX, mouseY, isHovered }: { children: React.ReactNode, mouseX: import("framer-motion").MotionValue<number>, mouseY: import("framer-motion").MotionValue<number>, isHovered: boolean }) {
   const prefersReducedMotion = useReducedMotion();
+  const letterRef = useRef<HTMLSpanElement>(null);
+
   const x = useMotionValue(0);
   const y = useMotionValue(0);
 
-  const springConfig = { damping: 20, stiffness: 150, mass: 0.5 };
+  // Smooth, premium spring
+  const springConfig = { damping: 25, stiffness: 200, mass: 0.5 };
   const smoothX = useSpring(x, springConfig);
   const smoothY = useSpring(y, springConfig);
 
-  const handlePointerMove = (e: React.PointerEvent<HTMLSpanElement>) => {
-    // Desktop only, ignore touches/styluses. Safety catch for preferences.
-    if (e.pointerType !== "mouse" || prefersReducedMotion) return;
+  useEffect(() => {
+    // Safety abort
+    if (prefersReducedMotion) return;
 
-    const rect = e.currentTarget.getBoundingClientRect();
-    const centerX = rect.left + rect.width / 2;
-    const centerY = rect.top + rect.height / 2;
+    let rafId: number;
 
-    // Calculate distance from center
-    const distanceX = e.clientX - centerX;
-    const distanceY = e.clientY - centerY;
+    const updatePosition = () => {
+      if (!isHovered) {
+        // Smoothly return home
+        x.set(0);
+        y.set(0);
+        rafId = requestAnimationFrame(updatePosition);
+        return;
+      }
 
-    // We want repulsion (move away from cursor), bounded strictly to subtle limits (e.g. max 12px)
-    // The closer to center, the harder the push (capped). Opposite math logic.
-    const maxRepel = 12;
-    // Normalized distance threshold (within 200px acts strongly)
-    const threshold = 200;
+      if (!letterRef.current) return;
+      const rect = letterRef.current.getBoundingClientRect();
+      const centerX = rect.left + rect.width / 2;
+      const centerY = rect.top + rect.height / 2;
 
-    const distance = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
+      const currentMouseX = mouseX.get();
+      const currentMouseY = mouseY.get();
 
-    if (distance < threshold) {
-      // Repel intensity mapping
-      const intensity = 1 - distance / threshold;
-      // Reverse direction to repel, capped by maxRepel
-      const moveX = -(distanceX / distance) * maxRepel * intensity;
-      const moveY = -(distanceY / distance) * maxRepel * intensity;
+      const distanceX = currentMouseX - centerX;
+      const distanceY = currentMouseY - centerY;
+      const distance = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
 
-      x.set(moveX);
-      y.set(moveY);
-    } else {
-      // Ease back
-      x.set(0);
-      y.set(0);
-    }
-  };
+      // Premium styling rules: max move 8px, soft gradient threshold of 180px
+      const maxRepel = 8;
+      const threshold = 180;
 
-  const handlePointerLeave = () => {
-    x.set(0);
-    y.set(0);
-  };
+      if (distance < threshold) {
+        // Squared interpolation for luxurious falloff gradient
+        const rawIntensity = 1 - distance / threshold;
+        const intensity = Math.pow(rawIntensity, 2);
+
+        const moveX = -(distanceX / distance) * maxRepel * intensity;
+        const moveY = -(distanceY / distance) * maxRepel * intensity;
+
+        x.set(moveX);
+        y.set(moveY);
+      } else {
+        x.set(0);
+        y.set(0);
+      }
+
+      rafId = requestAnimationFrame(updatePosition);
+    };
+
+    updatePosition();
+    return () => cancelAnimationFrame(rafId);
+  }, [mouseX, mouseY, isHovered, prefersReducedMotion, x, y]);
 
   return (
     <motion.span
-      onPointerMove={handlePointerMove}
-      onPointerLeave={handlePointerLeave}
+      ref={letterRef}
       style={{ x: smoothX, y: smoothY, display: "inline-block" }}
     >
       {children}
     </motion.span>
+  );
+}
+
+// Wrapper to intercept mouse coordinates and split string into letters
+function MagneticText({ text }: { text: string }) {
+  const prefersReducedMotion = useReducedMotion();
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+  const [isHovered, setIsHovered] = useState(false);
+
+  const handlePointerMove = (e: React.PointerEvent<HTMLSpanElement>) => {
+    if (e.pointerType !== "mouse" || prefersReducedMotion) return;
+    mouseX.set(e.clientX);
+    mouseY.set(e.clientY);
+  };
+
+  return (
+    <span
+      onPointerEnter={() => setIsHovered(true)}
+      onPointerLeave={() => setIsHovered(false)}
+      onPointerMove={handlePointerMove}
+      style={{ display: "inline-flex" }}
+    >
+      {text.split("").map((char, index) => (
+        <MagneticLetter key={index} mouseX={mouseX} mouseY={mouseY} isHovered={isHovered}>
+          {char === " " ? "\u00A0" : char}
+        </MagneticLetter>
+      ))}
+    </span>
   );
 }
 
@@ -235,7 +278,7 @@ export default function Home() {
                       variants={lineVariant}
                       className="text-[12vw] sm:text-[10vw] lg:text-[8vw] font-display font-bold tracking-tight leading-[0.85] m-0"
                     >
-                      <RepellingText>Roshan</RepellingText>
+                      <MagneticText text="Roshan" />
                     </motion.h1>
                   </div>
                   <div className="overflow-hidden pb-4 w-full">
@@ -243,7 +286,7 @@ export default function Home() {
                       variants={lineVariant}
                       className="text-[12vw] sm:text-[10vw] lg:text-[8vw] font-display font-bold tracking-tight leading-[0.85] m-0 mb-2"
                     >
-                      <RepellingText>Mariadas</RepellingText>
+                      <MagneticText text="Mariadas" />
                     </motion.h1>
                   </div>
 
