@@ -10,7 +10,7 @@ import { ShowcaseReel } from "@/components/ShowcaseReel";
 import Image from "next/image";
 
 // Individual letter physics node
-function MagneticLetter({ children, mouseX, mouseY, isHovered }: { children: React.ReactNode, mouseX: import("framer-motion").MotionValue<number>, mouseY: import("framer-motion").MotionValue<number>, isHovered: boolean }) {
+function MagneticLetter({ children, mouseX, mouseY, isHovered, maxRepel = 14, threshold = 240 }: { children: React.ReactNode, mouseX: import("framer-motion").MotionValue<number>, mouseY: import("framer-motion").MotionValue<number>, isHovered: boolean, maxRepel?: number, threshold?: number }) {
   const prefersReducedMotion = useReducedMotion();
   const letterRef = useRef<HTMLSpanElement>(null);
 
@@ -50,9 +50,6 @@ function MagneticLetter({ children, mouseX, mouseY, isHovered }: { children: Rea
       const distance = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
 
       // Premium styling rules: max move 14px, soft gradient threshold of 240px
-      const maxRepel = 14;
-      const threshold = 240;
-
       if (distance < threshold) {
         // Squared interpolation for luxurious falloff gradient
         const rawIntensity = 1 - distance / threshold;
@@ -86,7 +83,7 @@ function MagneticLetter({ children, mouseX, mouseY, isHovered }: { children: Rea
 }
 
 // Wrapper to intercept mouse coordinates and split string into letters
-function MagneticText({ text }: { text: string }) {
+function MagneticText({ text, maxRepel = 14, threshold = 240 }: { text: string, maxRepel?: number, threshold?: number }) {
   const prefersReducedMotion = useReducedMotion();
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
@@ -106,7 +103,7 @@ function MagneticText({ text }: { text: string }) {
       style={{ display: "inline-flex" }}
     >
       {text.split("").map((char, index) => (
-        <MagneticLetter key={index} mouseX={mouseX} mouseY={mouseY} isHovered={isHovered}>
+        <MagneticLetter key={index} mouseX={mouseX} mouseY={mouseY} isHovered={isHovered} maxRepel={maxRepel} threshold={threshold}>
           {char === " " ? "\u00A0" : char}
         </MagneticLetter>
       ))}
@@ -296,7 +293,7 @@ export default function Home() {
                       variants={roleVariant}
                       className="text-xl md:text-3xl font-display font-medium tracking-tight opacity-70 ml-1"
                     >
-                      Art Director
+                      <MagneticText text="Art Director" maxRepel={6} threshold={140} />
                     </motion.p>
                   </div>
                 </motion.div>

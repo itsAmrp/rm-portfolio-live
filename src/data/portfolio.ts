@@ -116,35 +116,29 @@ const mockGallery = (brand: string): MediaAsset[] => {
 
 /**
  * Robustly pulls the best thumbnail option available for any project
- * 1) Explicity defined coverImage
- * 2) Optional poster param in heroMedia
- * 3) Direct HeroMedia.url if it is specifically denoted as an image
- * 4) If heroMedia is video -> swap .mp4/.webm Cloudinary suffix out for .jpg (autogenerates frame)
- * 5) Local generic fallback
+ * 1) Hero video poster / generated thumbnail from the video itself
+ * 2) Cover image explicitly defined
+ * 3) Local generic fallback
  */
 export function getProjectThumbnail(project: Project): string {
-    // 1 & 2
-    if (project.coverImage) return getMediaUrl(project.coverImage) || project.coverImage;
-    if (project.heroMedia.poster) return getMediaUrl(project.heroMedia.poster) || project.heroMedia.poster;
+    // 1
+    if (project.heroMedia.type === "video") {
+        if (project.heroMedia.poster) return getMediaUrl(project.heroMedia.poster) || project.heroMedia.poster;
 
-    // 3
+        // Use the actual .mp4 to generate a high quality Cloudinary frame
+        const videoUrl = getMediaUrl(project.heroMedia.videoMp4);
+        if (videoUrl && (videoUrl.endsWith(".mp4") || videoUrl.endsWith(".webm"))) {
+            return videoUrl.replace(/\.(mp4|webm)$/, ".jpg");
+        }
+    }
+
+    // 2
+    if (project.coverImage) return getMediaUrl(project.coverImage) || project.coverImage;
     if (project.heroMedia.type === "image") {
         return getMediaUrl(project.heroMedia.url) || project.heroMedia.url;
     }
 
-    // 4
-    if (project.heroMedia.type === "video") {
-        const sourceUrl = getMediaUrl(project.heroMedia.url) || project.heroMedia.url;
-        // Check if its a raw MP4 or Webm Cloudinary path
-        if (sourceUrl.endsWith(".mp4") || sourceUrl.endsWith(".webm")) {
-            return sourceUrl.replace(/\.(mp4|webm)$/, ".jpg");
-        }
-        // Often, the heroMedia.url in our data schema for videos IS the .jpg poster itself! 
-        // e.g (heroMedia.url = "/media/idemitsu/hero.jpg", heroMedia.videoMp4 = "/media/.../hero.mp4")
-        return sourceUrl;
-    }
-
-    // 5
+    // 3
     return "/placeholders/gallery-1.jpg";
 }
 

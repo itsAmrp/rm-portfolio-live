@@ -130,8 +130,8 @@ export function CaseStudyClient({ project, nextProject, prevProject, relatedProj
                 <div className="hidden lg:block w-48 shrink-0">
                     <div className="sticky top-32 flex flex-col gap-4 text-sm font-medium tracking-widest uppercase sticky-nav">
                         <a href="#overview" className="text-foreground/40 hover:text-foreground transition-colors">Overview</a>
-                        <a href="#story" className="text-foreground/40 hover:text-foreground transition-colors">Story</a>
                         <a href="#gallery" className="text-foreground/40 hover:text-foreground transition-colors">Gallery</a>
+                        <a href="#story" className="text-foreground/40 hover:text-foreground transition-colors">Story</a>
                     </div>
                 </div>
 
@@ -170,6 +170,17 @@ export function CaseStudyClient({ project, nextProject, prevProject, relatedProj
                             <strong className="text-foreground font-semibold">Role:</strong> {project.roleSummary}
                         </p>
                     </div>
+
+                    {/* 10. Gallery */}
+                    <section id="gallery" className="mb-32">
+                        {(!project.gallery || project.gallery.length === 0) ? (
+                            <div className="py-24 text-center border border-foreground/10 rounded-xl bg-foreground/5">
+                                <h3 className="text-xl md:text-2xl font-display font-medium text-foreground/50">Gallery coming soon</h3>
+                            </div>
+                        ) : (
+                            <MasonryGallery items={project.gallery} />
+                        )}
+                    </section>
 
                     {/* Structured Content (Story) */}
                     <section id="story" className="space-y-24 mb-32">
@@ -243,17 +254,6 @@ export function CaseStudyClient({ project, nextProject, prevProject, relatedProj
                             </div>
                         </div>
 
-                    </section>
-
-                    {/* 10. Gallery */}
-                    <section id="gallery" className="mb-32">
-                        {(!project.gallery || project.gallery.length === 0) ? (
-                            <div className="py-24 text-center border border-foreground/10 rounded-xl bg-foreground/5">
-                                <h3 className="text-xl md:text-2xl font-display font-medium text-foreground/50">Gallery coming soon</h3>
-                            </div>
-                        ) : (
-                            <MasonryGallery items={project.gallery} />
-                        )}
                     </section>
 
                 </div>
