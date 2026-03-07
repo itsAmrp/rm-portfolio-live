@@ -24,11 +24,20 @@ export const metadata: Metadata = {
     title: "Roshan Mariadas | Portfolio",
     description: "A portfolio of art direction, visual storytelling, and modern image-making.",
     type: "website",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Roshan Mariadas | Portfolio",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Roshan Mariadas | Portfolio",
     description: "A portfolio of art direction, visual storytelling, and modern image-making.",
+    images: ["/og-image.png"],
   },
 };
 
