@@ -12,7 +12,7 @@ export async function POST(req: Request) {
         // 1. Verify hCaptcha Token
         const hcaptchaSecret = process.env.HCAPTCHA_SECRET_KEY;
         if (!hcaptchaSecret) {
-            return NextResponse.json({ error: "hCaptcha not configured on server" }, { status: 500 });
+            return NextResponse.json({ error: "Server Configuration Error: Missing HCAPTCHA_SECRET_KEY in environment" }, { status: 500 });
         }
 
         const verifyRes = await fetch("https://hcaptcha.com/siteverify", {
@@ -24,13 +24,13 @@ export async function POST(req: Request) {
         const verifyData = await verifyRes.json();
         if (!verifyData.success) {
             console.error("hCaptcha verification failed:", verifyData);
-            return NextResponse.json({ error: "Captcha verification failed" }, { status: 400 });
+            return NextResponse.json({ error: `Captcha Verification Failed: ${verifyData["error-codes"] ? verifyData["error-codes"].join(", ") : "Invalid Token"}` }, { status: 400 });
         }
 
         // 2. Send Email via Resend
         const resendApiKey = process.env.RESEND_API_KEY;
         if (!resendApiKey) {
-            return NextResponse.json({ error: "Email service not configured" }, { status: 500 });
+            return NextResponse.json({ error: "Server Configuration Error: Missing RESEND_API_KEY in environment" }, { status: 500 });
         }
 
         const resend = new Resend(resendApiKey);
@@ -47,12 +47,13 @@ export async function POST(req: Request) {
 
         if (error) {
             console.error("Resend error:", error);
-            return NextResponse.json({ error: "Failed to send email" }, { status: 500 });
+            // Surface the specific Resend API error message
+            return NextResponse.json({ error: `Resend Error: ${error.message || "Failed to send email"}` }, { status: 500 });
         }
 
         return NextResponse.json({ success: true, data });
     } catch (err: any) {
         console.error("Contact API error:", err);
-        return NextResponse.json({ error: "Internal server error" }, { status: 500 });
+        return NextResponse.json({ error: `Internal server error: ${err.message || String(err)}` }, { status: 500 });
     }
 }

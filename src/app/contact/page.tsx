@@ -7,6 +7,7 @@ import HCaptcha from "@hcaptcha/react-hcaptcha";
 
 export default function Contact() {
     const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
+    const [errorMessage, setErrorMessage] = useState<string | null>(null);
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [message, setMessage] = useState("");
@@ -15,6 +16,7 @@ export default function Contact() {
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+        setErrorMessage(null);
 
         if (!token) {
             alert("Please complete the captcha.");
@@ -30,7 +32,11 @@ export default function Contact() {
                 body: JSON.stringify({ name, email, message, hcaptchaToken: token }),
             });
 
-            if (!res.ok) throw new Error("Failed to send message");
+            const data = await res.json();
+
+            if (!res.ok) {
+                throw new Error(data.error || "Failed to send message via API");
+            }
 
             setStatus("success");
             setName("");
@@ -38,9 +44,10 @@ export default function Contact() {
             setMessage("");
             setToken(null);
             captchaRef.current?.resetCaptcha();
-        } catch (error) {
+        } catch (error: any) {
             console.error("Submission error:", error);
             setStatus("error");
+            setErrorMessage(error.message || "An unexpected error occurred. Please try again later.");
         }
     };
 
@@ -185,7 +192,10 @@ export default function Contact() {
                                         </div>
 
                                         {status === "error" && (
-                                            <p className="text-red-500 text-sm">Failed to send message. Please try again.</p>
+                                            <div className="p-4 rounded-md bg-red-500/10 border border-red-500/20 text-red-500 text-sm">
+                                                <p className="font-bold mb-1">Failed to send message.</p>
+                                                <p className="opacity-80">{errorMessage}</p>
+                                            </div>
                                         )}
 
                                         <button
