@@ -6,7 +6,7 @@ import Link from "next/link";
 import { motion, useScroll, useTransform, Variants } from "framer-motion";
 import { ArrowLeft, ArrowRight, ArrowUpRight } from "lucide-react";
 import type { Project } from "@/data/portfolio";
-import { getMediaUrl } from "@/data/portfolio";
+import { getMediaUrl, getProjectThumbnail } from "@/data/portfolio";
 import { VideoPlayer } from "@/components/VideoPlayer";
 import { MasonryGallery } from "@/components/MasonryGallery";
 
@@ -271,7 +271,7 @@ export function CaseStudyClient({ project, nextProject, prevProject, relatedProj
                         <Link key={p.slug} href={`/work/${p.slug}`} className="group block">
                             <div className="relative aspect-[4/3] w-full overflow-hidden bg-foreground/5 rounded-xl mb-6">
                                 <Image
-                                    src={getMediaUrl(p.heroMedia.url) || ""}
+                                    src={getProjectThumbnail(p)}
                                     alt={p.title}
                                     fill
                                     className="object-cover transition-transform duration-700 group-hover:scale-105"
