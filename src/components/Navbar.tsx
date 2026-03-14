@@ -10,7 +10,13 @@ import { Moon, Sun } from "lucide-react";
 
 export function Navbar() {
     const [scrolled, setScrolled] = useState(false);
-    const [isDark, setIsDark] = useState(true);
+    // Initialize isDark based on the document's class list, defaulting to true (dark) if not present or during SSR.
+    const [isDark, setIsDark] = useState(() => {
+        if (typeof window !== 'undefined') {
+            return !document.documentElement.classList.contains("light");
+        }
+        return true; // Default to dark on server or if window is not available
+    });
     const pathname = usePathname();
 
     useEffect(() => {
@@ -18,11 +24,8 @@ export function Navbar() {
             setScrolled(window.scrollY > 50);
         };
         window.addEventListener("scroll", handleScroll);
-
-        // Initial theme check
-        if (document.documentElement.classList.contains("light")) {
-            setIsDark(false);
-        }
+        // Check scroll position immediately on mount
+        handleScroll();
 
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);

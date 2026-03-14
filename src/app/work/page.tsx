@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useMemo, Suspense } from "react";
+import { useState, useEffect, useMemo, Suspense, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { projects, brandList } from "@/data/portfolio";
 import { WorkCard } from "@/components/WorkCard";
@@ -24,15 +24,7 @@ function WorkGallery() {
     const [search, setSearch] = useState(urlSearch);
     const [showFilters, setShowFilters] = useState(false);
 
-    // Sync search input with debounce to URL
-    useEffect(() => {
-        const timeout = setTimeout(() => {
-            updateUrl("q", search);
-        }, 500);
-        return () => clearTimeout(timeout);
-    }, [search]);
-
-    const updateUrl = (key: string, value: string) => {
+    const updateUrl = useCallback((key: string, value: string) => {
         const current = new URLSearchParams(Array.from(searchParams.entries()));
         if (!value || value === "All" || value === "") {
             current.delete(key);
@@ -42,7 +34,15 @@ function WorkGallery() {
         const searchStr = current.toString();
         const query = searchStr ? `?${searchStr}` : "";
         router.replace(`${pathname}${query}`, { scroll: false });
-    };
+    }, [searchParams, pathname, router]);
+
+    // Sync search input with debounce to URL
+    useEffect(() => {
+        const timeout = setTimeout(() => {
+            updateUrl("q", search);
+        }, 500);
+        return () => clearTimeout(timeout);
+    }, [search, updateUrl]);
 
     // Extract unique filter options
     const disciplines = ["All", ...Array.from(new Set(projects.flatMap(p => p.disciplines)))];

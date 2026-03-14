@@ -4,7 +4,7 @@ import { useRef, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, useScroll, useTransform, Variants } from "framer-motion";
-import { ArrowLeft, ArrowRight, ArrowUpRight } from "lucide-react";
+import { ArrowLeft, ArrowUpRight } from "lucide-react";
 import type { Project } from "@/data/portfolio";
 import { getMediaUrl, getProjectThumbnail } from "@/data/portfolio";
 import { VideoPlayer } from "@/components/VideoPlayer";

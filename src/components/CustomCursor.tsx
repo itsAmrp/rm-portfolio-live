@@ -51,7 +51,7 @@ export const CustomCursor = () => {
         document.addEventListener("mouseenter", handleMouseEnter);
 
         // reset state on navigation
-        setState("default");
+        // setState("default");
 
         return () => {
             window.removeEventListener("mousemove", handleMouseMove);
@@ -80,10 +80,10 @@ export const CustomCursor = () => {
     return (
         <motion.div
             className={`pointer-events-none fixed left-0 top-0 z-[100] flex items-center justify-center -translate-x-1/2 -translate-y-1/2 hidden md:flex transition-colors duration-300 ${(state === "image" || state === "video")
-                    ? "bg-background/80 backdrop-blur-md border border-foreground/10 shadow-lg"
-                    : state === "link"
-                        ? "bg-transparent border border-foreground/30"
-                        : "bg-transparent border border-foreground/40"
+                ? "bg-background/80 backdrop-blur-md border border-foreground/10 shadow-lg"
+                : state === "link"
+                    ? "bg-transparent border border-foreground/30"
+                    : "bg-transparent border border-foreground/40"
                 }`}
             animate={{
                 x: position.x,

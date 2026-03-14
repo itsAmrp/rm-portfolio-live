@@ -1,192 +1,47 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { motion, AnimatePresence, useScroll, useTransform, useMotionValue, useSpring, useReducedMotion } from "framer-motion";
+import { motion, AnimatePresence, useSpring, useMotionValue } from "framer-motion";
 import Link from "next/link";
-import { ArrowRight, ChevronRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { projects, siteMeta, brandList, featuredOrder, getMediaUrl } from "@/data/portfolio";
 import { WorkCard } from "@/components/WorkCard";
 import { ShowcaseReel } from "@/components/ShowcaseReel";
+import { MediaWallHero } from "@/components/MediaWallHero";
 import Image from "next/image";
 
-// Individual letter physics node
-function MagneticLetter({ children, mouseX, mouseY, isHovered, maxRepel = 14, threshold = 240 }: { children: React.ReactNode, mouseX: import("framer-motion").MotionValue<number>, mouseY: import("framer-motion").MotionValue<number>, isHovered: boolean, maxRepel?: number, threshold?: number }) {
-  const prefersReducedMotion = useReducedMotion();
-  const letterRef = useRef<HTMLSpanElement>(null);
-
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
-
-  // Smooth, premium spring
-  const springConfig = { damping: 25, stiffness: 200, mass: 0.5 };
-  const smoothX = useSpring(x, springConfig);
-  const smoothY = useSpring(y, springConfig);
-
-  useEffect(() => {
-    // Safety abort
-    if (prefersReducedMotion) return;
-
-    let rafId: number;
-
-    const updatePosition = () => {
-      if (!isHovered) {
-        // Smoothly return home
-        x.set(0);
-        y.set(0);
-        rafId = requestAnimationFrame(updatePosition);
-        return;
-      }
-
-      if (!letterRef.current) return;
-      const rect = letterRef.current.getBoundingClientRect();
-      const centerX = rect.left + rect.width / 2;
-      const centerY = rect.top + rect.height / 2;
-
-      const currentMouseX = mouseX.get();
-      const currentMouseY = mouseY.get();
-
-      const distanceX = currentMouseX - centerX;
-      const distanceY = currentMouseY - centerY;
-      const distance = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
-
-      // Premium styling rules: max move 14px, soft gradient threshold of 240px
-      if (distance < threshold) {
-        // Squared interpolation for luxurious falloff gradient
-        const rawIntensity = 1 - distance / threshold;
-        const intensity = Math.pow(rawIntensity, 2);
-
-        const moveX = -(distanceX / distance) * maxRepel * intensity;
-        const moveY = -(distanceY / distance) * maxRepel * intensity;
-
-        x.set(moveX);
-        y.set(moveY);
-      } else {
-        x.set(0);
-        y.set(0);
-      }
-
-      rafId = requestAnimationFrame(updatePosition);
-    };
-
-    updatePosition();
-    return () => cancelAnimationFrame(rafId);
-  }, [mouseX, mouseY, isHovered, prefersReducedMotion, x, y]);
-
-  return (
-    <motion.span
-      ref={letterRef}
-      style={{ x: smoothX, y: smoothY, display: "inline-block" }}
-    >
-      {children}
-    </motion.span>
-  );
-}
-
-// Wrapper to intercept mouse coordinates and split string into letters
-function MagneticText({ text, maxRepel = 14, threshold = 240 }: { text: string, maxRepel?: number, threshold?: number }) {
-  const prefersReducedMotion = useReducedMotion();
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-  const [isHovered, setIsHovered] = useState(false);
-
-  const handlePointerMove = (e: React.PointerEvent<HTMLSpanElement>) => {
-    if (e.pointerType !== "mouse" || prefersReducedMotion) return;
-    mouseX.set(e.clientX);
-    mouseY.set(e.clientY);
-  };
-
-  return (
-    <span
-      onPointerEnter={() => setIsHovered(true)}
-      onPointerLeave={() => setIsHovered(false)}
-      onPointerMove={handlePointerMove}
-      style={{ display: "inline-flex" }}
-    >
-      {text.split("").map((char, index) => (
-        <MagneticLetter key={index} mouseX={mouseX} mouseY={mouseY} isHovered={isHovered} maxRepel={maxRepel} threshold={threshold}>
-          {char === " " ? "\u00A0" : char}
-        </MagneticLetter>
-      ))}
-    </span>
-  );
-}
 
 export default function Home() {
   const [loading, setLoading] = useState(true);
 
+  // Using a ref to prevent state updates if the component unmounts quickly
+  const isMounted = useRef(false);
+
   useEffect(() => {
-    // Check if user prefers reduced motion; skip loader if so
+    isMounted.current = true;
     const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+    // If reduced motion is preferred, remove loading state smoothly
     if (mediaQuery.matches) {
-      setLoading(false);
+      setTimeout(() => {
+        if (isMounted.current) setLoading(false);
+      }, 0);
       return;
     }
 
     const timer = setTimeout(() => {
-      setLoading(false);
+      if (isMounted.current) setLoading(false);
     }, 2000);
-    return () => clearTimeout(timer);
+
+    return () => {
+      isMounted.current = false;
+      clearTimeout(timer);
+    };
   }, []);
-
-  const prefersReducedMotion = useReducedMotion();
-
-  const containerVariant: import("framer-motion").Variants = {
-    hidden: {},
-    visible: {
-      transition: { staggerChildren: 0.1 }
-    }
-  };
-
-  const lineVariant: import("framer-motion").Variants = {
-    hidden: { y: prefersReducedMotion ? 0 : 20, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-      transition: { ease: "easeOut", duration: 0.5 }
-    }
-  };
-
-  const roleVariant: import("framer-motion").Variants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { duration: 0.5, delay: 0.12, ease: "easeOut" }
-    }
-  };
-
-  const { scrollY } = useScroll();
-  const heroY = useTransform(scrollY, [0, 800], [0, 200]);
-  const heroOpacity = useTransform(scrollY, [0, 600], [1, 0]);
-
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-  const parallaxX = useSpring(mouseX, { damping: 25, stiffness: 150 });
-  const parallaxY = useSpring(mouseY, { damping: 25, stiffness: 150 });
-
-  const handleMouseMove = (e: React.MouseEvent) => {
-    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
-    if (mediaQuery.matches) return;
-    const { clientX, clientY } = e;
-    const { innerWidth, innerHeight } = window;
-    const x = (clientX / innerWidth - 0.5) * 20;
-    const y = (clientY / innerHeight - 0.5) * 20;
-    mouseX.set(x);
-    mouseY.set(y);
-  };
 
   const featuredProjects = featuredOrder
     .map(slug => projects.find(p => p.slug === slug))
     .filter((p): p is typeof projects[0] => p !== undefined);
-
-  const aiWorkflowSteps = [
-    { title: "Strategy", desc: "Defining the core narrative and creative objective." },
-    { title: "Concept", desc: "Ideating visual directions that align with brand goals." },
-    { title: "Styleframes", desc: "Generating initial keyframes using AI to establish the look." },
-    { title: "AI Image Pipeline", desc: "Refining and upscaling assets for pixel-perfect clarity." },
-    { title: "AI Video Pipeline", desc: "Animating stills and generating native video loops." },
-    { title: "Finishing", desc: "Compositing, color grading, and adding typographic layers." },
-    { title: "Delivery", desc: "Exporting optimized final assets across all digital formats." }
-  ];
 
   const servicesList = [
     "Creative Direction",
@@ -242,142 +97,7 @@ export default function Home() {
 
       <div className="flex flex-col min-h-screen">
         {/* SECTION B: Hero */}
-        <section
-          className="relative min-h-screen flex flex-col justify-center px-6 md:px-12 pt-32 pb-20 items-center overflow-hidden"
-          onMouseMove={handleMouseMove}
-        >
-          {/* Step 1: Soft Reveal of background grain and faint radial glow */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 0.5 }}
-            transition={{ duration: 2, ease: "easeOut" }}
-            className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-foreground/[0.03] via-background to-background"
-          />
-          <div className="absolute inset-0 -z-20 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-background via-background to-accent/5 opacity-50 dark:opacity-20" />
-
-          <motion.div
-            style={{ y: heroY, opacity: heroOpacity }}
-            className="max-w-7xl mx-auto w-full relative z-10 flex flex-col justify-center flex-grow"
-          >
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center mt-0">
-
-              {/* Left Column: Name & Title */}
-              <div className="lg:col-span-7 flex flex-col items-start pr-4 relative z-20">
-                {/* Step 2: Name reveals with custom staggered variants */}
-                <motion.div
-                  variants={containerVariant}
-                  initial="hidden"
-                  animate="visible"
-                  className="w-full flex flex-col"
-                >
-                  <div className="overflow-hidden pb-1 w-full mt-4">
-                    <motion.h1
-                      variants={lineVariant}
-                      className="text-[12vw] sm:text-[10vw] lg:text-[8vw] font-display font-bold tracking-tight leading-[0.85] m-0"
-                    >
-                      <MagneticText text="Roshan" />
-                    </motion.h1>
-                  </div>
-                  <div className="overflow-hidden pb-4 w-full">
-                    <motion.h1
-                      variants={lineVariant}
-                      className="text-[12vw] sm:text-[10vw] lg:text-[8vw] font-display font-bold tracking-tight leading-[0.85] m-0 mb-2"
-                    >
-                      <MagneticText text="Mariadas" />
-                    </motion.h1>
-                  </div>
-
-                  {/* Step 3: Role fades in */}
-                  <div className="overflow-hidden w-full">
-                    <motion.p
-                      variants={roleVariant}
-                      className="text-xl md:text-3xl font-display font-medium tracking-tight opacity-70 ml-1"
-                    >
-                      <MagneticText text="Art Director" maxRepel={6} threshold={140} />
-                    </motion.p>
-                  </div>
-                </motion.div>
-              </div>
-
-              {/* Right Column: Focus Block */}
-              <div className="lg:col-span-5 flex flex-col items-start lg:items-end w-full relative z-30 lg:-mr-12 mt-12 lg:mt-0">
-
-                {/* Step 4 & Parallax: Focus block outline and gentle drift */}
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 1.2, delay: 1.2, ease: [0.16, 1, 0.3, 1] }}
-                  style={{ x: parallaxX, y: parallaxY }}
-                  className="w-full max-w-md p-8 md:p-12 rounded-3xl border border-foreground/10 bg-background/40 backdrop-blur-xl shadow-2xl relative overflow-hidden group"
-                >
-                  {/* Subtle inner glow for premium feel */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-foreground/5 to-transparent opacity-50" />
-
-                  <div className="relative z-10 flex flex-col items-start">
-                    <div className="flex flex-col items-start mb-10 w-full text-lg md:text-xl text-foreground/80 font-medium tracking-wide">
-                      <span>Concept meets</span>
-
-                      {/* Step 5: "Execution" signature animation */}
-                      <div className="overflow-hidden mt-2 pb-2 w-full">
-                        <motion.span
-                          initial={{ opacity: 0, x: -20, skewX: 10 }}
-                          animate={{ opacity: 1, x: 0, skewX: 0 }}
-                          transition={{ duration: 1, delay: 1.6, ease: [0.16, 1, 0.3, 1] }}
-                          className="font-display italic text-4xl md:text-5xl lg:text-5xl text-left block text-foreground tracking-tight origin-left"
-                        >
-                          Execution.
-                        </motion.span>
-                      </div>
-                    </div>
-
-                    {/* Step 6: Buttons stagger in */}
-                    <div className="flex flex-col sm:flex-row items-center gap-4 w-full">
-                      <motion.div
-                        initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.5, delay: 0.20, ease: "easeOut" }}
-                        className="w-full sm:w-auto"
-                      >
-                        <Link
-                          href="/work"
-                          className="h-14 w-full sm:w-auto px-8 rounded-full bg-foreground text-background flex items-center justify-center text-xs tracking-widest uppercase font-bold hover:scale-105 transition-transform duration-300 shadow-xl"
-                        >
-                          View Work
-                        </Link>
-                      </motion.div>
-
-                      <motion.div
-                        initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.5, delay: 0.25, ease: "easeOut" }}
-                        className="w-full sm:w-auto"
-                      >
-                        <Link
-                          href="/contact"
-                          className="h-14 w-full sm:w-auto px-8 rounded-full border border-foreground/20 bg-transparent flex items-center justify-center text-xs tracking-widest uppercase font-bold hover:bg-foreground/5 transition-colors duration-300"
-                        >
-                          Contact
-                        </Link>
-                      </motion.div>
-                    </div>
-                  </div>
-                </motion.div>
-              </div>
-
-            </div>
-          </motion.div>
-
-          {/* Scroll Cue Hint */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 0.5 }}
-            transition={{ duration: 1, delay: 2.2 }}
-            style={{ opacity: useTransform(scrollY, [0, 100], [0.5, 0]) }}
-            className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 pointer-events-none"
-          >
-            <div className="w-[1px] h-12 bg-gradient-to-b from-foreground/50 to-transparent" />
-          </motion.div>
-        </section>
+        <MediaWallHero />
 
         {/* SECTION C: Selected Work */}
         <section className="py-24 px-6 md:px-12 bg-background border-t border-foreground/10">
