@@ -105,28 +105,34 @@ const wallMedia = [
     { type: "image", url: "/media/idemitsu-mena/08.jpg", size: "small" },
     { type: "image", url: "/media/cinnamon/05.jpg", size: "medium" },
     { type: "video", url: "https://res.cloudinary.com/ddxa0ahzp/video/upload/v1772733662/rm-portfolio-live/anchor-butter/hero.mp4", poster: "https://res.cloudinary.com/ddxa0ahzp/video/upload/v1772733662/rm-portfolio-live/anchor-butter/hero.jpg", size: "medium", priority: true },
+    { type: "image", url: "/media/anchor-newdale/02.jpg", size: "small" },
     { type: "image", url: "/media/idemitsu-mena/04.jpg", size: "large" },
     { type: "video", url: "https://res.cloudinary.com/ddxa0ahzp/video/upload/v1772733678/rm-portfolio-live/anchor-moments/hero.mp4", poster: "https://res.cloudinary.com/ddxa0ahzp/video/upload/v1772733678/rm-portfolio-live/anchor-moments/hero.jpg", size: "small" },
     { type: "image", url: "/media/baby-cheramy/04.jpg", size: "medium" },
     { type: "image", url: "/media/cinnamon/06.jpg", size: "large" },
+    { type: "image", url: "/media/dialog/03.jpg", size: "small" },
     { type: "video", url: "https://res.cloudinary.com/ddxa0ahzp/video/upload/v1772640810/rm-portfolio-live/anchor-moments/25.mp4", size: "small" },
     { type: "video", url: "/media/mazda-motor-oil-mena/hero.mp4", size: "large", priority: true },
     { type: "image", url: "https://res.cloudinary.com/ddxa0ahzp/image/upload/v1772640713/rm-portfolio-live/anchor-butter/05.jpg", size: "small" },
     { type: "image", url: "/media/portfolio-2024/10.jpg", size: "medium" },
+    { type: "image", url: "/media/cinnamon/10.jpg", size: "small" },
     { type: "image", url: "/media/baby-cheramy/02.jpg", size: "small" },
     { type: "video", url: "https://res.cloudinary.com/ddxa0ahzp/video/upload/v1772733667/rm-portfolio-live/anchor-butter/swirl.mp4", size: "medium" },
     { type: "image", url: "/media/cinnamon/11.jpg", size: "large" },
     { type: "image", url: "/media/sprite/rmdn-02.png", size: "medium" },
+    { type: "image", url: "https://res.cloudinary.com/ddxa0ahzp/image/upload/v1772640713/rm-portfolio-live/anchor-butter/04.jpg", size: "medium" },
     { type: "video", url: "https://res.cloudinary.com/ddxa0ahzp/video/upload/v1772733599/rm-portfolio-live/brewery/3.mp4", size: "small" },
     { type: "video", url: "/media/anchor-newdale/hero.mp4", size: "large" },
     { type: "image", url: "/media/idemitsu-mena/11.jpg", size: "medium" },
     { type: "image", url: "/media/cinnamon/02.jpg", size: "small" },
+    { type: "image", url: "/media/potted/05.jpg", size: "medium" },
 ];
 
 export function MediaWallHero() {
     const containerRef = useRef<HTMLDivElement>(null);
     const { scrollY } = useScroll();
     const prefersReducedMotion = useReducedMotion();
+    const [isNameHovered, setIsNameHovered] = useState(false);
 
     // Gentle parallax effects for the background grid
     const y1 = useTransform(scrollY, [0, 1000], [0, -100]);
@@ -150,35 +156,35 @@ export function MediaWallHero() {
 
                     {/* Column 1 */}
                     <motion.div style={{ y: prefersReducedMotion ? 0 : y1 }} className="flex flex-col gap-3 md:gap-4 mt-12 md:-mt-24">
-                        {wallMedia.slice(0, 4).map((media, i) => (
+                        {wallMedia.slice(0, 5).map((media, i) => (
                             <MediaTile key={`col1-${i}`} media={media} delay={i * 0.1} />
                         ))}
                     </motion.div>
 
                     {/* Column 2 */}
                     <motion.div style={{ y: prefersReducedMotion ? 0 : y2 }} className="flex flex-col gap-3 md:gap-4 mt-4 md:mt-12">
-                        {wallMedia.slice(4, 8).map((media, i) => (
+                        {wallMedia.slice(5, 10).map((media, i) => (
                             <MediaTile key={`col2-${i}`} media={media} delay={i * 0.15 + 0.1} />
                         ))}
                     </motion.div>
 
                     {/* Column 3 (Center - mostly hidden by text, but provides depth) */}
                     <motion.div style={{ y: prefersReducedMotion ? 0 : y1 }} className="hidden md:flex flex-col gap-3 md:gap-4 -mt-12">
-                        {wallMedia.slice(8, 12).map((media, i) => (
+                        {wallMedia.slice(10, 15).map((media, i) => (
                             <MediaTile key={`col3-${i}`} media={media} delay={i * 0.12 + 0.2} />
                         ))}
                     </motion.div>
 
                     {/* Column 4 */}
                     <motion.div style={{ y: prefersReducedMotion ? 0 : y3 }} className="hidden lg:flex flex-col gap-3 md:gap-4 mt-16 md:mt-24">
-                        {wallMedia.slice(12, 16).map((media, i) => (
+                        {wallMedia.slice(15, 20).map((media, i) => (
                             <MediaTile key={`col4-${i}`} media={media} delay={i * 0.1 + 0.3} />
                         ))}
                     </motion.div>
 
                     {/* Column 5 */}
                     <motion.div style={{ y: prefersReducedMotion ? 0 : y2 }} className="hidden xl:flex flex-col gap-3 md:gap-4 -mt-8">
-                        {wallMedia.slice(16, 20).map((media, i) => (
+                        {wallMedia.slice(20, 25).map((media, i) => (
                             <MediaTile key={`col5-${i}`} media={media} delay={i * 0.18 + 0.4} />
                         ))}
                     </motion.div>
@@ -194,17 +200,44 @@ export function MediaWallHero() {
             {/* 3. Center Hero Information Block */}
             <div className="relative z-20 flex flex-col items-center justify-center w-full max-w-5xl mx-auto text-center mt-[-5%]">
 
+                {/* Art Director Tag */}
+                <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 1, ease: "easeOut", delay: 0.1 }}
+                    className="mb-4 sm:mb-6"
+                >
+                    <div className="inline-block px-4 py-1.5 rounded-full border border-white/10 bg-white/5 backdrop-blur-md text-[10px] sm:text-xs tracking-[0.3em] font-medium uppercase text-white/80">
+                        Art Director
+                    </div>
+                </motion.div>
+
                 {/* Name Title */}
                 <motion.div
                     initial={{ opacity: 0, scale: 0.95, y: 20 }}
                     animate={{ opacity: 1, scale: 1, y: 0 }}
                     transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
-                    className="overflow-hidden pb-4"
+                    className="pb-4"
                 >
-                    <h1 className="text-[12vw] sm:text-[10vw] md:text-[8vw] lg:text-[7vw] font-display font-bold tracking-tight leading-[0.9] text-white m-0 drop-shadow-2xl flex flex-wrap justify-center gap-[2vw] md:gap-4">
-                        <span className="block"><MagneticText text="Roshan" /></span>
-                        <span className="block"><MagneticText text="Mariadas" /></span>
-                    </h1>
+                    <div
+                        className="relative"
+                        onPointerEnter={() => {
+                            if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+                            setIsNameHovered(true);
+                        }}
+                        onPointerLeave={() => setIsNameHovered(false)}
+                    >
+                        {/* Soft Glow/Blur Hover Layer (Desktop only) */}
+                        <div className={`absolute inset-0 pointer-events-none transition-opacity duration-700 ease-out hidden md:flex flex-wrap justify-center gap-[2vw] md:gap-4 blur-xl ${isNameHovered ? 'opacity-40' : 'opacity-0'}`}>
+                            <span className="block text-[12vw] sm:text-[10vw] md:text-[8vw] lg:text-[7vw] font-display font-bold tracking-tight leading-[0.9] text-white">Roshan Mariadas</span>
+                        </div>
+
+                        {/* Interactive Main Layer */}
+                        <h1 className="relative z-10 text-[12vw] sm:text-[10vw] md:text-[8vw] lg:text-[7vw] font-display font-bold tracking-tight leading-[0.9] text-white m-0 drop-shadow-2xl flex flex-wrap justify-center gap-[2vw] md:gap-4">
+                            <span className="block"><MagneticText text="Roshan" /></span>
+                            <span className="block"><MagneticText text="Mariadas" /></span>
+                        </h1>
+                    </div>
                 </motion.div>
 
                 {/* Supporting Line */}
@@ -213,7 +246,7 @@ export function MediaWallHero() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 1, ease: "easeOut", delay: 0.6 }}
                 >
-                    <div className="font-sans text-[10px] sm:text-xs tracking-[0.2em] sm:tracking-[0.3em] uppercase text-white/50 mb-4 sm:mb-6">
+                    <div className="font-sans text-[10px] sm:text-xs tracking-[0.2em] sm:tracking-[0.3em] uppercase text-white/90 font-bold mb-4 sm:mb-6 drop-shadow-md">
                         Translating bold ideas into precise visual realities
                     </div>
                 </motion.div>

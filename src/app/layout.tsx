@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Playfair_Display } from "next/font/google";
+import { Plus_Jakarta_Sans, Outfit } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
@@ -7,13 +7,13 @@ import { SmoothScroll } from "@/components/SmoothScroll";
 import { PageTransition } from "@/components/PageTransition";
 import { CustomCursor } from "@/components/CustomCursor";
 
-const inter = Inter({
-  variable: "--font-inter",
+const sans = Plus_Jakarta_Sans({
+  variable: "--font-sans-main",
   subsets: ["latin"],
 });
 
-const playfair = Playfair_Display({
-  variable: "--font-playfair",
+const display = Outfit({
+  variable: "--font-display-main",
   subsets: ["latin"],
 });
 
@@ -49,7 +49,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="scrollbar-hide dark">
-      <body className={`${inter.variable} ${playfair.variable} antialiased min-h-screen flex flex-col font-sans bg-background text-foreground transition-colors duration-500`}>
+      <body className={`${sans.variable} ${display.variable} antialiased min-h-screen flex flex-col font-sans bg-background text-foreground transition-colors duration-500 overflow-x-hidden`}>
         <div className="noise-overlay pointer-events-none fixed inset-0 z-50 opacity-[0.03] dark:opacity-[0.05]"></div>
         <CustomCursor />
         <SmoothScroll>

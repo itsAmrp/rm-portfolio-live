@@ -1,14 +1,12 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { motion, AnimatePresence, useSpring, useMotionValue } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { projects, siteMeta, brandList, featuredOrder, getMediaUrl } from "@/data/portfolio";
+import { projects, siteMeta, brandList, featuredOrder } from "@/data/portfolio";
 import { WorkCard } from "@/components/WorkCard";
-import { ShowcaseReel } from "@/components/ShowcaseReel";
 import { MediaWallHero } from "@/components/MediaWallHero";
-import Image from "next/image";
 
 
 export default function Home() {
@@ -127,8 +125,6 @@ export default function Home() {
           </div>
         </section>
 
-        {/* SECTION D: Showcase Reel */}
-        <ShowcaseReel />
 
         {/* SECTION E: Brand Marquee */}
         <section className="py-24 bg-background border-y border-foreground/10 overflow-hidden relative">
@@ -167,44 +163,6 @@ export default function Home() {
             </div>
           </div>
         </section>
-
-        {/* SECTION G: Short About */}
-        <section className="py-32 px-6 md:px-12 bg-accent/5">
-          <div className="container mx-auto">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8">
-              <div className="lg:col-span-5 relative h-[60vh] lg:h-auto rounded-xl overflow-hidden bg-foreground/10">
-                <Image
-                  src={getMediaUrl("/media/about/about-hero.jpg") || ""}
-                  alt="Roshan Mariadas Portrait"
-                  fill
-                  className="object-cover"
-                />
-              </div>
-              <div className="lg:col-span-6 lg:col-start-7 flex flex-col justify-center">
-                <h2 className="text-4xl md:text-5xl font-display font-bold tracking-tight mb-8">
-                  Built on craft. Defined by execution.
-                </h2>
-                <div className="space-y-6 text-foreground/80 text-lg leading-relaxed mb-12">
-                  <p>
-                    With over seven years of agency leadership and hands-on production experience, I shape bold ideas into clear visual narratives.
-                  </p>
-                  <p>
-                    My work balances aesthetic intuition with technical rigor, building creative systems that scale while protecting the integrity of the design.
-                  </p>
-                </div>
-                <div className="mt-8">
-                  <Link
-                    href="/about"
-                    className="h-12 px-8 rounded-full border border-foreground/20 inline-flex items-center justify-center text-xs tracking-widest uppercase font-bold hover:bg-foreground hover:text-background transition-colors duration-300"
-                  >
-                    More About Me
-                  </Link>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
       </div>
     </>
   );
