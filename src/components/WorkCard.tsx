@@ -50,17 +50,17 @@ export function WorkCard({ project, className, priority = false }: WorkCardProps
                         />
                     )}
 
-                    {/* Scope hover opacity to desktop to prevent mobile safari click-intercept bug. Add pointer-events-none so it never blocks clicks. */}
-                    <div className="absolute inset-0 bg-black/40 opacity-0 md:group-hover:opacity-100 transition-opacity duration-300 z-10 pointer-events-none" />
+                    {/* Scope hover opacity to desktop to prevent mobile safari click-intercept bug. Add pointer-events-none so it never blocks clicks. On mobile, elements are visibly identified by default. */}
+                    <div className="absolute inset-0 bg-black/40 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-300 z-10 pointer-events-none" />
 
-                    <div className="absolute inset-0 p-6 md:p-8 flex flex-col justify-between text-white opacity-0 md:group-hover:opacity-100 transition-all duration-300 z-20 pointer-events-none">
-                        <div className="flex justify-between items-start translate-y-2 md:group-hover:translate-y-0 transition-transform duration-300 ease-out">
+                    <div className="absolute inset-0 p-6 md:p-8 flex flex-col justify-between text-white opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-all duration-300 z-20 pointer-events-none">
+                        <div className="flex justify-between items-start md:translate-y-2 md:group-hover:translate-y-0 transition-transform duration-300 ease-out">
                             <span className="text-xs md:text-sm font-medium tracking-widest uppercase bg-white/10 backdrop-blur-md px-3 py-1 rounded-full">{project.brand}</span>
                             <span className="text-xs md:text-sm font-medium tracking-widest">{project.year}</span>
                         </div>
 
-                        <div className="translate-y-4 md:group-hover:translate-y-0 text-white/90 md:group-hover:text-white transition-all duration-300 ease-out">
-                            <h3 className="text-2xl md:text-3xl font-display font-bold tracking-tight mb-2 opacity-80 md:group-hover:opacity-100 transition-opacity duration-300">{project.title}</h3>
+                        <div className="md:translate-y-4 md:group-hover:translate-y-0 text-white md:text-white/90 md:group-hover:text-white transition-all duration-300 ease-out">
+                            <h3 className="text-2xl md:text-3xl font-display font-bold tracking-tight mb-2 opacity-100 md:opacity-80 md:group-hover:opacity-100 transition-opacity duration-300">{project.title}</h3>
                             <p className="text-xs md:text-sm tracking-widest uppercase opacity-80">{project.disciplines.slice(0, 3).join(" • ")}</p>
                         </div>
                     </div>

@@ -287,8 +287,11 @@ export function MediaWallHero() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 1.5, duration: 1 }}
-                className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 z-30 pointer-events-none"
+                className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-30 pointer-events-none"
             >
+                <div className="text-[9px] sm:text-[10px] tracking-[0.3em] uppercase text-white/50 font-medium font-sans">
+                    Scroll to Explore
+                </div>
                 <motion.div
                     className="w-[1px] h-10 bg-gradient-to-b from-white/40 to-transparent"
                     animate={prefersReducedMotion ? {} : { y: [0, 8, 0], opacity: [0.3, 1, 0.3] }}
@@ -339,21 +342,6 @@ function MediaTile({ media, delay }: { media: { type: string, url: string, poste
                 />
             )}
 
-            {/* Mobile-first brand/project labels */}
-            {(media.brand || media.category) && (
-                <div className="absolute inset-x-0 bottom-0 z-20 p-3 sm:p-4 bg-gradient-to-t from-black/80 via-black/40 to-transparent flex flex-col justify-end h-[60%] opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
-                    {media.brand && (
-                        <h4 className="text-white font-display font-medium text-xs sm:text-sm md:text-base tracking-tight leading-tight drop-shadow-md">
-                            {media.brand}
-                        </h4>
-                    )}
-                    {media.category && (
-                        <p className="text-white/70 font-sans text-[8px] sm:text-[9px] md:text-[10px] tracking-[0.2em] uppercase mt-0.5 md:mt-1 drop-shadow-sm">
-                            {media.category}
-                        </p>
-                    )}
-                </div>
-            )}
         </motion.div>
     );
 }
