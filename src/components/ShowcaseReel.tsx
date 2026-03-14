@@ -123,13 +123,9 @@ export function ShowcaseReel() {
                                                 loop
                                                 muted
                                                 playsInline
+                                                preload="metadata"
                                                 className="w-full h-auto max-h-[75vh] object-contain shadow-2xl rounded-sm"
                                             />
-                                            <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-background/20 backdrop-blur-sm z-20">
-                                                <div className="w-16 h-16 rounded-full bg-foreground text-background flex items-center justify-center pl-1 shadow-2xl">
-                                                    <Play fill="currentColor" size={24} />
-                                                </div>
-                                            </div>
                                         </div>
                                     ) : (
                                         <div className="relative w-full h-full max-h-[75vh] flex items-center justify-center">

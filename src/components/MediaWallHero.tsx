@@ -329,6 +329,7 @@ function MediaTile({ media, delay }: { media: { type: string, url: string, poste
                     muted
                     loop
                     playsInline
+                    preload="metadata"
                     className="absolute inset-0 w-full h-full object-cover origin-center transition-transform duration-[20s] group-hover:scale-110"
                 />
             ) : (

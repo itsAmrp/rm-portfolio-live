@@ -236,10 +236,11 @@ function Lightbox({ items, currentIndex, onClose, onIndexChange }: LightboxProps
                                 <video
                                     src={getMediaUrl(activeItem.videoMp4 || activeItem.videoWebm)}
                                     poster={getMediaUrl(activeItem.url.includes('.jpg') ? activeItem.url : undefined)}
-                                    controls
                                     autoPlay
                                     muted
+                                    loop
                                     playsInline
+                                    preload="metadata"
                                     className="max-w-full max-h-full object-contain"
                                 />
                             </div>

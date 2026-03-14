@@ -40,38 +40,23 @@ export function LazyVideo({ srcMp4, srcWebm, poster, alt }: LazyVideoProps) {
 
     return (
         <div className="relative w-full h-full min-h-[200px] bg-foreground/10 flex items-center justify-center overflow-hidden rounded-xl">
-            {hasPoster ? (
-                <video
-                    ref={videoRef}
-                    poster={poster}
-                    muted
-                    loop
-                    playsInline
-                    className="w-full h-full object-cover"
-                >
-                    {srcWebm && <source src={srcWebm} type="video/webm" />}
-                    {srcMp4 && <source src={srcMp4} type="video/mp4" />}
-                </video>
-            ) : (
-                <div className="absolute inset-0 bg-gradient-to-br from-foreground/5 to-foreground/20 flex flex-col items-center justify-center group-hover:from-foreground/10 group-hover:to-foreground/30 transition-colors">
-                    <div className="w-12 h-12 rounded-full bg-background/50 backdrop-blur flex items-center justify-center text-foreground shadow-lg">
-                        <Play size={20} className="ml-1" />
-                    </div>
-                </div>
+            {hasPoster && (
+                <div className="absolute inset-0 rounded-xl overflow-hidden z-0 bg-foreground/5" />
             )}
 
-            {!hasPoster && (
-                <video
-                    ref={videoRef}
-                    muted
-                    loop
-                    playsInline
-                    className="absolute inset-0 w-full h-full object-cover opacity-0"
-                >
-                    {srcWebm && <source src={srcWebm} type="video/webm" />}
-                    {srcMp4 && <source src={srcMp4} type="video/mp4" />}
-                </video>
-            )}
+            <video
+                ref={videoRef}
+                poster={poster}
+                autoPlay
+                muted
+                loop
+                playsInline
+                preload="metadata"
+                className={`w-full h-full object-cover transition-opacity duration-500 rounded-xl`}
+            >
+                {srcWebm && <source src={srcWebm} type="video/webm" />}
+                {srcMp4 && <source src={srcMp4} type="video/mp4" />}
+            </video>
         </div>
     );
 }
