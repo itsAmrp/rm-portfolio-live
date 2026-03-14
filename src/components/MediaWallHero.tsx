@@ -101,31 +101,31 @@ function MagneticText({ text, maxRepel = 14, threshold = 240 }: { text: string, 
 
 // Media assets for the mosaic grid, pulled from top projects in portfolio.ts
 const wallMedia = [
-    { type: "video", url: "https://res.cloudinary.com/ddxa0ahzp/video/upload/v1772741168/rm-portfolio-live/dilmah-sri-lanka/hero.mp4", poster: "https://res.cloudinary.com/ddxa0ahzp/video/upload/v1772741168/rm-portfolio-live/dilmah-sri-lanka/hero.jpg", size: "large", priority: true },
-    { type: "image", url: "/media/idemitsu-mena/08.jpg", size: "small" },
-    { type: "image", url: "/media/cinnamon/05.jpg", size: "medium" },
-    { type: "video", url: "https://res.cloudinary.com/ddxa0ahzp/video/upload/v1772733662/rm-portfolio-live/anchor-butter/hero.mp4", poster: "https://res.cloudinary.com/ddxa0ahzp/video/upload/v1772733662/rm-portfolio-live/anchor-butter/hero.jpg", size: "medium", priority: true },
-    { type: "image", url: "/media/anchor-newdale/02.jpg", size: "small" },
-    { type: "image", url: "/media/idemitsu-mena/04.jpg", size: "large" },
-    { type: "video", url: "https://res.cloudinary.com/ddxa0ahzp/video/upload/v1772733678/rm-portfolio-live/anchor-moments/hero.mp4", poster: "https://res.cloudinary.com/ddxa0ahzp/video/upload/v1772733678/rm-portfolio-live/anchor-moments/hero.jpg", size: "small" },
-    { type: "image", url: "/media/baby-cheramy/04.jpg", size: "medium" },
-    { type: "image", url: "/media/cinnamon/06.jpg", size: "large" },
-    { type: "image", url: "/media/dialog/03.jpg", size: "small" },
-    { type: "video", url: "https://res.cloudinary.com/ddxa0ahzp/video/upload/v1772640810/rm-portfolio-live/anchor-moments/25.mp4", size: "small" },
-    { type: "video", url: "/media/mazda-motor-oil-mena/hero.mp4", size: "large", priority: true },
-    { type: "image", url: "https://res.cloudinary.com/ddxa0ahzp/image/upload/v1772640713/rm-portfolio-live/anchor-butter/05.jpg", size: "small" },
-    { type: "image", url: "/media/portfolio-2024/10.jpg", size: "medium" },
-    { type: "image", url: "/media/cinnamon/10.jpg", size: "small" },
-    { type: "image", url: "/media/baby-cheramy/02.jpg", size: "small" },
-    { type: "video", url: "https://res.cloudinary.com/ddxa0ahzp/video/upload/v1772733667/rm-portfolio-live/anchor-butter/swirl.mp4", size: "medium" },
-    { type: "image", url: "/media/cinnamon/11.jpg", size: "large" },
-    { type: "image", url: "/media/sprite/rmdn-02.png", size: "medium" },
-    { type: "image", url: "https://res.cloudinary.com/ddxa0ahzp/image/upload/v1772640713/rm-portfolio-live/anchor-butter/04.jpg", size: "medium" },
-    { type: "video", url: "https://res.cloudinary.com/ddxa0ahzp/video/upload/v1772733599/rm-portfolio-live/brewery/3.mp4", size: "small" },
-    { type: "video", url: "/media/anchor-newdale/hero.mp4", size: "large" },
-    { type: "image", url: "/media/idemitsu-mena/11.jpg", size: "medium" },
-    { type: "image", url: "/media/cinnamon/02.jpg", size: "small" },
-    { type: "image", url: "/media/potted/05.jpg", size: "medium" },
+    { type: "video", url: "https://res.cloudinary.com/ddxa0ahzp/video/upload/v1772741168/rm-portfolio-live/dilmah-sri-lanka/hero.mp4", poster: "https://res.cloudinary.com/ddxa0ahzp/video/upload/v1772741168/rm-portfolio-live/dilmah-sri-lanka/hero.jpg", size: "large", priority: true, brand: "Dilmah Sri Lanka", category: "Commercial" },
+    { type: "image", url: "/media/idemitsu-mena/08.jpg", size: "small", brand: "Idemitsu", category: "Key Visual" },
+    { type: "image", url: "/media/cinnamon/05.jpg", size: "medium", brand: "Cinnamon Hotels", category: "Campaign" },
+    { type: "video", url: "https://res.cloudinary.com/ddxa0ahzp/video/upload/v1772733662/rm-portfolio-live/anchor-butter/hero.mp4", poster: "https://res.cloudinary.com/ddxa0ahzp/video/upload/v1772733662/rm-portfolio-live/anchor-butter/hero.jpg", size: "medium", priority: true, brand: "Anchor Butter", category: "Commercial" },
+    { type: "image", url: "/media/anchor-newdale/02.jpg", size: "small", brand: "Anchor Newdale", category: "Key Visual" },
+    { type: "image", url: "/media/idemitsu-mena/04.jpg", size: "large", brand: "Idemitsu", category: "Social" },
+    { type: "video", url: "https://res.cloudinary.com/ddxa0ahzp/video/upload/v1772733678/rm-portfolio-live/anchor-moments/hero.mp4", poster: "https://res.cloudinary.com/ddxa0ahzp/video/upload/v1772733678/rm-portfolio-live/anchor-moments/hero.jpg", size: "small", brand: "Anchor Moments", category: "Commercial" },
+    { type: "image", url: "/media/baby-cheramy/04.jpg", size: "medium", brand: "Baby Cheramy", category: "Campaign" },
+    { type: "image", url: "/media/cinnamon/06.jpg", size: "large", brand: "Cinnamon Hotels", category: "Digital" },
+    { type: "image", url: "/media/dialog/03.jpg", size: "small", brand: "Dialog", category: "Key Visual" },
+    { type: "video", url: "https://res.cloudinary.com/ddxa0ahzp/video/upload/v1772640810/rm-portfolio-live/anchor-moments/25.mp4", size: "small", brand: "Anchor Moments", category: "Social" },
+    { type: "video", url: "/media/mazda-motor-oil-mena/hero.mp4", size: "large", priority: true, brand: "Mazda", category: "Commercial" },
+    { type: "image", url: "https://res.cloudinary.com/ddxa0ahzp/image/upload/v1772640713/rm-portfolio-live/anchor-butter/05.jpg", size: "small", brand: "Anchor Butter", category: "Social" },
+    { type: "image", url: "/media/portfolio-2024/10.jpg", size: "medium", brand: "Personal", category: "Identity" },
+    { type: "image", url: "/media/cinnamon/10.jpg", size: "small", brand: "Cinnamon Hotels", category: "Social" },
+    { type: "image", url: "/media/baby-cheramy/02.jpg", size: "small", brand: "Baby Cheramy", category: "Campaign" },
+    { type: "video", url: "https://res.cloudinary.com/ddxa0ahzp/video/upload/v1772733667/rm-portfolio-live/anchor-butter/swirl.mp4", size: "medium", brand: "Anchor Butter", category: "Social" },
+    { type: "image", url: "/media/cinnamon/11.jpg", size: "large", brand: "Cinnamon Hotels", category: "Key Visual" },
+    { type: "image", url: "/media/sprite/rmdn-02.png", size: "medium", brand: "Sprite", category: "Digital" },
+    { type: "image", url: "https://res.cloudinary.com/ddxa0ahzp/image/upload/v1772640713/rm-portfolio-live/anchor-butter/04.jpg", size: "medium", brand: "Anchor Butter", category: "Campaign" },
+    { type: "video", url: "https://res.cloudinary.com/ddxa0ahzp/video/upload/v1772733599/rm-portfolio-live/brewery/3.mp4", size: "small", brand: "The Brewery", category: "Motion" },
+    { type: "video", url: "/media/anchor-newdale/hero.mp4", size: "large", brand: "Anchor Newdale", category: "Commercial" },
+    { type: "image", url: "/media/idemitsu-mena/11.jpg", size: "medium", brand: "Idemitsu", category: "Digital" },
+    { type: "image", url: "/media/cinnamon/02.jpg", size: "small", brand: "Cinnamon Hotels", category: "Campaign" },
+    { type: "image", url: "/media/potted/05.jpg", size: "medium", brand: "Potted", category: "Identity" },
 ];
 
 export function MediaWallHero() {
@@ -230,8 +230,8 @@ export function MediaWallHero() {
                         {/* Interactive Main Layer with Optical Bloom directly on text */}
                         <h1
                             className={`relative z-10 text-[12vw] sm:text-[10vw] md:text-[8vw] lg:text-[7vw] font-display font-bold tracking-tight leading-[0.9] m-0 flex flex-wrap justify-center gap-[2vw] md:gap-4 transition-all duration-700 ease-out ${isNameHovered && !prefersReducedMotion
-                                    ? 'text-white/90 drop-shadow-[0_0_15px_rgba(255,255,255,0.5)] md:drop-shadow-[0_0_30px_rgba(255,255,255,0.4)]'
-                                    : 'text-white drop-shadow-2xl'
+                                ? 'text-white/90 drop-shadow-[0_0_15px_rgba(255,255,255,0.5)] md:drop-shadow-[0_0_30px_rgba(255,255,255,0.4)]'
+                                : 'text-white drop-shadow-2xl'
                                 }`}
                         >
                             <span className="block"><MagneticText text="Roshan" /></span>
@@ -301,7 +301,7 @@ export function MediaWallHero() {
 }
 
 // Sub-component for individual grid media tiles
-function MediaTile({ media, delay }: { media: { type: string, url: string, poster?: string, size: string, priority?: boolean }, delay: number }) {
+function MediaTile({ media, delay }: { media: { type: string, url: string, poster?: string, size: string, priority?: boolean, brand?: string, category?: string }, delay: number }) {
     const prefersReducedMotion = useReducedMotion();
 
     // Height variation based on specified size - adjusted down to show more tiles at once
@@ -316,7 +316,7 @@ function MediaTile({ media, delay }: { media: { type: string, url: string, poste
             className={`relative w-full ${heightClass} rounded-2xl md:rounded-3xl overflow-hidden bg-background/20 backdrop-blur-md shadow-2xl border border-white/5 group`}
         >
             {/* Subtle overlay inside tile for rich contrast */}
-            <div className="absolute inset-0 z-10 bg-gradient-to-b from-transparent to-black/30 opacity-60" />
+            <div className="absolute inset-0 z-10 bg-gradient-to-b from-transparent to-black/30 opacity-60 pointer-events-none" />
 
             {media.type === "video" ? (
                 <video
@@ -337,6 +337,22 @@ function MediaTile({ media, delay }: { media: { type: string, url: string, poste
                     className="object-cover origin-center transition-transform duration-[20s] group-hover:scale-110"
                     priority={media.priority}
                 />
+            )}
+
+            {/* Mobile-first brand/project labels */}
+            {(media.brand || media.category) && (
+                <div className="absolute inset-x-0 bottom-0 z-20 p-3 sm:p-4 bg-gradient-to-t from-black/80 via-black/40 to-transparent flex flex-col justify-end h-[60%] opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                    {media.brand && (
+                        <h4 className="text-white font-display font-medium text-xs sm:text-sm md:text-base tracking-tight leading-tight drop-shadow-md">
+                            {media.brand}
+                        </h4>
+                    )}
+                    {media.category && (
+                        <p className="text-white/70 font-sans text-[8px] sm:text-[9px] md:text-[10px] tracking-[0.2em] uppercase mt-0.5 md:mt-1 drop-shadow-sm">
+                            {media.category}
+                        </p>
+                    )}
+                </div>
             )}
         </motion.div>
     );
