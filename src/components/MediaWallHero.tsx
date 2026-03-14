@@ -152,7 +152,7 @@ export function MediaWallHero() {
                 style={{ opacity: prefersReducedMotion ? 1 : heroOpacity }}
                 className="absolute inset-0 z-0 h-[120vh] -top-[10vh] left-0 right-0 w-full overflow-hidden opacity-80"
             >
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 md:gap-4 p-2 w-full h-full min-w-[120vw] -ml-[10vw]">
+                <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-2 sm:gap-3 md:gap-4 p-2 w-full h-full min-w-[105vw] -ml-[2.5vw]">
 
                     {/* Column 1 */}
                     <motion.div style={{ y: prefersReducedMotion ? 0 : y1 }} className="flex flex-col gap-3 md:gap-4 mt-12 md:-mt-24">
@@ -169,21 +169,21 @@ export function MediaWallHero() {
                     </motion.div>
 
                     {/* Column 3 (Center - mostly hidden by text, but provides depth) */}
-                    <motion.div style={{ y: prefersReducedMotion ? 0 : y1 }} className="hidden md:flex flex-col gap-3 md:gap-4 -mt-12">
+                    <motion.div style={{ y: prefersReducedMotion ? 0 : y1 }} className="flex flex-col gap-2 sm:gap-3 md:gap-4 -mt-8 md:-mt-12">
                         {wallMedia.slice(10, 15).map((media, i) => (
                             <MediaTile key={`col3-${i}`} media={media} delay={i * 0.12 + 0.2} />
                         ))}
                     </motion.div>
 
                     {/* Column 4 */}
-                    <motion.div style={{ y: prefersReducedMotion ? 0 : y3 }} className="hidden lg:flex flex-col gap-3 md:gap-4 mt-16 md:mt-24">
+                    <motion.div style={{ y: prefersReducedMotion ? 0 : y3 }} className="hidden sm:flex flex-col gap-2 sm:gap-3 md:gap-4 mt-8 sm:mt-16 md:mt-24">
                         {wallMedia.slice(15, 20).map((media, i) => (
                             <MediaTile key={`col4-${i}`} media={media} delay={i * 0.1 + 0.3} />
                         ))}
                     </motion.div>
 
                     {/* Column 5 */}
-                    <motion.div style={{ y: prefersReducedMotion ? 0 : y2 }} className="hidden xl:flex flex-col gap-3 md:gap-4 -mt-8">
+                    <motion.div style={{ y: prefersReducedMotion ? 0 : y2 }} className="hidden md:flex flex-col gap-2 sm:gap-3 md:gap-4 -mt-4 sm:-mt-8">
                         {wallMedia.slice(20, 25).map((media, i) => (
                             <MediaTile key={`col5-${i}`} media={media} delay={i * 0.18 + 0.4} />
                         ))}
@@ -220,20 +220,20 @@ export function MediaWallHero() {
                     className="pb-4"
                 >
                     <div
-                        className="relative"
+                        className="relative group"
                         onPointerEnter={() => {
                             if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
                             setIsNameHovered(true);
                         }}
                         onPointerLeave={() => setIsNameHovered(false)}
                     >
-                        {/* Soft Glow/Blur Hover Layer (Desktop only) */}
-                        <div className={`absolute inset-0 pointer-events-none transition-opacity duration-700 ease-out hidden md:flex flex-wrap justify-center gap-[2vw] md:gap-4 blur-xl ${isNameHovered ? 'opacity-40' : 'opacity-0'}`}>
-                            <span className="block text-[12vw] sm:text-[10vw] md:text-[8vw] lg:text-[7vw] font-display font-bold tracking-tight leading-[0.9] text-white">Roshan Mariadas</span>
-                        </div>
-
-                        {/* Interactive Main Layer */}
-                        <h1 className="relative z-10 text-[12vw] sm:text-[10vw] md:text-[8vw] lg:text-[7vw] font-display font-bold tracking-tight leading-[0.9] text-white m-0 drop-shadow-2xl flex flex-wrap justify-center gap-[2vw] md:gap-4">
+                        {/* Interactive Main Layer with Optical Bloom directly on text */}
+                        <h1
+                            className={`relative z-10 text-[12vw] sm:text-[10vw] md:text-[8vw] lg:text-[7vw] font-display font-bold tracking-tight leading-[0.9] m-0 flex flex-wrap justify-center gap-[2vw] md:gap-4 transition-all duration-700 ease-out ${isNameHovered && !prefersReducedMotion
+                                    ? 'text-white/90 drop-shadow-[0_0_15px_rgba(255,255,255,0.5)] md:drop-shadow-[0_0_30px_rgba(255,255,255,0.4)]'
+                                    : 'text-white drop-shadow-2xl'
+                                }`}
+                        >
                             <span className="block"><MagneticText text="Roshan" /></span>
                             <span className="block"><MagneticText text="Mariadas" /></span>
                         </h1>
@@ -282,6 +282,20 @@ export function MediaWallHero() {
                 </motion.div>
             </div>
 
+            {/* 4. Scroll to Explore Cue */}
+            <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 1.5, duration: 1 }}
+                className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 z-30 pointer-events-none"
+            >
+                <motion.div
+                    className="w-[1px] h-10 bg-gradient-to-b from-white/40 to-transparent"
+                    animate={prefersReducedMotion ? {} : { y: [0, 8, 0], opacity: [0.3, 1, 0.3] }}
+                    transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                />
+            </motion.div>
+
         </section>
     );
 }
@@ -290,8 +304,8 @@ export function MediaWallHero() {
 function MediaTile({ media, delay }: { media: { type: string, url: string, poster?: string, size: string, priority?: boolean }, delay: number }) {
     const prefersReducedMotion = useReducedMotion();
 
-    // Height variation based on specified size
-    const heightClass = media.size === "large" ? "h-[450px]" : media.size === "medium" ? "h-[320px]" : "h-[220px]";
+    // Height variation based on specified size - adjusted down to show more tiles at once
+    const heightClass = media.size === "large" ? "h-[280px] sm:h-[320px]" : media.size === "medium" ? "h-[200px] sm:h-[240px]" : "h-[140px] sm:h-[180px]";
 
     return (
         <motion.div

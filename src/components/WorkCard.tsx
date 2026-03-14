@@ -50,7 +50,8 @@ export function WorkCard({ project, className, priority = false }: WorkCardProps
                         />
                     )}
 
-                    <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10" />
+                    {/* Scope hover opacity to desktop to prevent mobile safari click-intercept bug. Add pointer-events-none so it never blocks clicks. */}
+                    <div className="absolute inset-0 bg-black/40 opacity-0 md:group-hover:opacity-100 transition-opacity duration-300 z-10 pointer-events-none" />
 
                     <div className="absolute inset-0 p-6 md:p-8 flex flex-col justify-between text-white opacity-0 md:group-hover:opacity-100 transition-all duration-300 z-20 pointer-events-none">
                         <div className="flex justify-between items-start translate-y-2 md:group-hover:translate-y-0 transition-transform duration-300 ease-out">
