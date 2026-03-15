@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { motion } from "framer-motion";
+import { motion, useMotionTemplate, useMotionValue } from "framer-motion";
 import Image from "next/image";
 import { nav, siteMeta, getMediaUrl } from "@/data/portfolio";
 import { Moon, Sun } from "lucide-react";
@@ -42,12 +42,43 @@ export function Navbar() {
         }
     };
 
+    let mouseX = useMotionValue(-1000);
+    let mouseY = useMotionValue(-1000);
+
+    const handleMouseMove = ({ currentTarget, clientX, clientY }: React.MouseEvent) => {
+        let { left, top } = currentTarget.getBoundingClientRect();
+        mouseX.set(clientX - left);
+        mouseY.set(clientY - top);
+    };
+
+    const handleMouseLeave = () => {
+        mouseX.set(-1000);
+        mouseY.set(-1000);
+    };
+
     return (
         <nav
-            className={`fixed top-0 w-full z-50 transition-all duration-500 bg-background/50 backdrop-blur-md border-b border-foreground/5 ${scrolled ? "py-4 shadow-sm" : "py-6"
+            onMouseMove={handleMouseMove}
+            onMouseLeave={handleMouseLeave}
+            className={`fixed top-0 w-full z-50 transition-all duration-500 overflow-hidden ${scrolled
+                ? "py-4 bg-background/60 backdrop-blur-2xl saturate-150 border-b border-foreground/5 shadow-[inset_0_-1px_0_0_rgba(255,255,255,0.05),0_4px_30px_rgba(0,0,0,0.05)]"
+                : "py-6 bg-transparent"
                 }`}
         >
-            <div className="container mx-auto px-6 md:px-12 flex justify-between items-center">
+            <motion.div
+                className="pointer-events-none absolute -inset-px rounded-xl opacity-0 transition duration-300 group-hover:opacity-100 mix-blend-screen"
+                style={{
+                    opacity: mouseX.get() !== -1000 ? 1 : 0,
+                    background: useMotionTemplate`
+            radial-gradient(
+              400px circle at ${mouseX}px ${mouseY}px,
+              ${isDark ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.04)'},
+              transparent 80%
+            )
+          `,
+                }}
+            />
+            <div className="container mx-auto px-6 md:px-12 flex justify-between items-center relative z-10 w-full">
                 <Link
                     href="/"
                     className="relative z-50 block opacity-100"
