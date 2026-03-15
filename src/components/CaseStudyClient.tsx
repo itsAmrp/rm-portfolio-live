@@ -178,7 +178,7 @@ export function CaseStudyClient({ project, nextProject, prevProject, relatedProj
                                 <h3 className="text-xl md:text-2xl font-display font-medium text-foreground/50">Gallery coming soon</h3>
                             </div>
                         ) : (
-                            <MasonryGallery items={project.gallery} />
+                            <MasonryGallery items={project.gallery} projectFallbackThumbnail={getProjectThumbnail(project)} />
                         )}
                     </section>
 

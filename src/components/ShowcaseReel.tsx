@@ -112,7 +112,7 @@ export function ShowcaseReel() {
                                     exit={{ opacity: 0 }}
                                     transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
                                     className="w-full h-full flex flex-col items-center justify-center p-4 md:p-8 relative"
-                                    style={{ gridArea: '1 / 1 / 2 / 2' }}
+                                    style={{ gridArea: '1 / 1 / 2 / 2', willChange: 'transform, opacity' }}
                                 >
                                     {isVideo ? (
                                         <div className="relative flex justify-center w-full">

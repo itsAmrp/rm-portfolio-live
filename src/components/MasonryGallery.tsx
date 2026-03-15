@@ -5,14 +5,15 @@ import Image from "next/image";
 import { motion, AnimatePresence, useMotionValue, useSpring, useReducedMotion, MotionValue } from "framer-motion";
 import { X, ChevronLeft, ChevronRight, Play } from "lucide-react";
 import type { MediaAsset } from "@/data/portfolio";
-import { getMediaUrl } from "@/data/portfolio";
+import { getMediaUrl, getGalleryItemThumbnail } from "@/data/portfolio";
 import { LazyVideo } from "@/components/LazyVideo";
 
 interface MasonryGalleryProps {
     items: MediaAsset[];
+    projectFallbackThumbnail?: string;
 }
 
-export function MasonryGallery({ items }: MasonryGalleryProps) {
+export function MasonryGallery({ items, projectFallbackThumbnail }: MasonryGalleryProps) {
     const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
     const mouseX = useMotionValue(-1000);
     const mouseY = useMotionValue(-1000);
@@ -44,6 +45,7 @@ export function MasonryGallery({ items }: MasonryGalleryProps) {
                         index={i}
                         mouseX={mouseX}
                         mouseY={mouseY}
+                        projectFallbackThumbnail={projectFallbackThumbnail}
                         onClick={() => setLightboxIndex(i)}
                     />
                 ))}
@@ -68,10 +70,11 @@ interface MasonryTileProps {
     index: number;
     mouseX: MotionValue<number>;
     mouseY: MotionValue<number>;
+    projectFallbackThumbnail?: string;
     onClick: () => void;
 }
 
-function MasonryTile({ media, index, mouseX, mouseY, onClick }: MasonryTileProps) {
+function MasonryTile({ media, index, mouseX, mouseY, projectFallbackThumbnail, onClick }: MasonryTileProps) {
     const ref = useRef<HTMLDivElement>(null);
     const prefersReducedMotion = useReducedMotion();
 
@@ -126,7 +129,7 @@ function MasonryTile({ media, index, mouseX, mouseY, onClick }: MasonryTileProps
             viewport={{ once: true, margin: "-50px" }}
             transition={{ duration: 0.6, delay: (index % 5) * 0.1, ease: "easeOut" }}
             className="break-inside-avoid relative w-full group cursor-zoom-in overflow-hidden rounded-xl bg-foreground/5 shadow-sm hover:shadow-2xl transition-shadow duration-300 transform-gpu"
-            style={{ x, y, rotateX, rotateY, transformPerspective: 1200 }}
+            style={{ x, y, rotateX, rotateY, transformPerspective: 1200, willChange: "transform" }}
             onClick={onClick}
             data-cursor={media.type === "video" ? "video" : "image"}
         >
@@ -135,7 +138,7 @@ function MasonryTile({ media, index, mouseX, mouseY, onClick }: MasonryTileProps
                     <LazyVideo
                         srcMp4={getMediaUrl(media.videoMp4)}
                         srcWebm={getMediaUrl(media.videoWebm)}
-                        poster={getMediaUrl(media.poster || (media.url.includes('.jpg') ? media.url : undefined))}
+                        poster={getGalleryItemThumbnail(media, projectFallbackThumbnail)}
                         alt={media.alt}
                     />
                     <div className="absolute top-4 left-4 flex gap-2 z-10 opacity-0 group-hover:opacity-100 transition-opacity">
@@ -235,7 +238,7 @@ function Lightbox({ items, currentIndex, onClose, onIndexChange }: LightboxProps
                             <div className="relative w-full h-full flex items-center justify-center bg-black/20 rounded-2xl overflow-hidden shadow-2xl">
                                 <video
                                     src={getMediaUrl(activeItem.videoMp4 || activeItem.videoWebm)}
-                                    poster={getMediaUrl(activeItem.url.includes('.jpg') ? activeItem.url : undefined)}
+                                    poster={getGalleryItemThumbnail(activeItem)}
                                     autoPlay
                                     muted
                                     loop

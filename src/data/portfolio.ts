@@ -145,6 +145,37 @@ export function getProjectThumbnail(project: Project): string {
     return "/placeholders/gallery-1.jpg";
 }
 
+/**
+ * Robustly pulls the best thumbnail option available for any gallery item
+ * 1) Explicit poster defined on the media asset
+ * 2) Generated Cloudinary frame from the .mp4 file
+ * 3) Fallback to the project's cover image / hero thumbnail
+ * 4) Hardcoded fallback placeholder if all else fails
+ */
+export function getGalleryItemThumbnail(media: MediaAsset, projectFallback?: string): string {
+    // 1
+    if (media.poster) {
+        return getMediaUrl(media.poster) || media.poster;
+    }
+
+    // 2. We can try to generate from Mp4 if it's a Cloudinary URL
+    let videoUrl = getMediaUrl(media.videoMp4 || media.videoWebm);
+    if (videoUrl && (videoUrl.endsWith(".mp4") || videoUrl.endsWith(".webm"))) {
+        if (videoUrl.includes('/upload/')) {
+            videoUrl = videoUrl.replace('/upload/', '/upload/so_95p/');
+        }
+        return videoUrl.replace(/\.(mp4|webm)$/, ".jpg");
+    }
+
+    // 3. Use the Project Fallback passed in (cover image, or hero poster)
+    if (projectFallback) {
+        return projectFallback;
+    }
+
+    // 4. Ultimate fallback to prevent empty grey blocks
+    return "/placeholders/gallery-1.jpg";
+}
+
 export const projects: Project[] = [
     {
         slug: "idemitsu-mena",

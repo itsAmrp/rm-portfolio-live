@@ -20,9 +20,13 @@ export function LazyVideo({ srcMp4, srcWebm, poster, alt }: LazyVideoProps) {
                 if (!videoRef.current) return;
 
                 // Pause when out of view, optionally play when in view (but requirements said "only autoplay in lightbox to save performance")
-                // So we will just ensure it's loaded but paused.
+                // Actually, for gallery videos to feel alive, we should play them when they are in view since they are visually crucial.
                 if (!entry.isIntersecting) {
                     videoRef.current.pause();
+                } else {
+                    videoRef.current.play().catch(e => {
+                        // ignore play interruptions
+                    });
                 }
             },
             { threshold: 0.1 }
