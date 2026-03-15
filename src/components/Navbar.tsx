@@ -60,19 +60,26 @@ export function Navbar() {
         <nav
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
-            className={`fixed top-0 w-full z-50 transition-all duration-500 overflow-hidden ${scrolled
-                ? "py-4 bg-background/60 backdrop-blur-2xl saturate-150 border-b border-foreground/5 shadow-[inset_0_-1px_0_0_rgba(255,255,255,0.05),0_4px_30px_rgba(0,0,0,0.05)]"
+            className={`fixed top-0 w-full z-50 transition-all duration-500 overflow-hidden group ${scrolled
+                ? "py-4 bg-background/60 backdrop-blur-2xl saturate-200 border-b border-foreground/10 shadow-sm"
                 : "py-6 bg-transparent"
                 }`}
         >
+            {/* Protective underlying gradient to ensure text readability in light mode vs hero images */}
+            <div className={`absolute inset-0 z-0 bg-gradient-to-b from-background/80 via-background/20 to-transparent transition-opacity duration-500 ${scrolled ? 'opacity-0' : 'opacity-100'}`} pointer-events-none />
+
+            {/* Apple-style top-edge highlight for surface depth (only visible when scrolled) */}
+            <div className={`absolute top-0 left-0 right-0 h-[1px] bg-white/20 z-0 transition-opacity duration-500 ${scrolled ? 'opacity-100' : 'opacity-0'} pointer-events-none`} />
+
+            {/* Subtle cursor tracking radial gradient */}
             <motion.div
-                className="pointer-events-none absolute -inset-px rounded-xl opacity-0 transition duration-300 group-hover:opacity-100 mix-blend-screen"
+                className="pointer-events-none absolute -inset-px rounded-xs opacity-0 transition duration-300 group-hover:opacity-100 mix-blend-screen z-0"
                 style={{
                     opacity: mouseX.get() !== -1000 ? 1 : 0,
                     background: useMotionTemplate`
             radial-gradient(
               400px circle at ${mouseX}px ${mouseY}px,
-              ${isDark ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.04)'},
+              ${isDark ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.05)'},
               transparent 80%
             )
           `,

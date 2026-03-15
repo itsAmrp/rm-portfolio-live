@@ -192,9 +192,9 @@ export function MediaWallHero() {
                 </div>
             </motion.div>
 
-            {/* 2. Dark Cinematic Overlay (Gradient from center and bottom) */}
-            <div className="absolute inset-0 z-10 bg-black/40 xl:bg-black/30 pointer-events-none" />
-            <div className="absolute inset-0 z-10 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(0,0,0,0.7)_100%)] pointer-events-none" />
+            {/* 2. Cinematic Overlay (Gradient from center and bottom, adapting to theme for text readability) */}
+            <div className="absolute inset-0 z-10 dark:bg-black/40 xl:dark:bg-black/30 bg-foreground/10 pointer-events-none" />
+            <div className="absolute inset-0 z-10 dark:bg-[radial-gradient(circle_at_center,transparent_0%,rgba(0,0,0,0.7)_100%)] bg-[radial-gradient(circle_at_center,transparent_0%,rgba(0,0,0,0.2)_100%)] pointer-events-none" />
             <div className="absolute inset-0 z-10 bg-gradient-to-t from-background via-background/60 to-transparent pointer-events-none" />
 
             {/* 3. Center Hero Information Block */}
