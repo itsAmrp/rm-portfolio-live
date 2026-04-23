@@ -155,13 +155,13 @@ function MasonryTile({ media, index, mouseX, mouseY, projectFallbackThumbnail, o
             ) : (
                 <div className="relative w-full">
                     <Image
-                        src={imgSrc || "/placeholders/gallery-1.jpg"}
+                        src={imgSrc || "/media/portfolio-2024/cover.jpg"}
                         alt={media.alt}
                         width={1000}
                         height={1000}
                         className="w-full h-auto object-cover"
                         sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1280px) 33vw, 25vw"
-                        onError={() => setImgSrc(projectFallbackThumbnail || "/placeholders/gallery-1.jpg")}
+                        onError={() => setImgSrc(projectFallbackThumbnail || "/media/portfolio-2024/cover.jpg")}
                     />
                     <div className="absolute top-4 left-4 flex gap-2 z-10 opacity-0 group-hover:opacity-100 transition-opacity">
                         <span className="px-3 py-1 bg-background/80 backdrop-blur-md rounded-full text-[10px] uppercase tracking-widest font-medium shadow-sm">
@@ -280,13 +280,13 @@ function LightboxImage({ item }: { item: MediaAsset }) {
 
     return (
         <Image
-            src={imgSrc || "/placeholders/gallery-1.jpg"}
+            src={imgSrc || "/media/portfolio-2024/cover.jpg"}
             alt={item.alt}
             fill
             quality={100}
             className="object-contain"
             sizes="100vw"
-            onError={() => setImgSrc("/placeholders/gallery-1.jpg")}
+            onError={() => setImgSrc("/media/portfolio-2024/cover.jpg")}
         />
     );
 }

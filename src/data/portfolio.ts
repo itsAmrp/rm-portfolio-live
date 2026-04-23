@@ -108,9 +108,9 @@ export const featuredOrder = [
 const mockGallery = (brand: string): MediaAsset[] => {
     return Array(6).fill(null).map((_, i) => ({
         type: i % 3 === 0 ? "video" : "image",
-        url: `/placeholders/gallery-${i + 1}.jpg`,
-        videoMp4: i % 3 === 0 ? `/placeholders/video-${i + 1}.mp4` : undefined,
-        videoWebm: i % 3 === 0 ? `/placeholders/video-${i + 1}.webm` : undefined,
+        url: `/media/portfolio-2024/cover.jpg`,
+        videoMp4: i % 3 === 0 ? undefined : undefined,
+        videoWebm: i % 3 === 0 ? undefined : undefined,
         alt: `${brand} visual ${i + 1}`,
     }));
 };
@@ -159,7 +159,7 @@ export function getProjectThumbnail(project: Project): string {
     }
 
     // 4. Absolute fallback
-    return "/placeholders/gallery-1.jpg";
+    return "/media/portfolio-2024/cover.jpg";
 }
 
 /**
@@ -171,17 +171,17 @@ export function getGalleryItemThumbnail(media: MediaAsset, projectFallback?: str
         return getMediaUrl(media.poster) || media.poster;
     }
 
-    // 2. If it's an image, just return its URL
-    if (media.type === "image" && media.url) {
-        return getMediaUrl(media.url) || media.url;
-    }
-
-    // 3. We can try to generate from Mp4 if it's a Cloudinary URL
+    // 2. We can try to generate from Mp4 if it's a Cloudinary URL
     let videoUrl = getMediaUrl(media.videoMp4 || media.videoWebm);
     if (videoUrl && (videoUrl.endsWith(".mp4") || videoUrl.endsWith(".webm"))) {
         if (videoUrl.includes('/upload/')) {
             return videoUrl.replace('/upload/', '/upload/so_95p/').replace(/\.(mp4|webm)$/, ".jpg");
         }
+    }
+
+    // 3. If there is a generic URL (often acts as poster for video, or src for image)
+    if (media.url) {
+        return getMediaUrl(media.url) || media.url;
     }
 
     // 4. Use the Project Fallback passed in (cover image, or hero poster)
@@ -190,7 +190,7 @@ export function getGalleryItemThumbnail(media: MediaAsset, projectFallback?: str
     }
 
     // 5. Ultimate fallback to prevent empty grey blocks
-    return "/placeholders/gallery-1.jpg";
+    return "/media/portfolio-2024/cover.jpg";
 }
 
 export const projects: Project[] = [
