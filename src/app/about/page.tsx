@@ -1,10 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Image from "next/image";
 import Link from "next/link";
 import { ArrowDown } from "lucide-react";
-import { getMediaUrl } from "@/data/portfolio";
 
 export default function About() {
     const skills = [
@@ -64,23 +62,7 @@ export default function About() {
                     </div>
                 </motion.div>
 
-                {/* Portrait */}
-                <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 1, delay: 0.4 }}
-                    className="relative aspect-[4/5] md:aspect-[21/9] w-full mb-32 overflow-hidden rounded-xl bg-foreground/5 from-foreground/5 to-foreground/10 bg-gradient-to-br"
-                >
-                    <Image
-                        src={getMediaUrl("/media/about/about-hero.jpg") || ""}
-                        alt="Roshan Mariadas Profile"
-                        fill
-                        className="object-cover"
-                        priority
-                    />
-                </motion.div>
-
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24 pt-12 border-t border-foreground/10">
 
                     {/* Left Column */}
                     <div className="lg:col-span-5 space-y-24">
