@@ -117,63 +117,79 @@ const mockGallery = (brand: string): MediaAsset[] => {
 
 /**
  * Robustly pulls the best thumbnail option available for any project
- * 1) Hero video poster / generated thumbnail from the video itself
- * 2) Cover image explicitly defined
- * 3) Local generic fallback
  */
 export function getProjectThumbnail(project: Project): string {
-    // 1
-    if (project.heroMedia.type === "video") {
-        if (project.heroMedia.poster) return getMediaUrl(project.heroMedia.poster) || project.heroMedia.poster;
-
-        // Use the actual .mp4 to generate a high quality Cloudinary frame
-        let videoUrl = getMediaUrl(project.heroMedia.videoMp4);
-        if (videoUrl && (videoUrl.endsWith(".mp4") || videoUrl.endsWith(".webm"))) {
-            if (videoUrl.includes('/upload/')) {
-                videoUrl = videoUrl.replace('/upload/', '/upload/so_95p/');
-            }
-            return videoUrl.replace(/\.(mp4|webm)$/, ".jpg");
-        }
+    // 1. Explicit project cover image overrides everything
+    if (project.coverImage) {
+        return getMediaUrl(project.coverImage) || project.coverImage;
     }
 
-    // 2
-    if (project.coverImage) return getMediaUrl(project.coverImage) || project.coverImage;
-    if (project.heroMedia.type === "image") {
+    // 2. Hero media logic
+    if (project.heroMedia.type === "video") {
+        if (project.heroMedia.poster) {
+            return getMediaUrl(project.heroMedia.poster) || project.heroMedia.poster;
+        }
+
+        // Generate high quality Cloudinary frame if it's uploaded to Cloudinary
+        let videoUrl = getMediaUrl(project.heroMedia.videoMp4 || project.heroMedia.videoWebm);
+        if (videoUrl && (videoUrl.endsWith(".mp4") || videoUrl.endsWith(".webm"))) {
+            if (videoUrl.includes('/upload/')) {
+                return videoUrl.replace('/upload/', '/upload/so_95p/').replace(/\.(mp4|webm)$/, ".jpg");
+            }
+        }
+    } else if (project.heroMedia.type === "image" && project.heroMedia.url) {
         return getMediaUrl(project.heroMedia.url) || project.heroMedia.url;
     }
 
-    // 3
+    // 3. Fallback to first valid gallery image if hero is missing a thumbnail
+    if (project.gallery && project.gallery.length > 0) {
+        const firstImage = project.gallery.find(item => item.type === "image" && item.url);
+        if (firstImage) {
+            return getMediaUrl(firstImage.url) || firstImage.url;
+        }
+        
+        // If all gallery items are videos, try to find one with a poster or cloudinary URL
+        const firstCloudinaryVideo = project.gallery.find(item => item.type === "video" && (getMediaUrl(item.videoMp4 || "") || "").includes("/upload/"));
+        if (firstCloudinaryVideo) {
+            let vidUrl = getMediaUrl(firstCloudinaryVideo.videoMp4 || "");
+            if (vidUrl) {
+                return vidUrl.replace('/upload/', '/upload/so_95p/').replace(/\.(mp4|webm)$/, ".jpg");
+            }
+        }
+    }
+
+    // 4. Absolute fallback
     return "/placeholders/gallery-1.jpg";
 }
 
 /**
  * Robustly pulls the best thumbnail option available for any gallery item
- * 1) Explicit poster defined on the media asset
- * 2) Generated Cloudinary frame from the .mp4 file
- * 3) Fallback to the project's cover image / hero thumbnail
- * 4) Hardcoded fallback placeholder if all else fails
  */
 export function getGalleryItemThumbnail(media: MediaAsset, projectFallback?: string): string {
-    // 1
+    // 1. Explicit poster
     if (media.poster) {
         return getMediaUrl(media.poster) || media.poster;
     }
 
-    // 2. We can try to generate from Mp4 if it's a Cloudinary URL
+    // 2. If it's an image, just return its URL
+    if (media.type === "image" && media.url) {
+        return getMediaUrl(media.url) || media.url;
+    }
+
+    // 3. We can try to generate from Mp4 if it's a Cloudinary URL
     let videoUrl = getMediaUrl(media.videoMp4 || media.videoWebm);
     if (videoUrl && (videoUrl.endsWith(".mp4") || videoUrl.endsWith(".webm"))) {
         if (videoUrl.includes('/upload/')) {
-            videoUrl = videoUrl.replace('/upload/', '/upload/so_95p/');
+            return videoUrl.replace('/upload/', '/upload/so_95p/').replace(/\.(mp4|webm)$/, ".jpg");
         }
-        return videoUrl.replace(/\.(mp4|webm)$/, ".jpg");
     }
 
-    // 3. Use the Project Fallback passed in (cover image, or hero poster)
+    // 4. Use the Project Fallback passed in (cover image, or hero poster)
     if (projectFallback) {
         return projectFallback;
     }
 
-    // 4. Ultimate fallback to prevent empty grey blocks
+    // 5. Ultimate fallback to prevent empty grey blocks
     return "/placeholders/gallery-1.jpg";
 }
 
