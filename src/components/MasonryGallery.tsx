@@ -77,6 +77,11 @@ interface MasonryTileProps {
 function MasonryTile({ media, index, mouseX, mouseY, projectFallbackThumbnail, onClick }: MasonryTileProps) {
     const ref = useRef<HTMLDivElement>(null);
     const prefersReducedMotion = useReducedMotion();
+    const [imgSrc, setImgSrc] = useState(getMediaUrl(media.url) || "");
+
+    useEffect(() => {
+        setImgSrc(getMediaUrl(media.url) || "");
+    }, [media.url]);
 
     const springConfig = { damping: 25, stiffness: 150, mass: 0.5 };
     const x = useSpring(0, springConfig);
@@ -150,12 +155,13 @@ function MasonryTile({ media, index, mouseX, mouseY, projectFallbackThumbnail, o
             ) : (
                 <div className="relative w-full">
                     <Image
-                        src={getMediaUrl(media.url) || ""}
+                        src={imgSrc || "/placeholders/gallery-1.jpg"}
                         alt={media.alt}
                         width={1000}
                         height={1000}
                         className="w-full h-auto object-cover"
                         sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1280px) 33vw, 25vw"
+                        onError={() => setImgSrc(projectFallbackThumbnail || "/placeholders/gallery-1.jpg")}
                     />
                     <div className="absolute top-4 left-4 flex gap-2 z-10 opacity-0 group-hover:opacity-100 transition-opacity">
                         <span className="px-3 py-1 bg-background/80 backdrop-blur-md rounded-full text-[10px] uppercase tracking-widest font-medium shadow-sm">
@@ -249,14 +255,7 @@ function Lightbox({ items, currentIndex, onClose, onIndexChange }: LightboxProps
                             </div>
                         ) : (
                             <div className="relative w-full h-full rounded-2xl overflow-hidden shadow-2xl border border-foreground/5">
-                                <Image
-                                    src={getMediaUrl(activeItem.url) || ""}
-                                    alt={activeItem.alt}
-                                    fill
-                                    quality={100}
-                                    className="object-contain"
-                                    sizes="100vw"
-                                />
+                                <LightboxImage item={activeItem} />
                             </div>
                         )}
                     </motion.div>
@@ -269,5 +268,25 @@ function Lightbox({ items, currentIndex, onClose, onIndexChange }: LightboxProps
                 </span>
             </div>
         </motion.div>
+    );
+}
+
+function LightboxImage({ item }: { item: MediaAsset }) {
+    const [imgSrc, setImgSrc] = useState(getMediaUrl(item.url) || "");
+
+    useEffect(() => {
+        setImgSrc(getMediaUrl(item.url) || "");
+    }, [item.url]);
+
+    return (
+        <Image
+            src={imgSrc || "/placeholders/gallery-1.jpg"}
+            alt={item.alt}
+            fill
+            quality={100}
+            className="object-contain"
+            sizes="100vw"
+            onError={() => setImgSrc("/placeholders/gallery-1.jpg")}
+        />
     );
 }

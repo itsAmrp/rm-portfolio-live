@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { Play } from "lucide-react";
-import { projects, getMediaUrl } from "@/data/portfolio";
+import { projects, getMediaUrl, getProjectThumbnail } from "@/data/portfolio";
 
 export function ShowcaseReel() {
     const featuredProjects = projects.filter(p => p.heroMedia).slice(0, 10);
@@ -134,6 +134,10 @@ export function ShowcaseReel() {
                                                 src={mediaUrl || ''}
                                                 alt={activeProject.brand}
                                                 className="w-full h-auto max-h-[75vh] object-contain shadow-sm rounded-sm max-w-full block mx-auto my-auto"
+                                                onError={(e) => {
+                                                    e.currentTarget.onerror = null;
+                                                    e.currentTarget.src = getProjectThumbnail(activeProject);
+                                                }}
                                             />
                                         </div>
                                     )}
