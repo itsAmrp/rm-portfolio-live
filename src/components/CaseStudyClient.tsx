@@ -173,12 +173,12 @@ export function CaseStudyClient({ project, nextProject, prevProject, relatedProj
 
                     {/* 10. Gallery */}
                     <section id="gallery" className="mb-32">
-                        {(!project.gallery || project.gallery.length === 0) ? (
+                        {(!project.gallery || project.gallery.length === 0) && (!project.images || project.images.length === 0) ? (
                             <div className="py-24 text-center border border-foreground/10 rounded-xl bg-foreground/5">
                                 <h3 className="text-xl md:text-2xl font-display font-medium text-foreground/50">Gallery coming soon</h3>
                             </div>
                         ) : (
-                            <MasonryGallery items={project.gallery} projectFallbackThumbnail={getProjectThumbnail(project)} />
+                            <MasonryGallery items={project.gallery || []} images={project.images} projectFallbackThumbnail={getProjectThumbnail(project)} />
                         )}
                     </section>
 

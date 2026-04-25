@@ -49,6 +49,7 @@ export interface Project {
     coverImage?: string; // Optional explicit image thumbnail bypass
     heroMedia: MediaAsset;
     gallery?: MediaAsset[];
+    images?: string[];
     credits?: string[];
 }
 
@@ -195,31 +196,31 @@ export function getGalleryItemThumbnail(media: MediaAsset, projectFallback?: str
 
 export const projects: Project[] = [
     {
-        slug: "sampath-bank",
+        slug: "sampath",
         brand: "Sampath Bank",
-        title: "The Evolve X Experience",
+        title: "Curated for you",
         region: "Sri Lanka",
         year: "2026",
-        disciplines: ["Art Direction", "Premium Design", "Branding"],
-        shortDescription: "A curated premium credit card offering for the modern elite.",
-        roleSummary: "Lead Art Director",
+        disciplines: ["Art Direction", "Premium Design"],
+        shortDescription: "A personalized experience crafted for an elevated lifestyle.",
+        roleSummary: "Art Director",
         tools: ["Adobe Photoshop", "Adobe Illustrator"],
         caseStudySections: {
-            challenge: "Positioning a credit card as an exclusive lifestyle asset rather than a basic financial utility.",
-            insight: "Premium consumers resonate with refined aesthetics, exclusivity, and understated luxury.",
-            idea: "A visual direction centered around deep contrasts, luxurious textures, and a quiet but confident presence.",
-            execution: "Designed sophisticated key visuals that elevate the Evolve X card to an object of desire.",
+            challenge: "Positioning a financial instrument as a gateway to selective access.",
+            insight: "True luxury speaks quietly but carries undeniable presence.",
+            idea: "A bold and structured visual system highlighting the inherent elegance of the card.",
+            execution: "Deep contrasts and sophisticated restraint bring a premium curated experience to life across every touchpoint.",
         },
         deliverables: ["Key Visuals", "Print Ads"],
         heroMedia: {
             type: "image",
-            url: "/media/sampath-bank/sampath-evolve-x-card-full-page-press-04.webp",
-            alt: "Sampath Bank Hero",
+            url: "https://res.cloudinary.com/ddxa0ahzp/image/upload/v1777126421/rm-portfolio-live/sampath/Sampath%20Evolve%20X%20Card%20full%20page%20press-04.png",
+            alt: "Sampath Evolve X Card Hero",
         },
-        gallery: [
-            { type: "image", url: "/media/sampath-bank/sampath-evolve-x-card-full-page-press-04.webp", alt: "sampath-bank gallery image" },
-            { type: "image", url: "/media/sampath-bank/sampath-evolve-x-card-full-page-press-06.webp", alt: "sampath-bank gallery image" },
-            { type: "image", url: "/media/sampath-bank/sampath-evolve-x-card-full-page-press-07.webp", alt: "sampath-bank gallery image" }
+        images: [
+            "https://res.cloudinary.com/ddxa0ahzp/image/upload/v1777126421/rm-portfolio-live/sampath/Sampath%20Evolve%20X%20Card%20full%20page%20press-04.png",
+            "https://res.cloudinary.com/ddxa0ahzp/image/upload/v1777126423/rm-portfolio-live/sampath/Sampath%20Evolve%20X%20Card%20full%20page%20press-06.png",
+            "https://res.cloudinary.com/ddxa0ahzp/image/upload/v1777126428/rm-portfolio-live/sampath/Sampath%20Evolve%20X%20Card%20full%20page%20press-07.png"
         ],
     },
     {
@@ -610,29 +611,10 @@ export const projects: Project[] = [
             videoMp4: "https://res.cloudinary.com/ddxa0ahzp/video/upload/v1772733662/rm-portfolio-live/anchor-butter/hero.mp4",
             alt: "anchor-butter Hero",
         },
-        gallery: [
-            { type: "image", url: "/media/anchor-butter/01.jpg", alt: "Anchor Butter Visual" },
-            { type: "image", url: "/media/anchor-butter/02.jpg", alt: "Anchor Butter Visual" },
-            { type: "image", url: "/media/anchor-butter/03.jpg", alt: "Anchor Butter Visual" },
-            { type: "image", url: "/media/anchor-butter/04.jpg", alt: "Anchor Butter Visual" },
-            { type: "image", url: "/media/anchor-butter/05.jpg", alt: "Anchor Butter Visual" },
-            { type: "image", url: "/media/anchor-butter/06.jpg", alt: "Anchor Butter Visual" },
-            { type: "image", url: "/media/anchor-butter/07.jpg", alt: "Anchor Butter Visual" },
-            { type: "image", url: "/media/anchor-butter/08.jpg", alt: "Anchor Butter Visual" },
-            { type: "image", url: "/media/anchor-butter/09.jpg", alt: "Anchor Butter Visual" },
-            { type: "image", url: "/media/anchor-butter/10.jpg", alt: "Anchor Butter Visual" },
-            { type: "image", url: "/media/anchor-butter/11.jpg", alt: "Anchor Butter Visual" },
-            { type: "image", url: "/media/anchor-butter/12.jpg", alt: "Anchor Butter Visual" },
-            { type: "image", url: "/media/anchor-butter/13.jpg", alt: "Anchor Butter Visual" },
-            { type: "image", url: "/media/anchor-butter/14.jpg", alt: "Anchor Butter Visual" },
-            { type: "image", url: "/media/anchor-butter/15.jpg", alt: "Anchor Butter Visual" },
-            { type: "image", url: "/media/anchor-butter/16.jpg", alt: "Anchor Butter Visual" },
-            { type: "image", url: "/media/anchor-butter/17.jpg", alt: "Anchor Butter Visual" },
-            { type: "video", url: "/media/anchor-butter/18.jpg", alt: "Anchor Butter Visual", videoMp4: "/media/anchor-butter/18.mp4" },
-            { type: "video", url: "/media/anchor-butter/19.jpg", alt: "Anchor Butter Visual", videoMp4: "/media/anchor-butter/19.mp4" },
-            { type: "image", url: "/media/anchor-butter/av2.webp", alt: "Anchor Butter Visual" },
-            { type: "image", url: "/media/anchor-butter/avurudu-2.webp", alt: "Anchor Butter Visual" },
-            { type: "image", url: "/media/anchor-butter/easter.webp", alt: "Anchor Butter Visual" }
+        images: [
+            "https://res.cloudinary.com/ddxa0ahzp/image/upload/v1776960146/rm-portfolio-live/anchor-butter/AV2.png",
+            "https://res.cloudinary.com/ddxa0ahzp/image/upload/v1776960148/rm-portfolio-live/anchor-butter/avurudu%202.png",
+            "https://res.cloudinary.com/ddxa0ahzp/image/upload/v1776960150/rm-portfolio-live/anchor-butter/easter.png"
         ],
     },
     {
@@ -658,54 +640,19 @@ export const projects: Project[] = [
             videoMp4: "https://res.cloudinary.com/ddxa0ahzp/video/upload/v1772733678/rm-portfolio-live/anchor-moments/hero.mp4",
             alt: "anchor-moments Hero",
         },
-        gallery: [
-            { type: "image", url: "/media/anchor-moments/01.jpg", alt: "Anchor Moments Visual" },
-            { type: "image", url: "/media/anchor-moments/02.jpg", alt: "Anchor Moments Visual" },
-            { type: "image", url: "/media/anchor-moments/03.jpg", alt: "Anchor Moments Visual" },
-            { type: "image", url: "/media/anchor-moments/04.jpg", alt: "Anchor Moments Visual" },
-            { type: "image", url: "/media/anchor-moments/05.jpg", alt: "Anchor Moments Visual" },
-            { type: "image", url: "/media/anchor-moments/06.jpg", alt: "Anchor Moments Visual" },
-            { type: "image", url: "/media/anchor-moments/07.jpg", alt: "Anchor Moments Visual" },
-            { type: "image", url: "/media/anchor-moments/08.jpg", alt: "Anchor Moments Visual" },
-            { type: "image", url: "/media/anchor-moments/09.jpg", alt: "Anchor Moments Visual" },
-            { type: "image", url: "/media/anchor-moments/10.jpg", alt: "Anchor Moments Visual" },
-            { type: "image", url: "/media/anchor-moments/11.jpg", alt: "Anchor Moments Visual" },
-            { type: "image", url: "/media/anchor-moments/12.jpg", alt: "Anchor Moments Visual" },
-            { type: "image", url: "/media/anchor-moments/13.jpg", alt: "Anchor Moments Visual" },
-            { type: "image", url: "/media/anchor-moments/14.jpg", alt: "Anchor Moments Visual" },
-            { type: "image", url: "/media/anchor-moments/15.jpg", alt: "Anchor Moments Visual" },
-            { type: "image", url: "/media/anchor-moments/16.jpg", alt: "Anchor Moments Visual" },
-            { type: "image", url: "/media/anchor-moments/17.jpg", alt: "Anchor Moments Visual" },
-            { type: "image", url: "/media/anchor-moments/18.jpg", alt: "Anchor Moments Visual" },
-            { type: "image", url: "/media/anchor-moments/19.jpg", alt: "Anchor Moments Visual" },
-            { type: "image", url: "/media/anchor-moments/20.jpg", alt: "Anchor Moments Visual" },
-            { type: "image", url: "/media/anchor-moments/21.jpg", alt: "Anchor Moments Visual" },
-            { type: "image", url: "/media/anchor-moments/22.jpg", alt: "Anchor Moments Visual" },
-            { type: "image", url: "/media/anchor-moments/23.jpg", alt: "Anchor Moments Visual" },
-            { type: "video", url: "/media/anchor-moments/24.jpg", alt: "Anchor Moments Visual", videoMp4: "/media/anchor-moments/24.mp4" },
-            { type: "video", url: "/media/anchor-moments/25.jpg", alt: "Anchor Moments Visual", videoMp4: "/media/anchor-moments/25.mp4" },
-            { type: "video", url: "/media/anchor-moments/26.jpg", alt: "Anchor Moments Visual", videoMp4: "/media/anchor-moments/26.mp4" },
-            { type: "video", url: "/media/anchor-moments/27.jpg", alt: "Anchor Moments Visual", videoMp4: "/media/anchor-moments/27.mp4" },
-            { type: "video", url: "/media/anchor-moments/28.jpg", alt: "Anchor Moments Visual", videoMp4: "/media/anchor-moments/28.mp4" },
-            { type: "video", url: "/media/anchor-moments/29.jpg", alt: "Anchor Moments Visual", videoMp4: "/media/anchor-moments/29.mp4" },
-            { type: "video", url: "/media/anchor-moments/30.jpg", alt: "Anchor Moments Visual", videoMp4: "/media/anchor-moments/30.mp4" },
-            { type: "video", url: "/media/anchor-moments/31.jpg", alt: "Anchor Moments Visual", videoMp4: "/media/anchor-moments/31.mp4" },
-            { type: "video", url: "/media/anchor-moments/32.jpg", alt: "Anchor Moments Visual", videoMp4: "/media/anchor-moments/32.mp4" },
-            { type: "video", url: "/media/anchor-moments/33.jpg", alt: "Anchor Moments Visual", videoMp4: "/media/anchor-moments/33.mp4" },
-            { type: "video", url: "/media/anchor-moments/34.jpg", alt: "Anchor Moments Visual", videoMp4: "/media/anchor-moments/34.mp4" },
-            { type: "video", url: "/media/anchor-moments/35.jpg", alt: "Anchor Moments Visual", videoMp4: "/media/anchor-moments/35.mp4" },
-            { type: "image", url: "/media/anchor-moments/artboard-1.webp", alt: "Anchor Moments Visual" },
-            { type: "image", url: "/media/anchor-moments/artboard-2.webp", alt: "Anchor Moments Visual" },
-            { type: "image", url: "/media/anchor-moments/artboard-3.webp", alt: "Anchor Moments Visual" },
-            { type: "image", url: "/media/anchor-moments/artboard-4.webp", alt: "Anchor Moments Visual" },
-            { type: "image", url: "/media/anchor-moments/artboard-4v.webp", alt: "Anchor Moments Visual" },
-            { type: "image", url: "/media/anchor-moments/artboard-4v2.webp", alt: "Anchor Moments Visual" },
-            { type: "image", url: "/media/anchor-moments/artboard-5.webp", alt: "Anchor Moments Visual" },
-            { type: "image", url: "/media/anchor-moments/artboard-6.webp", alt: "Anchor Moments Visual" },
-            { type: "image", url: "/media/anchor-moments/artboard-7.webp", alt: "Anchor Moments Visual" },
-            { type: "image", url: "/media/anchor-moments/artboard-8.webp", alt: "Anchor Moments Visual" },
-            { type: "image", url: "/media/anchor-moments/artboard-9.webp", alt: "Anchor Moments Visual" },
-            { type: "video", url: "/media/anchor-moments/frother.jpg", alt: "Anchor Moments Visual", videoMp4: "/media/anchor-moments/frother.mp4" }
+        images: [
+            "https://res.cloudinary.com/ddxa0ahzp/image/upload/v1776960093/rm-portfolio-live/anchor-moments/Artboard%201.png",
+            "https://res.cloudinary.com/ddxa0ahzp/image/upload/v1776960095/rm-portfolio-live/anchor-moments/Artboard%202.png",
+            "https://res.cloudinary.com/ddxa0ahzp/image/upload/v1776960096/rm-portfolio-live/anchor-moments/Artboard%203.png",
+            "https://res.cloudinary.com/ddxa0ahzp/image/upload/v1776960100/rm-portfolio-live/anchor-moments/Artboard%204.png",
+            "https://res.cloudinary.com/ddxa0ahzp/image/upload/v1776960101/rm-portfolio-live/anchor-moments/Artboard%204v.png",
+            "https://res.cloudinary.com/ddxa0ahzp/image/upload/v1776960103/rm-portfolio-live/anchor-moments/Artboard%204v2.png",
+            "https://res.cloudinary.com/ddxa0ahzp/image/upload/v1776960104/rm-portfolio-live/anchor-moments/Artboard%205.png",
+            "https://res.cloudinary.com/ddxa0ahzp/image/upload/v1776960105/rm-portfolio-live/anchor-moments/Artboard%206.png",
+            "https://res.cloudinary.com/ddxa0ahzp/image/upload/v1776960107/rm-portfolio-live/anchor-moments/Artboard%207.png",
+            "https://res.cloudinary.com/ddxa0ahzp/image/upload/v1776960108/rm-portfolio-live/anchor-moments/Artboard%208.png",
+            "https://res.cloudinary.com/ddxa0ahzp/image/upload/v1776960110/rm-portfolio-live/anchor-moments/Artboard%209.png",
+            "https://res.cloudinary.com/ddxa0ahzp/video/upload/v1776960118/rm-portfolio-live/anchor-moments/frother.mp4"
         ],
     },
     {
@@ -731,17 +678,11 @@ export const projects: Project[] = [
             videoMp4: "https://res.cloudinary.com/ddxa0ahzp/video/upload/v1772733606/rm-portfolio-live/brewery/hero.mp4",
             alt: "brewery Hero",
         },
-        gallery: [
-            { type: "image", url: "/media/brewery/01.jpg", alt: "Brewery Visual" },
-            { type: "image", url: "/media/brewery/1.webp", alt: "Brewery Visual" },
-            { type: "image", url: "/media/brewery/02.jpg", alt: "Brewery Visual" },
-            { type: "image", url: "/media/brewery/03.jpg", alt: "Brewery Visual" },
-            { type: "video", url: "/media/brewery/3.jpg", alt: "Brewery Visual", videoMp4: "/media/brewery/3.mp4" },
-            { type: "video", url: "/media/brewery/4.jpg", alt: "Brewery Visual", videoMp4: "/media/brewery/4.mp4" },
-            { type: "video", url: "/media/brewery/5.jpg", alt: "Brewery Visual", videoMp4: "/media/brewery/5.mp4" },
-            { type: "video", url: "/media/brewery/6.jpg", alt: "Brewery Visual", videoMp4: "/media/brewery/6.mp4" },
-            { type: "video", url: "/media/brewery/7.jpg", alt: "Brewery Visual", videoMp4: "/media/brewery/7.mp4" },
-            { type: "video", url: "/media/brewery/april-v.jpg", alt: "Brewery Visual", videoMp4: "/media/brewery/april-v.mp4" }
+        images: [
+            "https://res.cloudinary.com/ddxa0ahzp/image/upload/v1776960121/rm-portfolio-live/brewery/1.png",
+            "https://res.cloudinary.com/ddxa0ahzp/video/upload/v1776960126/rm-portfolio-live/brewery/3.mp4",
+            "https://res.cloudinary.com/ddxa0ahzp/video/upload/v1776960136/rm-portfolio-live/brewery/4.mp4",
+            "https://res.cloudinary.com/ddxa0ahzp/video/upload/v1776960143/rm-portfolio-live/brewery/april%20v.mp4"
         ],
     },
     {

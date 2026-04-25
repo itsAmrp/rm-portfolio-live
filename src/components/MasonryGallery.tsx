@@ -10,10 +10,11 @@ import { LazyVideo } from "@/components/LazyVideo";
 
 interface MasonryGalleryProps {
     items: MediaAsset[];
+    images?: string[];
     projectFallbackThumbnail?: string;
 }
 
-export function MasonryGallery({ items, projectFallbackThumbnail }: MasonryGalleryProps) {
+export function MasonryGallery({ items, images, projectFallbackThumbnail }: MasonryGalleryProps) {
     const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
     const mouseX = useMotionValue(-1000);
     const mouseY = useMotionValue(-1000);
@@ -29,7 +30,7 @@ export function MasonryGallery({ items, projectFallbackThumbnail }: MasonryGalle
         mouseY.set(-1000);
     };
 
-    if (!items || items.length === 0) return null;
+    if ((!items || items.length === 0) && (!images || images.length === 0)) return null;
 
     return (
         <>
@@ -38,17 +39,39 @@ export function MasonryGallery({ items, projectFallbackThumbnail }: MasonryGalle
                 onMouseMove={handleMouseMove}
                 onMouseLeave={handleMouseLeave}
             >
-                {items.map((media, i) => (
-                    <MasonryTile
-                        key={media.url + i}
-                        media={media}
-                        index={i}
-                        mouseX={mouseX}
-                        mouseY={mouseY}
-                        projectFallbackThumbnail={projectFallbackThumbnail}
-                        onClick={() => setLightboxIndex(i)}
-                    />
-                ))}
+                {images && images.length > 0 ? (
+                    images.map((imgSrc, i) => {
+                        const isVideo = imgSrc.endsWith('.mp4') || imgSrc.endsWith('.webm');
+                        return (
+                            <motion.div
+                                key={imgSrc + i}
+                                initial={{ opacity: 0, y: 30 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true, margin: "-50px" }}
+                                transition={{ duration: 0.6, delay: (i % 5) * 0.1, ease: "easeOut" }}
+                                className="break-inside-avoid relative w-full group overflow-hidden rounded-xl bg-foreground/5 shadow-sm hover:shadow-2xl transition-shadow duration-300"
+                            >
+                                {isVideo ? (
+                                    <video src={imgSrc} autoPlay muted loop playsInline className="w-full h-auto object-cover" />
+                                ) : (
+                                    <Image src={imgSrc} alt={`Gallery visual ${i + 1}`} width={1000} height={1000} className="w-full h-auto object-cover" sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1280px) 33vw, 25vw" />
+                                )}
+                            </motion.div>
+                        );
+                    })
+                ) : (
+                    items.map((media, i) => (
+                        <MasonryTile
+                            key={media.url + i}
+                            media={media}
+                            index={i}
+                            mouseX={mouseX}
+                            mouseY={mouseY}
+                            projectFallbackThumbnail={projectFallbackThumbnail}
+                            onClick={() => setLightboxIndex(i)}
+                        />
+                    ))
+                )}
             </div>
 
             <AnimatePresence>
